@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-
-import Link from "next/link";
 import { Button, Typography } from "antd";
 import Image from "next/image";
 import InfoBanner from "@assets/info-banner.jpeg";

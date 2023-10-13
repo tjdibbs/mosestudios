@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Logo from "@assets/logo.png";
-import { Button, Dropdown, MenuProps } from "antd";
+import { Button, Dropdown } from "antd";
 import { ArrowDown2, ShoppingCart } from "iconsax-react";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 

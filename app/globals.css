@@ -9,6 +9,15 @@
   font-family: "Noto Sans", sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
   @apply w-screen overflow-x-hidden;
+}
+
+.bottom-banner {
+  background-image: url("../public/images/bottom-banner-image.jpg");
 }

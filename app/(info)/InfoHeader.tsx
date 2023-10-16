@@ -4,6 +4,7 @@ import Logo from "@assets/logo.png";
 import { Button, Dropdown } from "antd";
 import { ArrowDown2, ShoppingCart } from "iconsax-react";
 import { ItemType } from "antd/es/menu/hooks/useItems";
+import Link from "next/link";
 
 const navData = [
   {
@@ -88,13 +89,18 @@ function InfoHeader() {
           })}
         </nav>
 
-        <div className="actions">
+        <div className="actions flex gap-x-4 items-center">
           <Button
             className="h-10 w-10 grid place-items-center"
             icon={<ShoppingCart size="24" color="white" />}
             shape="circle"
             type="text"
           />
+          <Link href={"/login"}>
+            <Button type="primary" className="text-black font-bold">
+              Sign in
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

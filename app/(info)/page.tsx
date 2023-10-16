@@ -7,6 +7,7 @@ import Techen from "@assets/techen.png";
 import Venus from "@assets/venus.png";
 import ReadySet from "@assets/ready-set.png";
 import Community from "@assets/community.png";
+import RoshePrint from "@assets/rosheprint.png";
 
 // Team members
 import CEO from "@assets/ceo.jpg";
@@ -22,16 +23,8 @@ import InfoBanner from "@assets/info-banner.jpeg";
 import Logo from "@assets/logo.png";
 import { BannerSvg } from "@comp/svgs";
 import { ArrowSwapHorizontal } from "iconsax-react";
-
-// import Swiper core and required modules
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  EffectCoverflow,
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, EffectCoverflow } from "swiper/modules";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -40,6 +33,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 export default function HomePage() {
+  const swiperRef = React.createRef<SwiperRef>();
+
   return (
     <div className="home-container">
       <section className="banner relative">
@@ -136,7 +131,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="subscribers">
+      {/* <section className="subscribers">
         <div className="section-title text-3xl text-center mb-10 font-black">
           Join Our Subscribers
         </div>
@@ -151,7 +146,7 @@ export default function HomePage() {
             Get more info
           </Button>
         </div>
-      </section>
+      </section> */}
 
       <section className="who-we-are my-28">
         <div className="text-wrap text-center max-w-2xl mx-auto">
@@ -170,8 +165,8 @@ export default function HomePage() {
           slidesPerView={3}
           className="pb-20 mt-10 max-w-5xl mx-auto"
           effect={"coverflow"}
-          defaultValue={2}
-          grabCursor={true}
+          ref={swiperRef}
+          // grabCursor={true}
           // centeredSlides={true}
           // slidesPerView={"auto"}
           coverflowEffect={{
@@ -188,7 +183,15 @@ export default function HomePage() {
           onSlideChange={() => console.log("slide change")}
         >
           {teamMembers.map((member, i) => (
-            <SwiperSlide className="h-auto p-4 grid place-items-center place-content-center text-center bg-black/60 rounded-xl shadow-lg">
+            <SwiperSlide
+              onClickCapture={() => {
+                console.log({ i });
+                swiperRef.current?.swiper.slideTo(i);
+                swiperRef.current!.swiper.activeIndex = i;
+              }}
+              key={member.name}
+              className="h-auto p-4 grid place-items-center place-content-center text-center bg-black/60 rounded-xl shadow-lg"
+            >
               <div className="image-wrap">
                 <Image
                   src={member.image}
@@ -199,7 +202,7 @@ export default function HomePage() {
                 />
               </div>
               <div className="name mt-3">{member.name}</div>
-              <div className="role mb-3 text-sm text-primary">
+              <div className="role mb-3 text-sm text-primary capitalize">
                 {member.role}
               </div>
 
@@ -209,22 +212,27 @@ export default function HomePage() {
         </Swiper>
       </section>
 
-      {/* <section className="rosheprint">
-        <div id="NewRootRoot" className="flex flex-col w-full">
-          <div className="bg-[#5e5f61] flex flex-row justify-between items-start pl-[114px] pr-10 py-8">
-            <img src="" id="ROSHEPRINT" className="mt-6 mb-12" />
-            <div className="self-end relative flex flex-col w-[606px] shrink-0 items-start pb-1 px-6">
-              <div className="w-[606px] h-24 bg-[#222222] absolute top-3 left-0 rounded-lg" />
-              <div
-                id="ComingSoon"
-                className="text-center text-[80px] font-['Noto_Sans'] font-bold text-[#f6bf02] relative"
-              >
-                Coming Soon!{" "}
-              </div>
+      <section className="rosheprint">
+        <div
+          id="NewRootRoot"
+          className="flex flex-col w-full bg-[url('../public/images/bottom-banner-image.jpg')]"
+        >
+          <div className="flex flex-row justify-around items-center py-10 bg-black/60">
+            <Image
+              src={RoshePrint}
+              alt="rosheprint"
+              className="mt-6 mb-12"
+              width={250}
+            />
+            <div
+              id="ComingSoon"
+              className="text-center text-3xl p-4 rounded-xl font-['Noto_Sans'] bg-bgDark font-bold text-[#f6bf02] relative"
+            >
+              Coming Soon!
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
@@ -242,7 +250,7 @@ const teamMembers = [
   },
   {
     name: "MOSES OMOBOLAJI",
-    role: "FOUNDER/CREATIVE DIRECTOR",
+    role: "founder/creative director",
     image: CEO,
     description: (
       <div className="description text-sm text-gray-400 mb-6">
@@ -250,7 +258,8 @@ const teamMembers = [
           Moses Omobolaji has been a digital artist since 2014 and has a
           background in 3D animation as well as Still and Motion Graphics. He
           has worked in <b className="text-primary">OrangeVfx studios</b> and{" "}
-          <b className="text-primary">Taeps Animaion Studios</b> as an animator.
+          <b className="text-primary">Taeps Animation Studios</b> as an
+          animator.
         </p>
         <p className="mt-4">
           While in orange, he worked on several projects including the{" "}
@@ -267,7 +276,7 @@ const teamMembers = [
     image: Uhe,
   },
   {
-    name: "YUSUFF ABDURRAHMAH",
+    name: "YUSUF ABDURRAHMAH",
     role: "CHARACTER ARTIST ",
     image: Yusuf,
   },

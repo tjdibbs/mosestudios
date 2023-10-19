@@ -79,7 +79,7 @@ const FormControl = (props: FormControlProps) => {
                   showToday={false}
                   size="large"
                   className="w-full"
-                  onChange={(e) => {}}
+                  onChange={() => {}}
                 />
               </div>
             );

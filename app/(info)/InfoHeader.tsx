@@ -104,7 +104,9 @@ function InfoHeader() {
 
                       if (navMenu.title == "Services") {
                         pathname = "services#" + pathname;
-                        active = location.href.includes(pathname);
+                        if (typeof location != "undefined") {
+                          active = location.href.includes(pathname);
+                        }
                       }
 
                       return {

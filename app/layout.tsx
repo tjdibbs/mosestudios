@@ -1,6 +1,5 @@
 import React from "react";
 import StyledComponentsRegistry from "@lib/AntdRegistry";
-import type { Metadata } from "next";
 import "./font.css";
 import "./globals.css";
 

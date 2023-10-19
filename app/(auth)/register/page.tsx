@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import LogoSmall from "@assets/logo-small.png";
-import { Button, Checkbox, Divider, Input } from "antd";
+import { Button, Divider, Input } from "antd";
 import { GoogleSvg } from "@comp/svgs";
 import { useForm } from "react-hook-form";
 import FormControl from "@comp/FormControl";

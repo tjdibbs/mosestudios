@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { teamMembers } from "../page";
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
+import teamMembers from "../teamMembers";
 
 function Team() {
   return (

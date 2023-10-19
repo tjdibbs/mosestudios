@@ -73,7 +73,11 @@ function InfoHeader() {
                 <Button
                   key={navMenu.title}
                   type="text"
-                  onClick={() => router.push(navMenu.title.toLocaleLowerCase())}
+                  onClick={
+                    navMenu.title == "Contact"
+                      ? () => router.push(navMenu.title.toLocaleLowerCase())
+                      : undefined
+                  }
                   className={
                     "text-white text-sm [&.ant-dropdown-open]:bg-primary/50 hover:bg-primary/50 flex items-center gap-x-1" +
                     (currentLocation.includes(navMenu.title.toLowerCase())

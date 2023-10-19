@@ -50,13 +50,13 @@ export default function HomePage() {
             <span>Welcome to </span>
             <Image
               src={Logo}
-              width={120}
+              width={130}
               height={30}
               priority
               alt="roshestudio logo"
             />
           </div>
-          <Typography.Title rootClassName="text-2xl" className="text-primary">
+          <Typography.Title rootClassName="text-2xl">
             TELL YOUR BEST BRAND STORY
           </Typography.Title>
           <Button type="primary" size="large" className="text-black">
@@ -74,7 +74,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="partners flex items-center justify-evenly bg-white py-8 max-w-5xl mx-auto rounded-xl shadow-xl shadow-white/20 my-10">
+        <div className="partners flex items-center justify-evenly bg-[#D9D9D9] py-8 rounded-xl shadow-xl shadow-white/20 my-10">
           {[Codenest, PowerLab, ReadySet, Techen, Venus].map((img, i) => (
             <Image
               src={img}
@@ -85,7 +85,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="text-sm max-w-2xl mx-auto text-gray-400 text-center">
+        <div className="text-sm max-w-2xl mt-4 mx-auto text-gray-400 text-center">
           We offer innovative digital content solution like 3D animation, 2D
           animation, Product Visualization, Motion graphics, Visual effects and
           and Still Graphics to tell compelling brand stories.
@@ -109,20 +109,20 @@ export default function HomePage() {
 
         <div className="packages flex flex-wrap gap-6 my-10 max-w-7xl mx-auto">
           {packages.map((p, i) => (
-            <div className="package flex-grow min-w-[320px] max-w-sm py-6 w-[300px] border border-solid border-primary shadow-primary/20 shadow-lg p-4 rounded-xl">
-              <div className="package-title text-primary font-bold text-2xl mb-2">
+            <div className="package bg-[#D9D9D9] text-black flex-grow min-w-[320px] max-w-sm py-6 w-[300px] border border-solid border-primary shadow-primary/20 shadow-lg p-4 rounded-xl">
+              <div className="package-title text-black text-center uppercase font-extrabold text-2xl mb-2">
                 {p.title}
               </div>
-              <p className="package-description text-sm text-gray-300 mb-2">
+              <p className="package-description text-sm text-black text-center mb-2">
                 {p.description}
               </p>
 
               <div className="price flex justify-between mt-6">
-                <div className="dollar bg-primary text-black font-bold px-6 py-2 rounded-lg">
+                <div className="dollar bg-bgDark text-white text-xl font-bold px-6 py-2 rounded-lg">
                   {p.price.dollar}
                 </div>
-                <ArrowSwapHorizontal size="32" className="text-primary" />
-                <div className="naira bg-primary text-black font-bold px-6 py-2 rounded-lg">
+                <ArrowSwapHorizontal size="32" />
+                <div className="naira bg-bgDark text-white text-xl  font-bold px-6 py-2 rounded-lg">
                   {p.price.naira}
                 </div>
               </div>
@@ -190,7 +190,7 @@ export default function HomePage() {
                 swiperRef.current!.swiper.activeIndex = i;
               }}
               key={member.name}
-              className="h-auto p-4 grid place-items-center place-content-center text-center bg-black/60 rounded-xl shadow-lg"
+              className="h-auto p-4 grid place-items-center place-content-center text-center bg-[#D9D9D9] text-black rounded-xl shadow-lg"
             >
               <div className="image-wrap">
                 <Image
@@ -237,7 +237,7 @@ export default function HomePage() {
   );
 }
 
-const teamMembers = [
+export const teamMembers = [
   {
     name: "EMANUEL ABALLERO",
     role: "Technical Artist",
@@ -253,19 +253,18 @@ const teamMembers = [
     role: "founder/creative director",
     image: CEO,
     description: (
-      <div className="description text-sm text-gray-400 mb-6">
+      <div className="description text-xs mb-6">
         <p>
           Moses Omobolaji has been a digital artist since 2014 and has a
           background in 3D animation as well as Still and Motion Graphics. He
-          has worked in <b className="text-primary">OrangeVfx studios</b> and{" "}
-          <b className="text-primary">Taeps Animation Studios</b> as an
-          animator.
+          has worked in <b>OrangeVfx studios</b> and{" "}
+          <b>Taeps Animation Studios</b> as an animator.
         </p>
         <p className="mt-4">
           While in orange, he worked on several projects including the{" "}
-          <b className="text-primary">AU Agenda</b>
+          <b>AU Agenda</b>
           2063. and he is currently directing his debut short film{" "}
-          <b className="text-primary">NEW AGE</b> set to be released in 2024.
+          <b>NEW AGE</b> set to be released in 2024.
         </p>
       </div>
     ),

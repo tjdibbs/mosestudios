@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import Logo from "@assets/logo.png";
@@ -5,6 +7,8 @@ import { Button, Dropdown } from "antd";
 import { ArrowDown2, ShoppingCart } from "iconsax-react";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
+import NextNProgress from "nextjs-progressbar";
 
 const navData = [
   {
@@ -40,70 +44,105 @@ const navData = [
 ];
 
 function InfoHeader() {
+  const router = useRouter();
+  const currentLocation = usePathname();
+
+  console.log({ currentLocation });
+
   return (
-    <header className="main-header">
-      <div className="header-wrapper max-w-7xl mx-auto p-4 gap-4 flex items-center">
-        <div className="logo-wrap flex mr-10">
-          <Image
-            alt="mosestudios logo"
-            src={Logo}
-            width={120}
-            height={30}
-            priority
-          />
-        </div>
+    <React.Fragment>
+      <NextNProgress />
+      <header className="main-header">
+        <div className="header-wrapper max-w-7xl mx-auto p-4 gap-4 flex items-center">
+          <div className="logo-wrap flex mr-10">
+            <Link href={"/"}>
+              <Image
+                alt="mosestudios logo"
+                src={Logo}
+                width={130}
+                height={30}
+                priority
+              />
+            </Link>
+          </div>
 
-        <nav className="navigators flex-grow flex items-center gap-x-3">
-          {navData.map((navMenu) => {
-            const hasMenu = navMenu.menu.length;
-            const button = (
-              <Button
-                key={navMenu.title}
-                type="text"
-                className="text-white text-sm [&.ant-dropdown-open]:bg-primary/50 hover:bg-primary/50 flex items-center gap-x-1"
-              >
-                <span>{navMenu.title}</span>
-                {hasMenu ? <ArrowDown2 size="14" /> : ""}
+          <nav className="navigators flex-grow flex items-center gap-x-3">
+            {navData.map((navMenu) => {
+              const hasMenu = navMenu.menu.length;
+              const button = (
+                <Button
+                  key={navMenu.title}
+                  type="text"
+                  onClick={() => router.push(navMenu.title.toLocaleLowerCase())}
+                  className={
+                    "text-white text-sm [&.ant-dropdown-open]:bg-primary/50 hover:bg-primary/50 flex items-center gap-x-1" +
+                    (currentLocation.includes(navMenu.title.toLowerCase())
+                      ? " bg-primary/10"
+                      : "")
+                  }
+                >
+                  <span>{navMenu.title}</span>
+                  {hasMenu ? <ArrowDown2 size="14" /> : ""}
+                </Button>
+              );
+              return hasMenu ? (
+                <Dropdown
+                  mouseEnterDelay={0}
+                  mouseLeaveDelay={0.1}
+                  key={navMenu.title}
+                  overlayClassName="border-t-2 border-b-0 border-x-0 border-solid border-primary"
+                  menu={{
+                    items: navMenu.menu.map<ItemType>((m) => {
+                      let pathname = m.replace(" ", "-");
+
+                      let active = currentLocation.includes(pathname);
+
+                      if (m == "mission & vision") {
+                        pathname = "mission";
+                        active = currentLocation == "/mission";
+                      }
+
+                      if (navMenu.title == "Services") {
+                        pathname = "services#" + pathname;
+                        active = location.href.includes(pathname);
+                      }
+
+                      return {
+                        key: m,
+                        label: m,
+
+                        className:
+                          "capitalize hover:bg-primary hover:text-black transition" +
+                          (active ? " bg-primary/10" : ""),
+                        onClick: () => router.push(pathname),
+                      };
+                    }),
+                  }}
+                >
+                  {button}
+                </Dropdown>
+              ) : (
+                button
+              );
+            })}
+          </nav>
+
+          <div className="actions flex gap-x-4 items-center">
+            <Button
+              className="h-10 w-10 grid place-items-center"
+              icon={<ShoppingCart size="24" color="white" />}
+              shape="circle"
+              type="text"
+            />
+            <Link href={"/login"}>
+              <Button type="primary" className="text-black font-bold">
+                Sign in
               </Button>
-            );
-            return hasMenu ? (
-              <Dropdown
-                mouseEnterDelay={0}
-                mouseLeaveDelay={0.1}
-                key={navMenu.title}
-                overlayClassName="border-t-2 border-b-0 border-x-0 border-solid border-primary"
-                menu={{
-                  items: navMenu.menu.map<ItemType>((m) => ({
-                    key: m,
-                    label: m,
-                    className:
-                      "capitalize hover:bg-primary hover:text-black transition",
-                  })),
-                }}
-              >
-                {button}
-              </Dropdown>
-            ) : (
-              button
-            );
-          })}
-        </nav>
-
-        <div className="actions flex gap-x-4 items-center">
-          <Button
-            className="h-10 w-10 grid place-items-center"
-            icon={<ShoppingCart size="24" color="white" />}
-            shape="circle"
-            type="text"
-          />
-          <Link href={"/login"}>
-            <Button type="primary" className="text-black font-bold">
-              Sign in
-            </Button>
-          </Link>
+            </Link>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </React.Fragment>
   );
 }
 

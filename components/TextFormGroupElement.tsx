@@ -19,9 +19,12 @@ export type FormGroupProps = {
 export const TextFormGroupElement = React.memo((props: FormGroupProps) => {
   const { required = true } = props;
   return (
-    <div className="form-group flex-grow">
-      <label htmlFor={props.name} className="block mb-2 font-semibold text-sm">
-        {props.label || "Business " + props.name?.replaceAll(/[0-9]/g, "")}{" "}
+    <div className="form-group flex-grow mb-4">
+      <label
+        htmlFor={props.name}
+        className="block mb-2 font-semibold text-sm text-black capitalize"
+      >
+        {props.label || props.name?.replaceAll(/[0-9]/g, "")}{" "}
         {required && <span className="text-red-600 font-bold">*</span>}
       </label>
       <Input

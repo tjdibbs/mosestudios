@@ -4,6 +4,7 @@ import theme from "utils/theme";
 import { Metadata } from "next";
 import InfoHeader from "./InfoHeader";
 import Footer from "./InfoFooter";
+import NextNProgress from "nextjs-progressbar";
 
 export const metadata: Metadata = {
   title: "Mosestudios",

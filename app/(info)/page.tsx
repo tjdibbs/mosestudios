@@ -6,15 +6,9 @@ import PowerLab from "@assets/powerlab.png";
 import Techen from "@assets/techen.png";
 import Venus from "@assets/venus.png";
 import ReadySet from "@assets/ready-set.png";
-import Community from "@assets/community.png";
 import RoshePrint from "@assets/rosheprint.png";
 
 // Team members
-import CEO from "@assets/ceo.jpg";
-import Dolapo from "@assets/dolapo.jpg";
-import Aballero from "@assets/aballero.jpg";
-import Yusuf from "@assets/yusuf.png";
-import Uhe from "@assets/uhe.jpg";
 
 import React from "react";
 import { Button, Typography } from "antd";
@@ -109,7 +103,7 @@ export default function HomePage() {
         </div>
 
         <div className="packages flex flex-wrap gap-6 my-10 max-w-7xl mx-auto">
-          {packages.map((p, i) => (
+          {packages.map((p) => (
             <div className="package bg-[#D9D9D9] text-black flex-grow min-w-[320px] max-w-sm py-6 w-[300px] border border-solid border-primary shadow-primary/20 shadow-lg p-4 rounded-xl">
               <div className="package-title text-black text-center uppercase font-extrabold text-2xl mb-2">
                 {p.title}

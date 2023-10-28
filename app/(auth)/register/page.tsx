@@ -16,7 +16,12 @@ function RegisterPage() {
       <div className="bg-white/70 rounded-lg shadow-lg w-[500px] p-6 text-black">
         <Link href={"/"}>
           <div className="logo w-max mx-auto mb-6">
-            <Image src={LogoSmall} width={70} alt="roshestudios" />
+            <Image
+              src={"/images/mose.gif"}
+              height={100}
+              width={100}
+              alt="roshestudios"
+            />
           </div>
         </Link>
 
@@ -24,9 +29,6 @@ function RegisterPage() {
           <div className="form-header mb-4 text-center">
             <div className="form-title text-2xl font-bold mb-2">
               Sign Up for MoseStudios
-            </div>
-            <div className="secondary-text text-sm text-gray-600">
-              Let’s begin your Power journey
             </div>
           </div>
 
@@ -77,11 +79,11 @@ function RegisterPage() {
 
           <Button
             type="primary"
-            className="w-full h-12 shadow-lg mt-10 text-black"
+            className="w-full h-12 shadow-lg mt-10 text-black font-bold"
           >
-            Login
+            Submit
           </Button>
-          <div className="my-2 text-sm text-center">
+          {/* <div className="my-2 text-sm text-center">
             By submitting your information, you agree to Pai’s{" "}
             <b>
               <a href="#">Terms of service</a>
@@ -90,7 +92,7 @@ function RegisterPage() {
             <b>
               <a href="#">Privacy Policy</a>
             </b>
-          </div>
+          </div> */}
 
           <div className="text-center mt-10">
             Have an account?{" "}

@@ -11,10 +11,10 @@ function ContactUs() {
   const { FormControl } = useFormControl(useForm());
   return (
     <div className="contact-us-container">
-      <div className="flex gap-20 justify-center my-20 items-center flex-wrap">
+      <div className="flex gap-20 gap-x-[200px] justify-center my-20 items-center flex-wrap">
         <div className="wrap">
           <div className="wrap text-center">
-            <div className="page-title text-3xl font-bold mb-2 uppercase">
+            <div className="page-title font-bold text-4xl mb-2 uppercase">
               Contact <span className="text-primary">Us</span>
             </div>
             <div className="text-light mb-8">
@@ -44,9 +44,9 @@ function ContactUs() {
         </div>
         <div className="image-wrap">
           <Image
-            src={LogoBig}
-            width={400}
-            height={400}
+            src={"/images/mose.gif"}
+            width={500}
+            height={500}
             alt="roshestudio logo"
           />
         </div>

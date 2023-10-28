@@ -16,7 +16,12 @@ function ForgotPasswordPage() {
       <div className="bg-white/70 rounded-lg shadow-lg w-[400px] p-6 text-black">
         <Link href={"/"}>
           <div className="logo w-max mx-auto mb-6">
-            <Image src={LogoSmall} width={70} alt="roshestudios" />
+            <Image
+              src={"/images/mose.gif"}
+              height={100}
+              width={100}
+              alt="roshestudios"
+            />
           </div>
         </Link>
 

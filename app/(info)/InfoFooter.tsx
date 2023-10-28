@@ -1,13 +1,20 @@
+"use client";
+
 import { Button } from "antd";
-import { Facebook, Instagram } from "iconsax-react";
+import { Instagram, Youtube } from "iconsax-react";
 import React from "react";
+import { Icon } from "@iconify/react";
 
 function Footer() {
   return (
     <footer>
-      <div className="wrap-text text-center text-2xl font-bold my-6">
+      <div className="wrap-text text-center text-3xl font-extrabold my-6">
         ANY PROJECT IN MIND ?
-        <Button type="text" size="large" className="text-primary">
+        <Button
+          type="text"
+          size="large"
+          className="text-primary font-bold text-3xl"
+        >
           GET IN TOUCH
         </Button>
       </div>
@@ -20,9 +27,18 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div className="wrap">
-          <div className="title text-primary font-bold text-xl mb-4">
+        <div className="wrap text-right">
+          <div className="title text-primary font-bold text-2xl mb-4">
             Contact us
+          </div>
+
+          <div className="phone mb-2">
+            <a
+              href="tel:+2348103115400"
+              className="no-underline text-white block"
+            >
+              +234-802-768-5574
+            </a>
           </div>
           <div className="email mb-2">
             <a
@@ -32,23 +48,15 @@ function Footer() {
               info@roshe<span className="text-primary">studios</span>.com
             </a>
           </div>
-          <div className="phone">
-            <a
-              href="tel:+2348103115400"
-              className="no-underline text-white block"
-            >
-              +2348103115400
-            </a>
-          </div>
         </div>
       </div>
 
-      <div className="copy-right text-center p-4 leading-6">
+      <div className="copy-right text-center p-4 leading-6 py-10">
         © 2023 ROSHE<span className="text-primary font-semibold">STUDIOS</span>{" "}
-        LLC. All rights reserved. The ROSHESTUDIOS logo and other ROSHE
-        <span className="text-primary font-semibold">STUDIOS</span>
+        LLC. All Rights Reserved. The ROSHESTUDIOS logo and other ROSHE
+        <span className="text-primary font-semibold">STUDIOS </span>
         marks, logo and trade dress are trademarks or registered trademarks of
-        ROSHE<span className="text-primary font-semibold">STUDIOS</span> LTD.
+        ROSHE<span className="text-primary font-semibold">STUDIOS</span> LLC.
       </div>
     </footer>
   );
@@ -61,9 +69,21 @@ const socialIcons = [
     icon: <Instagram size="32" className="text-white" />,
   },
   {
-    title: "facebook",
-    icon: <Facebook size="32" className="text-white" />,
-    link: "https://facebook.com",
+    title: "linkedin",
+    icon: (
+      <Icon icon="mingcute:linkedin-line" height={32} className="text-white" />
+    ),
+    link: "https://www.linkedin.com/company/roshestudios/",
+  },
+  {
+    title: "twitter",
+    icon: <Icon icon="mdi:twitter" height={32} className="text-white" />,
+    link: "https://twitter.com/roshestudi18670",
+  },
+  {
+    title: "youtube",
+    icon: <Youtube size="32" className="text-white" />,
+    link: "https://youtube.com/@roshestudios?si=1hWhiSQoU_6yXNEA",
   },
 ];
 

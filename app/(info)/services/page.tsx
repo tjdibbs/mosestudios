@@ -17,11 +17,13 @@ function Services() {
             }
             id={service.id}
           >
-            <div className="wrap">
+            <div className="wrap flex justify-center items-center flex-col">
               <div className="title mb-4 text-3xl font-bold">
                 {service.title}
               </div>
-              <div className="description max-w-xl">{service.description}</div>
+              <div className="description max-w-xl text-center leading-7">
+                {service.description}
+              </div>
 
               <Button className="h-12 mt-6 px-6 rounded-none border-primary">
                 Contact us now

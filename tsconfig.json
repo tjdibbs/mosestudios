@@ -25,7 +25,8 @@
     "paths": {
       "@comp/*": ["components/*"],
       "@assets/*": ["assets/*"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@redux/*": ["redux/*"]
     },
     "plugins": [
       {

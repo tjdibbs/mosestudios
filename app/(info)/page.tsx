@@ -17,7 +17,7 @@ import InfoBanner from "@assets/info-banner.jpeg";
 import Logo from "@assets/logo.png";
 import { BannerSvg } from "@comp/svgs";
 import { ArrowSwapHorizontal } from "iconsax-react";
-import { Pagination, EffectCoverflow } from "swiper/modules";
+import { Pagination, EffectCoverflow, FreeMode } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -33,28 +33,40 @@ export default function HomePage() {
   return (
     <div className="home-container">
       <section className="banner relative">
-        <Image
+        {/* <Image
           src={InfoBanner}
           className="max-h-[500px] w-full object-fill"
           alt="roshestudio banner"
           priority
-        />
+        /> */}
+        <video
+          controls={false}
+          className="w-full h-[800px] object-fill brightness-[40%]"
+          autoPlay
+          loop
+          muted
+          src="./homepage-video.mp4"
+        ></video>
 
         <div className="content absolute w-full h-full top-0 left-0 grid place-items-center place-content-center">
           <div className="welcome bg-bgDark w-max px-4 py-2 rounded-lg mb-4 mx-auto text-white flex gap-x-4 items-center">
             <span>Welcome to </span>
             <Image
               src={Logo}
-              width={130}
-              height={30}
+              width={188}
+              height={32}
               priority
               alt="roshestudio logo"
             />
           </div>
-          <Typography.Title rootClassName="text-2xl">
+          <Typography.Title rootClassName="text-5xl font-extrabold text-primary">
             TELL YOUR BEST BRAND STORY
           </Typography.Title>
-          <Button type="primary" size="large" className="text-black">
+          <Button
+            type="primary"
+            size="large"
+            className="text-black h-12 w-48 font-bold text-lg"
+          >
             Get Started
           </Button>
         </div>
@@ -62,7 +74,9 @@ export default function HomePage() {
       </section>
       <section className="partners-sections my-16">
         <div className="text-wrap text-center max-w-2xl mx-auto">
-          <h1 className="text-2xl mb-2">A VIRTUAL GLOBAL DIGITAL STUDIO</h1>
+          <h1 className="text-3xl mb-2 font-bold">
+            A VIRTUAL GLOBAL DIGITAL STUDIO
+          </h1>
           <p className="text-secondary capitalize text-gray-500">
             sometimes size doesn't matter. we work for big & small non-stoppable
             visionaries. there's love for them all
@@ -161,9 +175,6 @@ export default function HomePage() {
           className="pb-20 mt-10 max-w-5xl mx-auto"
           effect={"coverflow"}
           ref={swiperRef}
-          // grabCursor={true}
-          // centeredSlides={true}
-          // slidesPerView={"auto"}
           coverflowEffect={{
             rotate: 50,
             stretch: 0,
@@ -172,8 +183,8 @@ export default function HomePage() {
             slideShadows: true,
           }}
           modules={[EffectCoverflow, Pagination]}
+          loop
           pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
@@ -217,11 +228,11 @@ export default function HomePage() {
               src={RoshePrint}
               alt="rosheprint"
               className="mt-6 mb-12"
-              width={250}
+              width={300}
             />
             <div
               id="ComingSoon"
-              className="text-center text-3xl p-4 rounded-xl font-['Noto_Sans'] bg-bgDark font-bold text-[#f6bf02] relative"
+              className="text-center text-4xl p-8 rounded-xl font-['Noto_Sans'] bg-bgDark font-bold text-[#f6bf02] relative"
             >
               Coming Soon!
             </div>

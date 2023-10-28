@@ -13,18 +13,22 @@ function LoginPage() {
   const { control } = useForm();
   return (
     <div className="login-container w-screen h-screen grid place-items-center">
-      <div className="bg-white/70 rounded-lg shadow-lg w-[400px] p-6 text-black">
+      <div className="bg-white/70 rounded-lg shadow-lg w-[450px] p-6 px-8 text-black">
         <Link href={"/"}>
           <div className="logo w-max mx-auto mb-6">
-            <Image src={LogoSmall} width={70} alt="roshestudios" />
+            <Image
+              src={"/images/mose.gif"}
+              height={100}
+              width={100}
+              alt="roshestudios"
+            />
           </div>
         </Link>
 
         <form action="#">
           <div className="form-header mb-4 text-center">
-            <div className="form-title text-2xl font-bold mb-2">Login</div>
-            <div className="secondary-text text-sm text-gray-600">
-              Login to your account to continue accessing Pai
+            <div className="form-title text-3xl font-bold mb-2">
+              Login to your dashboard
             </div>
           </div>
 
@@ -53,9 +57,9 @@ function LoginPage() {
           </div>
           <Link
             href={"/forgot-password"}
-            className="text-sm mt-3 font-semibold"
+            className="text-sm mt-5 block font-semibold"
           >
-            Forgot password?
+            Forgot password ?
           </Link>
 
           <Button

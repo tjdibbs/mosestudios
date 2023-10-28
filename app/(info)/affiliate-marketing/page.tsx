@@ -11,7 +11,7 @@ function AffiliateMarketing() {
   const { FormControl } = useFormControl(useForm());
   return (
     <div className="internship-container">
-      <div className="page-title font-bold text-3xl my-10 text-center">
+      <div className="page-title font-bold text-5xl mt-10 mb-6 text-center">
         AFFILIATE <span className="text-primary">MARKETING</span>
       </div>
 
@@ -42,7 +42,7 @@ function AffiliateMarketing() {
         </div>
       </div>
 
-      <div className="wrap flex justify-center gap-16 my-20 items-center flex-wrap">
+      <div className="wrap flex justify-center gap-16 gap-x-[200px] my-20 items-center flex-wrap">
         <form action="#" className="bg-white px-6 w-[500px] py-8">
           {FormControl({ name: "fullName", label: "Full Name" })}
           {FormControl({ name: "phone" })}
@@ -64,9 +64,9 @@ function AffiliateMarketing() {
 
         <div className="image-wrap">
           <Image
-            src={LogoBig}
-            width={400}
-            height={400}
+            src={"/images/mose.gif"}
+            width={500}
+            height={500}
             alt="roshestudio logo"
           />
         </div>

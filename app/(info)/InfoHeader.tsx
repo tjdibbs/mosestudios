@@ -59,8 +59,8 @@ function InfoHeader() {
               <Image
                 alt="mosestudios logo"
                 src={Logo}
-                width={130}
-                height={30}
+                width={188}
+                height={32}
                 priority
               />
             </Link>

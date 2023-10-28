@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import StyledComponentsRegistry from "@lib/AntdRegistry";
 import "./font.css";
 import "./globals.css";
+import { Provider } from "react-redux";
+import { store } from "@redux/store";
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
   <html lang="en">
@@ -18,7 +22,9 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
       /> */}
     </head>
     <body className="bg-bgDark text-white">
-      <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      <Provider store={store}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </Provider>
     </body>
   </html>
 );

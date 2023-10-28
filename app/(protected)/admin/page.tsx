@@ -2,13 +2,16 @@
 
 import ContentContainer from "@comp/protected/ContentContainer";
 import Customers from "@comp/protected/Customers";
-import PerformanceChart from "@comp/protected/PerformanceChart";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
+import dynamic from "next/dynamic";
 import React from "react";
 
+const Performance = dynamic(
+  async () => await import("@comp/protected/PerformanceChart"),
+  { ssr: false, loading: () => <Skeleton /> }
+);
+
 function Admin() {
-  const onBrowser = typeof window != "undefined";
-  console.log({ onBrowser, w: typeof window });
   return (
     <div className="admin-container flex-1 flex gap-5 justify-between pr-2">
       <div className="wrap flex-grow">
@@ -55,7 +58,7 @@ function Admin() {
             </div>
           </div>
           <div className="wrap text-black">
-            {onBrowser && <PerformanceChart />}
+            <Performance />
           </div>
         </div>
 

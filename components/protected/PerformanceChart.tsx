@@ -91,16 +91,12 @@ const series = [
 
 function PerformanceChart() {
   return (
-    <>
-      {typeof window !== "undefined" && (
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="line"
-          height={300}
-        />
-      )}
-    </>
+    <ReactApexChart
+      options={options}
+      series={series}
+      type="line"
+      height={300}
+    />
   );
 }
 

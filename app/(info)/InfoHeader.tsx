@@ -47,7 +47,7 @@ function InfoHeader() {
   const router = useRouter();
   const currentLocation = usePathname();
 
-  console.log({ currentLocation });
+  // console.log({ currentLocation });
 
   return (
     <React.Fragment>

@@ -117,8 +117,11 @@ export default function HomePage() {
         </div>
 
         <div className="packages flex flex-wrap gap-6 my-10 max-w-7xl mx-auto">
-          {packages.map((p) => (
-            <div className="package bg-[#D9D9D9] text-black flex-grow min-w-[320px] max-w-sm py-6 w-[300px] border border-solid border-primary shadow-primary/20 shadow-lg p-4 rounded-xl">
+          {packages.map((p, index) => (
+            <div
+              key={index}
+              className="package bg-[#D9D9D9] text-black flex-grow min-w-[320px] max-w-sm py-6 w-[300px] border border-solid border-primary shadow-primary/20 shadow-lg p-4 rounded-xl"
+            >
               <div className="package-title text-black text-center uppercase font-extrabold text-2xl mb-2">
                 {p.title}
               </div>
@@ -185,8 +188,8 @@ export default function HomePage() {
           modules={[EffectCoverflow, Pagination]}
           loop
           pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
         >
           {teamMembers.map((member, i) => (
             <SwiperSlide

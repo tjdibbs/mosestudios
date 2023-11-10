@@ -6,13 +6,12 @@ import _ from "lodash";
 import { NextRequest, NextResponse } from "next/server";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
+import { Next } from "iconsax-react";
 
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     const body = await req.json();
-
-    console.log({ body });
 
     if (!body?.email || !body?.password)
       return NextResponse.json(
@@ -26,8 +25,6 @@ export async function POST(req: NextRequest) {
       },
       { __v: 0, updatedAt: 0 }
     );
-
-    console.log({ user });
 
     if (!user)
       return NextResponse.json(
@@ -43,19 +40,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const _token = token.create(
+      {
+        user: _.pick(user, ["_id", "email", "firstName", "userType"]),
+        tokenType: "accessToken",
+      },
+      "2h"
+    );
+
     const responseObject = {
       success: true,
       message: `Authenticated as ${user.email}`,
       user: {
         ..._.omit(user, ["password"]),
       },
-      token: token.create(
-        {
-          user: _.pick(user, ["_id", "email", "firstName", "userType"]),
-          tokenType: "accessToken",
-        },
-        "2h"
-      ),
+      token: _token,
       refreshToken: token.create(
         {
           user: _.pick(user, ["_id", "userType"]),
@@ -65,7 +64,13 @@ export async function POST(req: NextRequest) {
       ),
     };
 
-    return NextResponse.json(responseObject);
+    return NextResponse.json(responseObject, {
+      headers: {
+        "Set-Cookie": `tk=${_token}; sameSite=strict; path=/; maxAge=${
+          60 * 60 * 2
+        }`,
+      },
+    });
   } catch (err: any) {
     return NextResponse.json(
       new HttpError(err.message, STATUS.INTERNAL_SERVER_ERROR),

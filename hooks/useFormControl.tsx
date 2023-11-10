@@ -1,49 +1,22 @@
-"use client";
-
 import { Input, DatePicker } from "antd";
+import SelectFormGroupElement from "@comp/SelectFormGroupElement";
 import TextFormGroupElement from "@comp/TextFormGroupElement";
-import {
-  Control,
-  Controller,
-  FieldValues,
-  RegisterOptions,
-  UseFormClearErrors,
-  UseFormSetValue,
-} from "react-hook-form";
+import { Controller, RegisterOptions, useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { RangePickerProps } from "antd/es/date-picker";
-import React from "react";
 
-export type FormGroupProps = {
-  name: string;
-  value?: string;
-  label?: string;
-  options?: object[];
-  required?: boolean;
-  withLabel?: boolean;
-  error?: boolean;
-  placeholder?: string;
-  htmlRef?: React.RefObject<unknown>;
-  inputType?: string;
-  rows?: number;
-  maxLength?: number;
-  max?: number;
-  onChange?(value: React.ChangeEvent | string): void;
-  onBlur?(e: React.FormEvent): void;
-  setFormState?: React.Dispatch<React.SetStateAction<unknown>>;
-};
+type F = Roshestudios.FormGroupProps;
 
-type FormControlProps = FormGroupProps & {
+export type FormControlProps = F & {
   type?: "input" | "select" | "date" | "textarea";
   required?: boolean;
   rules?: RegisterOptions;
 };
 
-type Props = {
-  setValue: UseFormSetValue<Partial<{ [x: string]: string }>>;
+type Props<T> = {
+  autoComplete?: boolean;
   setRegions?: React.Dispatch<React.SetStateAction<string[]>>;
-  clearErrors: UseFormClearErrors<Partial<{ [x: string]: string }>>;
-  control: Control<FieldValues, { [x: string]: string }>;
+  defaultValues?: T;
 };
 
 // eslint-disable-next-line arrow-body-style
@@ -52,13 +25,19 @@ const disabledDate: RangePickerProps["disabledDate"] = (current) => {
   return current && current > dayjs().endOf("day");
 };
 
-export default function useFormControl(props: Props) {
-  const { setValue, setRegions, clearErrors, control } = props;
+export default function useFormControl<T>(props: Props<T>) {
+  const actions = useForm<T extends object ? T : F>({
+    // @ts-ignore
+    defaultValues: props.defaultValues,
+  });
+  const { setValue, clearErrors, control } = actions;
+  const { autoComplete } = props;
 
   const FormControl = (props: FormControlProps) => {
     const { type = "input", required = true } = props;
     return (
       <Controller
+        // @ts-ignore
         name={props.name}
         control={control}
         rules={{
@@ -77,44 +56,49 @@ export default function useFormControl(props: Props) {
           field: { onChange, onBlur, value, ref },
           formState: { errors },
         }) => {
-          const error = Boolean(errors[props.name]);
+          const _errors = errors as {
+            [x in (typeof props)["name"]]: object | undefined;
+          };
+          const error = Boolean(_errors[props.name]);
 
           switch (type) {
             case "input":
               return (
+                // @ts-ignore
                 <TextFormGroupElement
                   onChange={onChange}
                   onBlur={onBlur}
                   htmlRef={ref}
+                  autoComplete={autoComplete}
                   value={value as string}
                   {...{ ...props, required, error }}
                 />
               );
-            // case "select":
-            //   return (
-            //     <SelectFormGroupElement
-            //       onChange={(v: string) => {
-            //         setValue(props.name, v);
-            //         clearErrors(props.name);
-            //       }}
-            //       onBlur={onBlur}
-            //       value={value as string}
-            //       htmlRef={ref}
-            //       {...{
-            //         ...props,
-            //         required,
-            //         error,
-            //       }}
-            //     />
-            //   );
+            case "select":
+              return (
+                // @ts-ignore
+                <SelectFormGroupElement
+                  onChange={(v: string) => {
+                    // @ts-ignore
+                    setValue(props.name, v);
+                    // @ts-ignore
+                    clearErrors(props.name);
+                  }}
+                  onBlur={onBlur}
+                  value={value as string}
+                  htmlRef={ref}
+                  {...{
+                    ...props,
+                    required,
+                    error,
+                  }}
+                />
+              );
             case "date":
               return (
                 <div className="form-group flex-grow">
-                  <label
-                    htmlFor={props.name}
-                    className="block mb-2 font-semibold text-sm"
-                  >
-                    {props.label ||
+                  <label htmlFor={props.name} className="block mb-2 text-sm">
+                    {props.label || //@ts-ignore
                       "Business " + props.name?.replaceAll(/[0-9]/g, "")}{" "}
                     {required && (
                       <span className="text-red-600 font-bold">*</span>
@@ -129,19 +113,26 @@ export default function useFormControl(props: Props) {
                     disabledDate={disabledDate}
                     format={(value) => `${value.format("MMMM DD, YYYY.")}`}
                     value={value ? dayjs(value as string) : undefined}
-                    onChange={() => {}}
+                    onChange={(e) => {
+                      // @ts-ignore
+                      setValue("dateOfIncorporation", e);
+                      // @ts-ignore
+                      clearErrors("dateOfIncorporation");
+                    }}
                   />
                 </div>
               );
             case "textarea":
               return (
-                <div className="form-group description-wrap flex-grow text-black">
+                <div className="form-group description-wrap flex-grow ">
                   <label
-                    htmlFor={props.name}
-                    className="block mb-2 font-semibold text-sm"
+                    htmlFor="business-email"
+                    className="block mb-2 text-sm"
                   >
-                    {props.label}
-                    <span className="text-red-600 font-bold">*</span>
+                    {props.label}{" "}
+                    {required && (
+                      <span className="text-red-600 font-bold">*</span>
+                    )}
                   </label>
                   <Input.TextArea
                     rows={props.rows || 3}
@@ -152,10 +143,7 @@ export default function useFormControl(props: Props) {
                     value={value as string}
                     onChange={onChange}
                     onBlur={onBlur}
-                    classNames={{
-                      textarea: "bg-white",
-                    }}
-                    className="shadow-sm flex-grow bg-white"
+                    className="shadow-sm flex-grow"
                     name={props.name}
                   />
                 </div>
@@ -168,5 +156,5 @@ export default function useFormControl(props: Props) {
     );
   };
 
-  return { FormControl };
+  return { FormControl, ...actions };
 }

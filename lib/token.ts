@@ -49,7 +49,12 @@ export function verify(token: string) {
       return { error: "Invalid or expired token" };
     }
 
-    return { payload: _.omit(decodedToken, ["exp", "iat"]) };
+    return {
+      payload: _.omit(decodedToken, ["exp", "iat"]) as {
+        user: Roshestudios.User;
+        tokenType: "accessToken" | "refreshToken";
+      },
+    };
   } catch (error) {
     return { error: "Invalid or expired token" };
   }

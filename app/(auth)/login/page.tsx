@@ -2,18 +2,48 @@
 
 import React from "react";
 import Image from "next/image";
-import LogoSmall from "@assets/logo-small.png";
-import { Button, Checkbox, Divider, Input } from "antd";
+import { Button, Checkbox, Divider, message as Alert } from "antd";
 import { GoogleSvg } from "@comp/svgs";
-import { useForm } from "react-hook-form";
-import FormControl from "@comp/FormControl";
 import Link from "next/link";
+import useFormControl from "@hooks/useFormControl";
+import useFetch from "@hooks/useFetch";
+import { config } from "@lib/constants";
+import { useRouter } from "next/navigation";
+import { LOGIN } from "@redux/slices/sessionSlice";
+import { useAppDispatch } from "@redux/store";
+
+type FormDataType = {
+  email: string;
+  password: string;
+};
 
 function LoginPage() {
-  const { control } = useForm();
+  const { FormControl, handleSubmit } = useFormControl<FormDataType>({});
+  const { fetcher, fetching } = useFetch();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const submit = async (formData: FormDataType) => {
+    const res = await fetcher<{ token: string; user: Roshestudios.User }>({
+      url: config.urls.login,
+      data: formData,
+      method: "POST",
+    });
+
+    console.log({ res });
+
+    if (!res.success || res.error)
+      return Alert.error(res.message ?? res.error ?? "Unknown error occurred");
+
+    Alert.success(res.message);
+    dispatch(LOGIN({ user: res.user, token: res.token }));
+
+    router.push(res.user.userType == "admin" ? "/admin" : "/dashboard");
+  };
+
   return (
-    <div className="login-container w-screen h-screen grid place-items-center">
-      <div className="bg-white/70 rounded-lg shadow-lg w-[450px] p-6 px-8 text-black">
+    <div className="login-container w-screen h-screen grid place-items-center py-10">
+      <div className="bg-white/90 rounded-lg shadow-lg w-[450px] p-6 px-8 text-black">
         <Link href={"/"}>
           <div className="logo w-max mx-auto mb-6">
             <Image
@@ -25,16 +55,16 @@ function LoginPage() {
           </div>
         </Link>
 
-        <form action="#">
+        <form action="#" onSubmit={handleSubmit(submit)}>
           <div className="form-header mb-4 text-center">
-            <div className="form-title text-3xl font-bold mb-2">
+            <div className="form-title text-2xl font-bold mb-2">
               Login to your dashboard
             </div>
           </div>
 
           <Button
             type="primary"
-            className="bg-white text-black flex items-center gap-x-2 h-12 w-full justify-center"
+            className="bg-[#fff] text-black flex items-center gap-x-2 h-12 w-full justify-center"
           >
             <GoogleSvg /> <span>Login with google </span>
           </Button>
@@ -45,25 +75,27 @@ function LoginPage() {
 
           {FormControl({
             name: "email",
-            control,
             label: "Email address",
             placeholder: "name@example.com",
           })}
-          <div className="form-group mt-4">
-            <label htmlFor="password" className="text-sm mb-2 block">
-              Password <span className="text-red-600 font-bold">*</span>
-            </label>
-            <Input.Password className="bg-white" placeholder="" size="large" />
-          </div>
+          {FormControl({
+            name: "password",
+            label: "Password",
+            placeholder: "*******",
+            inputType: "password",
+          })}
+
           <Link
             href={"/forgot-password"}
-            className="text-sm mt-5 block font-semibold"
+            className="text-sm mt-5 block font-semibold w-max"
           >
             Forgot password ?
           </Link>
 
           <Button
             type="primary"
+            htmlType="submit"
+            loading={fetching}
             className="w-full h-12 shadow-lg mt-10 text-black"
           >
             Login

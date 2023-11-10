@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { STATUS } from "@lib/constants";
 import HttpError from "@lib/httpError";
-import { hashPassword } from "@lib/crypto";
+import { encrypt, hashPassword } from "@lib/crypto";
 import { Notifications, Users } from "@models/index";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
+import Emailer, { Email } from "@lib/emailer";
+import generateRandom5DigitNumber from "@lib/getRandomDigits";
+import moment from "moment";
+import { omit } from "lodash";
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,7 +25,6 @@ export async function POST(req: NextRequest) {
     }
 
     const hashedPassword = await hashPassword(body.password);
-
     // create user, user setting and user notifications
     const user = await Users.create({
       ...body,
@@ -40,6 +43,7 @@ export async function POST(req: NextRequest) {
       ],
     });
 
+    // const code = generateRandom5DigitNumber();
     const _token = token.create(
       {
         email: user.email,
@@ -50,14 +54,18 @@ export async function POST(req: NextRequest) {
     );
 
     // await Emailer(user.email, Email.VERIFY, {
-    //   firstName: user.email,
-    //   verify_url: `${BASE_URL}/auth/verify-email?token=${_token}`,
+    //   firstName: user.firstName,
+    //   code,
     // });
 
     return NextResponse.json({
       success: true,
       message: "User Registered Successfully",
+      user: omit(user, ["password", "updatedAt"]),
       token: _token,
+      // verifyToken: encrypt(
+      //   JSON.stringify({ code, expireTime: moment().add(5, "m") })
+      // ),
     });
   } catch (err: any) {
     console.error(err);

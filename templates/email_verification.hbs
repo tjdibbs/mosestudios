@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roshestudios - Email Verification</title>
+  <style>
+    body {
+      background: #efefef;
+      padding: 2em 1em;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    .greeting {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .confirm {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .confirm h6 {
+      font-size: 1.2em;
+    }
+
+    .confirm p {
+      margin-bottom: 1em;
+    }
+
+    .link-wrap {
+      margin: 2em auto;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      background-color: #997a00;
+      color: white;
+    }
+
+    .alternate {
+      text-align: center;
+    }
+
+    .alternate p {
+      margin-bottom: 1em;
+    }
+
+    .alternate .link-wrap {
+      margin-bottom: 1em;
+    }
+
+    .alternate a {
+      color: #54373c;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="banner">
+    <!-- Insert your banner content here -->
+  </div>
+
+  <div class="greeting">
+    <h1>Hi {{firstName}}!</h1>
+  </div>
+  <h1 style="text-align: center;">Thanks for choosing roshestudios</h1>
+  <hr>
+
+  <div class="confirm">
+    <h6>Email Verification</h6>
+    <p>To verify you email, please make use of the code</p>
+    <p style="color: #54373c;">
+      <b>Note: The code below will expire in 2 hours from the time it was created.</b>
+    </p>
+    <div class="link-wrap">
+      <p color="white" style="color: white, padding: 6px 16px;font-weight: bolder;" class="button">{{code}}</p>
+    </div>
+  </div>
+
+
+  {{>footer}}
+</body>
+
+</html>

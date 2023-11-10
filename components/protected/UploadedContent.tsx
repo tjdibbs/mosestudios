@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import { Message, Messages } from "iconsax-react";
 
 function UploadedContent() {
   return (
@@ -29,6 +30,12 @@ function UploadedContent() {
             >
               Download
             </Button>
+            <Button
+              size="large"
+              className="font-bold rounded-xl text-white bg-white/10 "
+              icon={<Messages />}
+              type="text"
+            />
 
             <div className="text-zinc-400 text-xs">
               Available Corrections : 0/2

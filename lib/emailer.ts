@@ -17,6 +17,7 @@ export enum Email {
   CHANGE = "change",
   VERIFY = "verify",
   SUPPORT = "support",
+  SEND_CODE = "send_code",
 }
 
 export default async function Emailer(
@@ -25,7 +26,7 @@ export default async function Emailer(
   data?: any
 ) {
   const mailOptions: Partial<MailOptions> = {
-    from: "Roshestudios <tech@Roshestudiosng.com>",
+    from: "Roshestudios <tech@nubisng.com>",
     to: email,
     sender: "Roshestudios",
   };
@@ -53,8 +54,6 @@ export default async function Emailer(
       mailOptions.html = await addHtml("email_verification");
       break;
     default:
-      mailOptions.subject = `Otp Verification`;
-      mailOptions.html = await addHtml("otp_template");
       break;
   }
 

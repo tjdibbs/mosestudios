@@ -3,12 +3,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SessionInitialState = {
-  user: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    image: string;
-  } | null;
+  user: Roshestudios.User | null;
   token: string | null;
   loggedIn: boolean;
 };

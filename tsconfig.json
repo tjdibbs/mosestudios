@@ -30,7 +30,8 @@
       "@assets/*": ["assets/*"],
       "@lib/*": ["lib/*"],
       "@redux/*": ["redux/*"],
-      "@models/*": ["models/*"]
+      "@models/*": ["models/*"],
+      "@hooks/*": ["hooks/*"]
     },
     "plugins": [
       {

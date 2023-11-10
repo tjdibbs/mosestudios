@@ -1,16 +1,17 @@
 "use client";
 
 import React from "react";
-import { useAppSelector } from "@redux/store";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 import type { MenuProps } from "antd";
-import { Affix, Menu } from "antd";
-import { ElementPlus } from "iconsax-react";
+import { Affix, Button, Menu } from "antd";
+import { ElementPlus, Logout } from "iconsax-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import LargeLogo from "@assets/logo.png";
 import SmallLogo from "@assets/logo-small.png";
 import Image from "next/image";
+import { LOGIN } from "@redux/slices/sessionSlice";
 
 type MenuItem = Required<MenuProps>["items"][number];
 export interface MenuInfo {
@@ -18,10 +19,13 @@ export interface MenuInfo {
   keyPath: string[];
 }
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ sessionUser: Roshestudios.User; token?: string }> = (
+  props
+) => {
   const user = useAppSelector((s) => s.session.user);
   const [collapse, setCollapse] = React.useState<boolean>(false);
   const location = usePathname();
+  const dispatch = useAppDispatch();
 
   const [toggle, setToggle] = React.useState({
     selected: ["/dashboard"],
@@ -42,6 +46,9 @@ const Sidebar: React.FC = () => {
 
     // scroll to top after location change
     window.scrollTo({ top: 0 });
+    if (props.sessionUser) {
+      dispatch(LOGIN({ user: props.sessionUser, token: props.token }));
+    }
   }, [location]);
 
   React.useEffect(() => {
@@ -95,7 +102,11 @@ const Sidebar: React.FC = () => {
             inlineCollapsed={collapse}
           />
         </div>
-        <div className="sidebar-footer absolute bottom-0 left-0 p-3 right-0"></div>
+        <div className="sidebar-footer absolute bottom-0 left-0 p-3 right-0">
+          <Button className="bg-dark text-white flex items-center h-auto gap-x-2 py-2 rounded-xl">
+            <Logout /> <span>Logout</span>
+          </Button>
+        </div>
       </div>
     </Affix>
   );

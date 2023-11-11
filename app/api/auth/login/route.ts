@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
 import { Next } from "iconsax-react";
+import { serialize } from "cookie";
 
 export async function POST(req: NextRequest) {
   try {
@@ -48,6 +49,14 @@ export async function POST(req: NextRequest) {
       "2h"
     );
 
+    const serialized = serialize("tk", _token, {
+      // sameSite: true,
+      // httpOnly: true,
+      secure: process.env.NODE_ENV == "production",
+      maxAge: 60 * 60 * 24 * 2,
+      path: "/",
+    });
+
     const responseObject = {
       success: true,
       message: `Authenticated as ${user.email}`,
@@ -66,9 +75,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(responseObject, {
       headers: {
-        "Set-Cookie": `tk=${_token}; sameSite=strict; path=/; maxAge=${
-          60 * 60 * 2
-        }`,
+        "Set-Cookie": serialized,
       },
     });
   } catch (err: any) {

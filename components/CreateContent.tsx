@@ -18,7 +18,7 @@ type FormDataType = {
 const CreateContent = React.forwardRef<CreateContentRefObject, {}>(
   function CreateContent(_props, ref) {
     const user = useAppSelector((s) => s.session.user);
-    const [open, setOpen] = React.useState<boolean>(true);
+    const [open, setOpen] = React.useState<boolean>(false);
     const { handleSubmit, FormControl } = useFormControl<FormDataType>({});
 
     React.useImperativeHandle(ref, () => ({
@@ -59,4 +59,4 @@ const CreateContent = React.forwardRef<CreateContentRefObject, {}>(
   }
 );
 
-export default React.memo(CreateContent);
+export default CreateContent;

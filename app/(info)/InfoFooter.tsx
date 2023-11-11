@@ -22,8 +22,10 @@ function Footer() {
         <div className="wrap social-icons">
           <div className="text text-primary mb-4">LET’S STAY CONNECTED</div>
           <div className="icons flex gap-x-3 items-center">
-            {socialIcons.map((icon) => (
-              <a href={icon.link}>{icon.icon}</a>
+            {socialIcons.map((icon, index) => (
+              <a key={index} href={icon.link}>
+                {icon.icon}
+              </a>
             ))}
           </div>
         </div>

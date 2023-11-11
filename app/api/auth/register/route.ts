@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { STATUS } from "@lib/constants";
 import HttpError from "@lib/httpError";
-import { encrypt, hashPassword } from "@lib/crypto";
+import { hashPassword } from "@lib/crypto";
 import { Notifications, Users } from "@models/index";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
-import Emailer, { Email } from "@lib/emailer";
-import generateRandom5DigitNumber from "@lib/getRandomDigits";
-import moment from "moment";
 import { omit } from "lodash";
+import { serialize } from "cookie";
 
 export async function POST(req: NextRequest) {
   try {
@@ -58,15 +56,30 @@ export async function POST(req: NextRequest) {
     //   code,
     // });
 
-    return NextResponse.json({
-      success: true,
-      message: "User Registered Successfully",
-      user: omit(user, ["password", "updatedAt"]),
-      token: _token,
-      // verifyToken: encrypt(
-      //   JSON.stringify({ code, expireTime: moment().add(5, "m") })
-      // ),
+    const serialized = serialize("tk", _token, {
+      // sameSite: true,
+      // httpOnly: true,
+      secure: process.env.NODE_ENV == "production",
+      maxAge: 60 * 60 * 24 * 2,
+      path: "/",
     });
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "User Registered Successfully",
+        user: omit(user, ["password", "updatedAt"]),
+        token: _token,
+        // verifyToken: encrypt(
+        //   JSON.stringify({ code, expireTime: moment().add(5, "m") })
+        // ),
+      },
+      {
+        headers: {
+          "Set-Cookie": serialized,
+        },
+      }
+    );
   } catch (err: any) {
     console.error(err);
     return NextResponse.json(

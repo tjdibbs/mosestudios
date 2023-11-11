@@ -41,7 +41,7 @@ export default function HomePage() {
         /> */}
         <video
           controls={false}
-          className="w-full h-[800px] object-fill brightness-[40%]"
+          className="w-full h-[800px] object-cover brightness-[40%]"
           autoPlay
           loop
           muted

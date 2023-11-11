@@ -2,12 +2,11 @@
 
 import useFormControl from "hooks/useFormControl";
 import React from "react";
-import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { Button } from "antd";
 
 function RemoteJobs() {
-  const { FormControl } = useFormControl(useForm());
+  const { FormControl } = useFormControl({});
   return (
     <div className="internship-container">
       <div className="page-title font-bold text-5xl mt-10 mb-6 text-center">

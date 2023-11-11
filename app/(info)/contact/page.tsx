@@ -3,12 +3,10 @@
 import React from "react";
 import { Button } from "antd";
 import useFormControl from "hooks/useFormControl";
-import { useForm } from "react-hook-form";
-import LogoBig from "@assets/logo-big.png";
 import Image from "next/image";
 
 function ContactUs() {
-  const { FormControl } = useFormControl(useForm());
+  const { FormControl } = useFormControl({});
   return (
     <div className="contact-us-container">
       <div className="flex gap-20 gap-x-[200px] justify-center my-20 items-center flex-wrap">

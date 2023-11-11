@@ -77,9 +77,7 @@ export async function POST(req: NextRequest) {
       {
         headers: {
           "Set-Cookie": serialized,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          ...corsHeaders,
         },
       }
     );
@@ -87,7 +85,13 @@ export async function POST(req: NextRequest) {
     console.error(err);
     return NextResponse.json(
       new HttpError(err.message, STATUS.INTERNAL_SERVER_ERROR),
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
 }
+
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     if (!body?.email || !body?.password)
       return NextResponse.json(
         new HttpError("Incomplete body fields", STATUS.BAD_REQUEST),
-        { status: STATUS.BAD_REQUEST }
+        { status: STATUS.BAD_REQUEST, headers: corsHeaders }
       );
 
     const user = await Users.findOne(
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     if (_.isEmpty(user) || !matched) {
       return NextResponse.json(
         new HttpError("Email or password is incorrect", STATUS.BAD_REQUEST),
-        { status: STATUS.BAD_REQUEST }
+        { status: STATUS.BAD_REQUEST, headers: corsHeaders }
       );
     }
 
@@ -76,15 +76,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(responseObject, {
       headers: {
         "Set-Cookie": serialized,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        ...corsHeaders,
       },
     });
   } catch (err: any) {
     return NextResponse.json(
       new HttpError(err.message, STATUS.INTERNAL_SERVER_ERROR),
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
 }
+
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};

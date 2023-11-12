@@ -6,7 +6,6 @@ import _ from "lodash";
 import { NextRequest, NextResponse } from "next/server";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
-import { Next } from "iconsax-react";
 import { serialize } from "cookie";
 
 export async function POST(req: NextRequest) {
@@ -87,7 +86,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export const corsHeaders = {
+const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",

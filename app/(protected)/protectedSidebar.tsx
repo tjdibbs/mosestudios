@@ -20,9 +20,7 @@ export interface MenuInfo {
   keyPath: string[];
 }
 
-const Sidebar: React.FC<{ sessionUser: Roshestudios.User; token?: string }> = (
-  props
-) => {
+const Sidebar: React.FC<{}> = (props) => {
   const user = useAppSelector((s) => s.session.user);
   const [collapse, setCollapse] = React.useState<boolean>(false);
   const location = usePathname();
@@ -43,11 +41,11 @@ const Sidebar: React.FC<{ sessionUser: Roshestudios.User; token?: string }> = (
     });
   };
 
-  React.useLayoutEffect(() => {
-    if (props.sessionUser) {
-      dispatch(LOGIN({ user: props.sessionUser, token: props.token }));
-    }
-  }, [dispatch, props.sessionUser, props.token]);
+  // React.useLayoutEffect(() => {
+  //   if (props.sessionUser) {
+  //     dispatch(LOGIN({ user: props.sessionUser, token: props.token }));
+  //   }
+  // }, [dispatch, props.sessionUser, props.token]);
 
   React.useEffect(() => {
     setCollapse(window.innerWidth < 1024);
@@ -63,6 +61,8 @@ const Sidebar: React.FC<{ sessionUser: Roshestudios.User; token?: string }> = (
       window.onresize = null;
     };
   }, [collapse]);
+
+  if (!user) return <></>;
 
   return (
     <Affix offsetTop={0}>

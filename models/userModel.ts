@@ -1,7 +1,10 @@
 import generateRandom5DigitNumber from "@lib/getRandomDigits";
-import { prop } from "@typegoose/typegoose";
+import { modelOptions, prop } from "@typegoose/typegoose";
 import { Schema } from "mongoose";
 
+@modelOptions({
+  schemaOptions: { collection: "Users", timestamps: true, versionKey: false },
+})
 export default class User {
   @prop()
   firstName: string;

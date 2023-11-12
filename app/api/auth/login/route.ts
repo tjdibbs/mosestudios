@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
         user: _.pick(user, ["_id", "email", "firstName", "userType"]),
         tokenType: "accessToken",
       },
-      "2h"
+      "1w"
     );
 
     const serialized = serialize("tk", _token, {
@@ -64,13 +64,13 @@ export async function POST(req: NextRequest) {
         ..._.omit(user, ["password"]),
       },
       token: _token,
-      refreshToken: token.create(
-        {
-          user: _.pick(user, ["_id", "userType"]),
-          tokenType: "refreshToken",
-        },
-        "1w"
-      ),
+      // refreshToken: token.create(
+      //   {
+      //     user: _.pick(user, ["_id", "userType"]),
+      //     tokenType: "refreshToken",
+      //   },
+      //   "1w"
+      // ),
     };
 
     return NextResponse.json(responseObject, {

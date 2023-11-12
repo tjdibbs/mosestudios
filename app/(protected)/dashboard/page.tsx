@@ -1,17 +1,50 @@
 "use client";
 
-import { Affix, Button, Input, Modal } from "antd";
+import { Affix, Button, Input, Modal, message as Alert } from "antd";
 import { ArrowRight, Notification, Add } from "iconsax-react";
 import React from "react";
 import Image from "next/image";
 import ProfileImage from "@assets/profile.png";
 import UploadedContent from "@comp/protected/UploadedContent";
-import { useAppSelector } from "@redux/store";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 import CreateContent, { CreateContentRefObject } from "@comp/CreateContent";
+import Loading from "../loading";
+import useFetch from "@hooks/useFetch";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { config } from "@lib/constants";
+import { LOGIN } from "@redux/slices/sessionSlice";
 
 function Dashboard() {
   const user = useAppSelector((s) => s.session.user);
   const createContentRef = React.useRef<CreateContentRefObject>(null);
+  const { fetcher } = useFetch();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    if (!user) {
+      (async () => {
+        const tk = Cookies.get("tk");
+
+        if (!tk) return router.replace("/login?_r=/dashboard");
+        const res = await fetcher<{ token: string; user: Roshestudios.User }>({
+          url: config.urls.getSessionUser,
+          method: "post",
+          data: { token: tk },
+        });
+
+        if (!res.success || res.error)
+          return router.replace("/login?_r=/dashboard");
+
+        console.log({ res });
+        dispatch(LOGIN({ user: res.user, token: tk }));
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!user) return <Loading />;
 
   return (
     <div className="customer-dashboard-container">

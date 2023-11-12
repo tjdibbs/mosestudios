@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         firstName: user.email,
         _id: user._id,
       },
-      "2h"
+      "1w"
     );
 
     // await Emailer(user.email, Email.VERIFY, {
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       // sameSite: true,
       // httpOnly: true,
       secure: process.env.NODE_ENV == "production",
-      maxAge: 60 * 60 * 24 * 2,
+      maxAge: 60 * 60 * 24 * 7,
       path: "/",
     });
 

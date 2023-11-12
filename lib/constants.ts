@@ -21,8 +21,6 @@ export const serverErrors: { [x: number]: string } = {
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 export const SECRET_KEY = process.env.SECRET_KEY as string;
 
-console.log({ BASE_URL });
-
 export enum Urls {
   login = "/auth/login",
   register = "/auth/register",
@@ -30,6 +28,12 @@ export enum Urls {
   forgotPassword = "/auth/forgot-password",
   resetPassword = "/auth/reset-password",
   sendCode = "/auth/one-time-password",
+  getSessionUser = "/auth/get-session-user",
+
+  uploadContent = "/(protected)/upload-content",
+  addReview = "/protected/add-review",
+  aggregate = "/protected/aggregate",
+  getUser = "/protected/users",
 }
 
 export const config = {

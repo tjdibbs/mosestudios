@@ -32,10 +32,10 @@ export default function useFetch(fetchOnMount = false) {
     async <T>(config: AxiosRequestConfig): Promise<responseType<T>> => {
       setFetching(true);
 
-      abortOngoingRequests();
+      // abortOngoingRequests();
 
-      const abortController = new AbortController();
-      setAbortControllers((s) => [...s, abortController]);
+      // const abortController = new AbortController();
+      // setAbortControllers((s) => [...s, abortController]);
 
       try {
         const response = await axios({
@@ -45,7 +45,7 @@ export default function useFetch(fetchOnMount = false) {
             Authorization: `Bearer ${token}`,
           },
           // timeout: 50000,
-          signal: abortController.signal,
+          // signal: abortController.signal,
           baseURL: appConfig.baseUrl,
           validateStatus: function (status) {
             return status <= 500; // Resolve only if the status code is less than 500

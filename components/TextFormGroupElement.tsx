@@ -16,7 +16,7 @@ export const TextFormGroupElement = React.memo(
           value={props.value}
           onBlur={props.onBlur}
           type={props.inputType}
-          className="bg-[#fff]"
+          className="bg-[#fff] text-black placeholder:text-gray-700 placeholder:text-sm"
           onChange={(e) => {
             if (props.setFormState)
               // @ts-ignore

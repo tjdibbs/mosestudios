@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body,
+html {
+  @apply w-screen overflow-x-hidden;
+  scroll-behavior: smooth;
+}
+
+.bottom-banner {
+  background-image: url("../public/images/bottom-banner-image.jpg");
+  @apply relative before:absolute before:left-0 before:top-0 before:content-[''] before:from-bgDark before:bg-gradient-to-r before:to-transparent before:w-[30%]  before:h-full;
+  @apply after:absolute after:right-0 after:top-0 after:content-[''] after:from-bgDark after:bg-gradient-to-l after:to-transparent after:w-[30%]  after:h-full;
+}

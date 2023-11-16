@@ -7,7 +7,10 @@ export const TextFormGroupElement = React.memo(
     const Comp = props.inputType !== "password" ? Input : Input.Password;
     return (
       <div className="form-group flex-grow mb-4" ref={props.htmlRef}>
-        <label htmlFor="business-name" className="block mb-2 text-sm">
+        <label
+          htmlFor="business-name"
+          className="block mb-2 text-sm text-black"
+        >
           {props.label || "Business " + props.name?.replaceAll(/[0-9]/g, "")}{" "}
           {required && <span className="text-red-600 font-bold">*</span>}
         </label>
@@ -16,7 +19,7 @@ export const TextFormGroupElement = React.memo(
           value={props.value}
           onBlur={props.onBlur}
           type={props.inputType}
-          className="bg-[#fff] text-black placeholder:text-gray-700 placeholder:text-sm"
+          className="bg-[#fff] py-2.5 text-black placeholder:text-gray-400 placeholder:text-sm"
           onChange={(e) => {
             if (props.setFormState)
               // @ts-ignore

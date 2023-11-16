@@ -127,7 +127,7 @@ export default function useFormControl<T>(props: Props<T>) {
                 <div className="form-group description-wrap flex-grow ">
                   <label
                     htmlFor="business-email"
-                    className="block mb-2 text-sm"
+                    className="block mb-2 text-sm text-black"
                   >
                     {props.label}{" "}
                     {required && (
@@ -143,7 +143,7 @@ export default function useFormControl<T>(props: Props<T>) {
                     value={value as string}
                     onChange={onChange}
                     onBlur={onBlur}
-                    className="shadow-sm flex-grow"
+                    className="shadow-sm flex-grow bg-[#fff] py-2.5 text-black placeholder:text-gray-400 placeholder:text-sm"
                     name={props.name}
                   />
                 </div>

@@ -7,7 +7,10 @@ export const SelectFormGroupElement = React.memo(
     return (
       <div className={"form-group flex-grow"}>
         {withLabel && (
-          <label htmlFor="business-name" className="block mb-2 text-sm">
+          <label
+            htmlFor="business-name"
+            className="block mb-2 text-sm text-black"
+          >
             {props.label || "Business " + props.name?.replaceAll(/[0-9]/g, "")}{" "}
             <span className="text-red-600 font-bold">*</span>
           </label>
@@ -15,7 +18,7 @@ export const SelectFormGroupElement = React.memo(
         <Select
           options={props.options}
           id={props.name}
-          className="w-full"
+          className="w-full bg-[#fff] py-2.5 text-black placeholder:text-gray-400 placeholder:text-sm"
           showSearch
           defaultValue={props.value}
           value={props.value}

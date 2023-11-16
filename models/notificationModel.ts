@@ -19,6 +19,13 @@ class NotificationObject {
   seen: boolean;
 }
 
+@modelOptions({
+  schemaOptions: {
+    collection: "Notifications",
+    timestamps: true,
+    versionKey: false,
+  },
+})
 export default class Notification {
   @prop({ type: Schema.Types.ObjectId })
   _id: string;

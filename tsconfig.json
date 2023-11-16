@@ -45,8 +45,7 @@
     "**/*.ts",
     "**/*.tsx",
     "tailwind.config.ts",
-    "key.json",
-    "app/api/auth/get-session-user"
+    "key.json"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,15 +1,12 @@
 import { STATUS } from "@lib/constants";
-import { verifyPassword, hashPassword } from "@lib/crypto";
+import { hashPassword } from "@lib/crypto";
 import HttpError from "@lib/httpError";
 import { Users, Notifications } from "@models/index";
-import _ from "lodash";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
 import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter, expressWrapper } from "next-connect";
-import cors from "cors";
-import { NextResponse } from "next/server";
+import { createRouter } from "next-connect";
 import { omit } from "lodash";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
@@ -80,10 +77,6 @@ router.post(async (req, res) => {
     // ),
   });
 });
-
-export const config = {
-  runtime: "edge",
-};
 
 export default router.handler({
   onError: (err: any, req, res) => {

@@ -9,12 +9,12 @@ import RoshePrint from "@assets/rosheprint.png";
 // Team members
 
 import React from "react";
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import Image from "next/image";
 import Logo from "@assets/logo.png";
 import { BannerSvg } from "@comp/svgs";
 import { ArrowSwapHorizontal } from "iconsax-react";
-import { Pagination, EffectCoverflow, FreeMode } from "swiper/modules";
+import { Pagination, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { teamMembers } from "@lib/constants";
 import InfoLayout from "@comp/info/InfoLayout";
@@ -87,7 +87,7 @@ export default function HomePage() {
                 src={img}
                 key={i}
                 alt={"roshestudios partner"}
-                className="w-[40%] sm:w-auto "
+                className="w-[40%] sm:w-auto h-auto"
                 height={i == 2 ? 70 : 40}
               />
             ))}

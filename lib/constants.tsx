@@ -1,7 +1,4 @@
 import Dolapo from "@assets/dolapo.jpg";
-import Aballero from "@assets/aballero.jpg";
-import Yusuf from "@assets/yusuf.png";
-import Uhe from "@assets/uhe.jpg";
 import CEO from "@assets/ceo.jpg";
 import Ayoodola from "@assets/ayodola.jpg";
 import ProductDesigner from "@assets/product-designer.jpg";
@@ -22,14 +19,14 @@ export const teamMembers = [
         <p className="mt-4">
           I have worked in two animation studios in Nigeria. I am currently the
           Director and Producer of my debut short film, New Age, set to be
-          released in 2024. Ofcourse, you will find me having fun with my
+          released in 2024. Of course, you will find me having fun with my
           friends, gaming or going on vacations.
         </p>
       </div>
     ),
   },
   {
-    name: "Ayoodola",
+    name: "AYODOLA OLUSOGA",
     role: "Financial Manager",
     image: Ayoodola,
     description: (
@@ -44,18 +41,7 @@ export const teamMembers = [
     ),
   },
   {
-    name: "Product Designer",
-    role: "Product Designer",
-    description: <p>I am a professional 3d artist from Planet Earth</p>,
-    image: ProductDesigner,
-  },
-  // {
-  //   name: "EMANUEL ABALLERO",
-  //   role: "Technical Artist",
-  //   image: Aballero,
-  // },
-  {
-    name: "Okeke Chimeze",
+    name: "OKEKE CHIMEZE",
     role: "Character animator",
     description: (
       <p>
@@ -66,20 +52,23 @@ export const teamMembers = [
     image: Okeke,
   },
   {
-    name: "OLAOPA DOLAPO",
-    role: "Business Development",
-    image: Dolapo,
+    name: "TOBILOBA ADEKUNLE",
+    role: "Product Designer",
+    description: <p>I am a professional 3d artist from Planet Earth</p>,
+    image: ProductDesigner,
   },
 
-  // {
-  //   name: "UHEADA ",
-  //   role: "Concept Artist",
-  //   image: Uhe,
-  // },
   {
-    name: "YUSUF ABDURRAHMAH",
-    role: "CHARACTER ARTIST ",
-    image: Yusuf,
+    name: "OLAOPA DOLAPO",
+    role: "COMMUNICATIONS MANAGER",
+    description: (
+      <p>
+        Olaopa Dolapo is an experienced Communications Manager with a background
+        in content strategy, collaborations, and email marketing. She is a
+        digital success catalyst, driving engagement and results.
+      </p>
+    ),
+    image: Dolapo,
   },
 ];
 

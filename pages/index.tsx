@@ -5,6 +5,7 @@ import Techen from "@assets/techen.png";
 import Venus from "@assets/venus.png";
 import ReadySet from "@assets/ready-set.png";
 import RoshePrint from "@assets/rosheprint.png";
+import FindrColorCode from "@assets/FindrColorCode.png";
 
 // Team members
 
@@ -35,34 +36,34 @@ export default function HomePage() {
         /> */}
           <video
             controls={false}
-            className="w-full min-h-[350px] sm:h-[800px] object-cover brightness-[70%]"
+            className="w-full min-h-[350px] sm:h-[800px] object-cover brightness-[90%]"
             autoPlay
             loop
             muted
             src="./homepage-video.mp4"
           ></video>
 
-          <div className="content absolute w-full h-full top-0 left-0 grid place-items-center place-content-center">
-            <div className="welcome bg-bgDark w-max px-4 py-2 rounded-lg mb-4 mx-auto text-white flex gap-x-4 items-center">
-              <span className="font-extrabold text-lg uppercase">
+          <div className="content absolute w-full h-full top-56 left-0 grid place-items-center place-content-center">
+            <div className="welcome bg-bgDark w-max px-4 py-2 rounded-lg mb-2 mx-auto text-white flex gap-x-4 items-center">
+              <span className="font-extrabold text-xl uppercase">
                 Welcome to{" "}
               </span>
               <Image
                 src={Logo}
-                width={188}
-                height={32}
+                width={224}
+                height={42}
                 priority
                 alt="roshestudio logo"
               />
             </div>
-            <h1 className="text-3xl sm:text-5xl text-center font-extrabold text-primary mb-3">
+            <h1 className="text-3xl sm:text-5xl text-center font-extrabold text-primary mb-1">
               TELL YOUR BEST BRAND STORY
             </h1>
             <Link href={"/contact"}>
               <Button
                 type="primary"
                 size="large"
-                className="text-black h-12 w-48 font-bold text-lg"
+                className="text-black w-auto px-2 uppercase text-center font-bold text-2xl"
               >
                 Get Started
               </Button>
@@ -70,30 +71,37 @@ export default function HomePage() {
           </div>
           <BannerSvg />
         </section>
-        <section className="partners-sections my-16 px-4">
-          <div className="text-wrap text-center max-w-2xl mx-auto">
-            <h1 className="text-2xl sm:text-3xl mb-2 font-bold">
+        <section className="partners-sections my-16">
+          <div className="text-wrap text-center mx-auto">
+            <h1 className="text-2xl sm:text-5xl mb-2 font-bold">
               A VIRTUAL GLOBAL DIGITAL STUDIO
             </h1>
-            <p className="text-secondary capitalize text-gray-500">
-              sometimes size doesn't matter. we work for big & small
-              non-stoppable visionaries. there's love for them all
+            <p className="text-secondary text-2xl text-center text-gray-500">
+              Sometimes size doesn't matter. We work for big & small
+              non-stoppable visionaries. There's love for them all
             </p>
           </div>
 
           <div className="partners flex flex-wrap gap-5 gap-y-10 items-center justify-evenly bg-[#D9D9D9] py-8  shadow-xl shadow-white/20 my-10">
-            {[Codenest, PowerLab, ReadySet, Techen, Venus].map((img, i) => (
+            {[
+              { image: Codenest, height: 30 },
+              { image: PowerLab, height: 30 },
+              { image: ReadySet, height: 70 },
+              { image: Techen, height: 25 },
+              { image: Venus, height: 40 },
+              { image: FindrColorCode, height: 40 },
+            ].map((item, i) => (
               <Image
-                src={img}
+                src={item.image}
                 key={i}
                 alt={"roshestudios partner"}
-                className="w-[40%] sm:w-auto h-auto"
-                height={i == 2 ? 70 : 40}
+                className="w-[40%] sm:w-auto"
+                height={item.height}
               />
             ))}
           </div>
 
-          <div className=" max-w-2xl mt-4 mx-auto text-gray-400 text-center">
+          <div className="max-w-6xl text-2xl mt-4 mx-auto text-gray-400 text-center">
             We offer innovative digital content solution like 3D animation, 2D
             animation, Product Visualization, Motion graphics, Visual effects
             and and Still Graphics to tell compelling brand stories.
@@ -102,41 +110,41 @@ export default function HomePage() {
 
         <section
           id="sme-social-content-packages"
-          className="social-media-packages my-40 px-4"
+          className="social-media-packages my-20 px-4"
         >
-          <div className="text-wrap text-center max-w-2xl mx-auto">
-            <div className="section-title text-3xl text-center mb-2 font-black">
+          <div className="text-wrap text-center  mx-auto">
+            <div className="section-title text-2xl sm:text-5xl text-center mb-2 font-black">
               SOCIAL MEDIA PACKAGE SUBSCRIPTIONS
             </div>
-            <div className="secondary-text text-gray-400">
+            <div className="secondary-text text-xl text-center mx-auto max-w-6xl text-gray-400">
               With our Social media content packages, brands can focus on other
               part of their business while we create stunning and amazing
               contents for their social handles .
             </div>
-            <div className="subtitle mt-4 text-2xl font-bold">
+            <div className="subtitle mt-6 text-2xl sm:text-5xl font-bold">
               SUBSCRIBE TO A <span className="text-primary">PLAN</span>
             </div>
           </div>
 
-          <div className="packages flex flex-wrap gap-6 my-10 max-w-7xl mx-auto">
+          <div className="packages flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
             {packages.map((p, index) => (
               <div
                 key={index}
                 className="package bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
               >
-                <div className="package-title text-black text-center uppercase font-extrabold text-2xl mb-2">
+                <div className="package-title text-black text-center uppercase font-extrabold text-4xl mb-2">
                   {p.title}
                 </div>
-                <p className="package-description text-black text-center mb-2">
+                <p className="package-description text-black text-xl text-center mb-2">
                   {p.description}
                 </p>
 
                 <div className="price flex justify-between mt-6">
-                  <div className="dollar bg-bgDark text-white text-xl font-bold px-6 py-2 rounded-lg">
+                  <div className="dollar bg-bgDark text-white text-3xl font-bold px-6 py-2 rounded-lg">
                     {p.price.dollar}
                   </div>
                   <ArrowSwapHorizontal size="32" />
-                  <div className="naira bg-bgDark text-white text-xl  font-bold px-6 py-2 rounded-lg">
+                  <div className="naira bg-bgDark text-white text-3xl  font-bold px-6 py-2 rounded-lg">
                     {p.price.naira}
                   </div>
                 </div>
@@ -163,14 +171,15 @@ export default function HomePage() {
       </section> */}
 
         <section className="who-we-are my-28 px-4">
-          <div className="text-wrap text-center max-w-2xl mx-auto">
-            <div className="section-title text-4xl text-center mb-2 font-black">
+          <div className="text-wrap text-center max-w-5xl mx-auto">
+            <div className="section-title uppercase text-5xl text-center mb-2 font-black">
               Who We Are
             </div>
-            <div className="secondary-text text-gray-400">
-              ROSHESTUDIOS is a global virtual studio. We are a team of nearly
-              12 experienced international artists across the world with
-              creatives specialized in different aspects of CG production.
+            <div className="secondary-text text-xl text-gray-400">
+              ROSHE<span className="text-primary">STUDIOS</span> is a global
+              virtual studio. We are a team of nearly 12 experienced
+              international artists across the world with creatives specialized
+              in different aspects of CG production.
             </div>
           </div>
 
@@ -246,12 +255,12 @@ export default function HomePage() {
               <Image
                 src={RoshePrint}
                 alt="rosheprint"
-                className="mt-6 mb-12 w-64 h-auto sm:w-auto"
+                className="mt-6 mb-12 w-64 h-auto sm:w-auto relative z-10"
                 width={300}
               />
               <div
                 id="ComingSoon"
-                className="text-center text-4xl p-8 rounded-xl font-['Noto_Sans'] bg-bgDark font-bold text-[#f6bf02] relative"
+                className="text-center text-4xl p-8 rounded-xl font-['Noto_Sans'] bg-bgDark relative z-10 font-bold text-[#f6bf02] relative"
               >
                 Coming Soon!
               </div>

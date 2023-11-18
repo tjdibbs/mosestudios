@@ -10,7 +10,7 @@ function OurStory() {
           <div className="title font-extrabold text-3xl mb-4">
             ROSHE<span className="text-primary">STUDIOS</span> STORY
           </div>
-          <div className="text max-w-4xl font-light text-textDark leading-7">
+          <div className="text-lg max-w-4xl font-light text-textDark leading-7">
             ROSHE<span className="text-primary">STUDIOS</span> was born from a
             passion to see design leveraged across organizations to bring better
             solutions to customers.

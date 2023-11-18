@@ -123,8 +123,8 @@ function InfoHeader() {
 
   return (
     <React.Fragment>
-      <Affix offsetTop={0}>
-        <header className="main-header sticky top-0 bg-bgDark">
+      <Affix rootClassName="z-50" className="z-50" offsetTop={0}>
+        <header className="main-header z-50 relative top-0 bg-bgDark">
           <div className="header-wrapper max-w-7xl mx-auto p-4 gap-4 flex items-center">
             <Button
               shape="circle"

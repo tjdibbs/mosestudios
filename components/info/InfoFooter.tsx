@@ -7,21 +7,23 @@ import { Icon } from "@iconify/react";
 
 function Footer() {
   return (
-    <footer className="mt-24">
-      <div className="wrap-text text-center text-2xl sm:text-3xl font-extrabold my-6">
+    <footer className="mt-8">
+      <div className="wrap-text text-center text-2xl sm:text-5xl font-extrabold my-6">
         ANY PROJECT IN MIND ?
         <Button
           type="text"
           size="large"
-          className="text-primary font-bold text-2xl sm:text-3xl"
+          className="text-primary font-bold text-2xl sm:text-5xl"
         >
           GET IN TOUCH
         </Button>
       </div>
       <div className="wrap bg-black/50">
-        <div className="flex flex-wrap max-w-6xl mx-auto items-center px-10 justify-end  py-10 gap-6">
+        <div className="flex flex-wrap px-24 mx-auto items-start justify-end  py-10 gap-6">
           <div className="wrap social-icons flex-grow">
-            <div className="text text-primary mb-4">LET’S STAY CONNECTED</div>
+            <div className="text-2xl font-bold text-primary mb-4">
+              Let's stay connected
+            </div>
             <div className="icons flex gap-x-3 items-center">
               {socialIcons.map((icon, index) => (
                 <a key={index} href={icon.link} target="_blank">
@@ -38,21 +40,21 @@ function Footer() {
             <div className="phone mb-2">
               <a
                 href="tel:+2348103115400"
-                className="no-underline text-white block"
+                className="no-underline text-white block text-xl"
               >
                 +234-802-768-5574
               </a>
-              <a
+              {/* <a
                 href="tel:+447917904869"
                 className="no-underline text-white block"
               >
                 +447917904869
-              </a>
+              </a> */}
             </div>
-            <div className="email mb-2">
+            <div className="email mb-2 ">
               <a
                 href="mailto:info@roshestudios.com"
-                className="no-underline text-white block"
+                className="no-underline text-white block text-xl"
               >
                 info@roshe<span className="text-primary">studios</span>.com
               </a>
@@ -75,29 +77,29 @@ function Footer() {
 const socialIcons = [
   {
     title: "whatsapp",
-    link: "https://wa.me/+447917904869",
-    icon: <Whatsapp size="32" color="white" />,
+    link: "https://wa.me/+2348027685574",
+    icon: <Whatsapp size="40" color="white" />,
   },
   {
     title: "instagram",
     link: "https://instagram.com/roshe_studios?igshid=NTc4MTIwNjQ2YQ==",
-    icon: <Instagram size="32" className="text-white" />,
+    icon: <Instagram size="40" className="text-white" />,
   },
   {
     title: "linkedin",
     icon: (
-      <Icon icon="mingcute:linkedin-line" height={32} className="text-white" />
+      <Icon icon="mingcute:linkedin-line" height={40} className="text-white" />
     ),
     link: "https://www.linkedin.com/company/roshestudios/",
   },
   {
     title: "twitter",
-    icon: <Icon icon="mdi:twitter" height={32} className="text-white" />,
+    icon: <Icon icon="mdi:twitter" height={40} className="text-white" />,
     link: "https://twitter.com/roshestudi18670",
   },
   {
     title: "youtube",
-    icon: <Youtube size="32" className="text-white" />,
+    icon: <Youtube size="40" className="text-white" />,
     link: "https://youtube.com/@roshestudios?si=1hWhiSQoU_6yXNEA",
   },
 ];

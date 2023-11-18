@@ -22,6 +22,6 @@ html {
 
 .bottom-banner {
   background-image: url("../public/images/bottom-banner-image.jpg");
-  @apply relative before:absolute before:left-0 before:top-0 before:content-[''] before:from-bgDark before:bg-gradient-to-r before:to-transparent before:w-[30%]  before:h-full;
-  @apply after:absolute after:right-0 after:top-0 after:content-[''] after:from-bgDark after:bg-gradient-to-l after:to-transparent after:w-[30%]  after:h-full;
+  @apply relative before:absolute before:left-0 before:top-0 before:content-[''] before:from-white/70 before:bg-gradient-to-r before:to-transparent before:w-[30%]  before:h-full;
+  @apply after:absolute after:right-0 after:top-0 after:content-[''] after:from-white/70 after:bg-gradient-to-l after:to-transparent after:w-[30%]  after:h-full;
 }

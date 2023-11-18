@@ -4,11 +4,10 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@assets/logo.png";
 import { Affix, Button, Drawer, Dropdown } from "antd";
-import { ArrowDown2, ShoppingCart, HambergerMenu } from "iconsax-react";
+import { ArrowDown2, HambergerMenu } from "iconsax-react";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import NextNProgress from "nextjs-progressbar";
 
 const navData = [
   {
@@ -81,7 +80,7 @@ function InfoHeader() {
             overlayClassName="border-t-2 border-b-0 border-x-0 border-solid border-primary"
             menu={{
               items: navMenu.menu.map<ItemType>((m) => {
-                let pathname = m.replace(" ", "-");
+                let pathname = m.replaceAll(" ", "-");
 
                 let active = currentLocation.includes(pathname);
 
@@ -91,20 +90,24 @@ function InfoHeader() {
                 }
 
                 if (navMenu.title == "Services") {
-                  pathname = "services#" + pathname;
-                  if (typeof location != "undefined") {
-                    active = location.href.includes(pathname);
+                  if (m == "sme social content packages") {
+                    pathname = "/#" + pathname;
+                  } else {
+                    pathname = "/services/" + pathname;
+                    if (typeof location != "undefined") {
+                      active = location.href.includes(pathname);
+                    }
                   }
                 }
 
                 return {
                   key: m,
-                  label: m,
+                  label: <Link href={pathname}>{m}</Link>,
 
                   className:
                     "capitalize hover:bg-primary hover:text-black transition" +
                     (active ? " bg-primary/10" : ""),
-                  onClick: () => router.push(pathname),
+                  onClick: () => setOpenDrawer(false),
                 };
               }),
             }}

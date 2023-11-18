@@ -54,10 +54,10 @@ function Dashboard() {
         <div className="page-container">
           <Affix offsetTop={0}>
             <div className="header bg-bgDark p-4 flex items-center justify-between">
-              <div className="welcome-text font-bold text-2xl">
+              <div className="welcome-text font-bold text-base sm:text-2xl">
                 Welcome Back, Moses
               </div>
-              <div className="search">
+              <div className="search hidden sm:block">
                 <Input.Search
                   size="large"
                   placeholder="Search for content"
@@ -83,7 +83,7 @@ function Dashboard() {
                         height={40}
                       />
                     </div>
-                    <div className="wrap flex-1">
+                    <div className="wrap flex-1 hidden sm:block">
                       <div className="name font-bold">
                         {user?.firstName}
                         {user?.package && (
@@ -106,17 +106,17 @@ function Dashboard() {
               </div>
             </div>
           </Affix>
-          <div className="flex gap-10 mt-6 pr-3">
+          <div className="flex flex-wrap gap-10 mt-6 pr-3">
             <div className="wrap flex-grow">
-              <div className="flex bg-bgDarkSecondary px-4 mb-10 py-6 rounded-xl gap-6 items-center">
+              <div className="flex flex-wrap bg-bgDarkSecondary px-4 mb-10 py-6 rounded-xl gap-6 items-center">
                 <Button
                   type="text"
                   onClickCapture={() => createContentRef.current?.open()}
                   className="w-[63px] h-[63px] gird place-items-center  bg-white rounded-full"
                   icon={<Add className="h-14 w-14" color="black" />}
                 />
-                <div className="flex-1">
-                  <div className="text-2xl mb-2 font-bold tracking-tight">
+                <div className="flex-grow">
+                  <div className="text-lg sm:text-2xl mb-2 font-bold tracking-tight">
                     New Content
                   </div>
                   <div className="text-base font-medium tracking-tight">

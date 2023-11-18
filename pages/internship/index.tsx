@@ -19,8 +19,8 @@ function Internship() {
           <div className="text-center font-light text-[#adadad] text-sm sm:text-base">
             Are you passionate, talented and creative? 2D Artists or 3D Artists?
             <br />
-            Application for internship program generally begins on November 1st,
-            2022.
+            Application for internship program generally begins on January 1st,
+            2024.
             <br />
             <br />
             <span className="font-bold">Key Output</span> - Provide creative

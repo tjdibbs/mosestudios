@@ -68,10 +68,10 @@ const Sidebar: React.FC<{}> = (props) => {
     <Affix offsetTop={0}>
       <div
         className={
-          "sidebar-container relative h-screen bg-bgDarkSecondary p-4 " +
+          "sidebar-container relative h-screen bg-bgDarkSecondary p-4 hidden sm:block " +
           (collapse
             ? "w-[60px] overflow-hidden"
-            : "w-[250px] overflow-auto pl-4")
+            : "w-[250px] overflow-auto pl-4 ")
         }
       >
         {

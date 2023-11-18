@@ -21,7 +21,7 @@ function RemoteJobs() {
             in telling compelling stories and creating industry standard digital
             content solution.
             <br />
-            Remote jobs will be open October 2nd, 2023.
+            Remote jobs will be open January 1st, 2024
             <br />
             <br />
             <span className="font-bold">Mode of Work</span> - Remote and

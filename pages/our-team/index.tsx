@@ -11,7 +11,7 @@ function Team() {
           <div className="title font-extrabold text-3xl mb-2">
             THE ROSHE<span className="text-primary">STUDIOS</span> TEAM
           </div>
-          <div className="text-sm">
+          <div className="leading-6">
             We believe in a diverse range of personnel to bring creative skills,
             thoughts, and ideas to the table. Our workforce of over 25 persons
             consists of youth mostly within the age range of 21 and 40. We all

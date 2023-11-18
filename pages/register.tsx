@@ -74,7 +74,7 @@ function RegisterPage() {
             <form action="#" onSubmit={handleSubmit(submit)}>
               <div className="form-header mb-4 text-center">
                 <div className="form-title text-2xl font-bold mb-2">
-                  Sign Up for MoseStudios
+                  Sign Up for RosheStudios
                 </div>
               </div>
 

@@ -13,8 +13,8 @@ function BrandCulture() {
             productivity. We formulate policies that favour employees, keeping
             their productivity level high while producing world-class content.
             We can brag about the team spirit in our studio that has helped make
-            the daunting task of animation easy. Simply put, MOSESTUDIOS creates
-            a family bond while maintaining professionalism.
+            the daunting task of animation easy. Simply put, ROSHESTUDIOS
+            creates a family bond while maintaining professionalism.
           </div>
         </div>
         <div className="text-white px-6 grid place-items-center gap-4 place-content-center h-[415px]">

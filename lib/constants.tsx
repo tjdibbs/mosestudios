@@ -13,7 +13,7 @@ export const teamMembers = [
     role: "founder/creative director",
     image: CEO,
     description: (
-      <div className="description text-xs mb-6">
+      <div className="description mb-6">
         <p>
           My name is Moses Omobolaji. I have been a Digital artist since 2014
           with a background in 3D Animation as well as still and motion
@@ -49,11 +49,11 @@ export const teamMembers = [
     description: <p>I am a professional 3d artist from Planet Earth</p>,
     image: ProductDesigner,
   },
-  {
-    name: "EMANUEL ABALLERO",
-    role: "Technical Artist",
-    image: Aballero,
-  },
+  // {
+  //   name: "EMANUEL ABALLERO",
+  //   role: "Technical Artist",
+  //   image: Aballero,
+  // },
   {
     name: "Okeke Chimeze",
     role: "Character animator",
@@ -71,11 +71,11 @@ export const teamMembers = [
     image: Dolapo,
   },
 
-  {
-    name: "UHEADA ",
-    role: "Concept Artist",
-    image: Uhe,
-  },
+  // {
+  //   name: "UHEADA ",
+  //   role: "Concept Artist",
+  //   image: Uhe,
+  // },
   {
     name: "YUSUF ABDURRAHMAH",
     role: "CHARACTER ARTIST ",

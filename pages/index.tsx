@@ -75,13 +75,13 @@ export default function HomePage() {
             <h1 className="text-2xl sm:text-3xl mb-2 font-bold">
               A VIRTUAL GLOBAL DIGITAL STUDIO
             </h1>
-            <p className="text-secondary text-sm sm:text-base capitalize text-gray-500">
+            <p className="text-secondary capitalize text-gray-500">
               sometimes size doesn't matter. we work for big & small
               non-stoppable visionaries. there's love for them all
             </p>
           </div>
 
-          <div className="partners flex flex-wrap gap-5 gap-y-10 items-center justify-evenly bg-[#D9D9D9] py-8 rounded-xl shadow-xl shadow-white/20 my-10">
+          <div className="partners flex flex-wrap gap-5 gap-y-10 items-center justify-evenly bg-[#D9D9D9] py-8  shadow-xl shadow-white/20 my-10">
             {[Codenest, PowerLab, ReadySet, Techen, Venus].map((img, i) => (
               <Image
                 src={img}
@@ -93,19 +93,22 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-sm max-w-2xl mt-4 mx-auto text-gray-400 text-center">
+          <div className=" max-w-2xl mt-4 mx-auto text-gray-400 text-center">
             We offer innovative digital content solution like 3D animation, 2D
             animation, Product Visualization, Motion graphics, Visual effects
             and and Still Graphics to tell compelling brand stories.
           </div>
         </section>
 
-        <section className="social-media-packages my-40 px-4">
+        <section
+          id="sme-social-content-packages"
+          className="social-media-packages my-40 px-4"
+        >
           <div className="text-wrap text-center max-w-2xl mx-auto">
             <div className="section-title text-3xl text-center mb-2 font-black">
               SOCIAL MEDIA PACKAGE SUBSCRIPTIONS
             </div>
-            <div className="secondary-text text-sm text-gray-400">
+            <div className="secondary-text text-gray-400">
               With our Social media content packages, brands can focus on other
               part of their business while we create stunning and amazing
               contents for their social handles .
@@ -124,7 +127,7 @@ export default function HomePage() {
                 <div className="package-title text-black text-center uppercase font-extrabold text-2xl mb-2">
                   {p.title}
                 </div>
-                <p className="package-description text-sm text-black text-center mb-2">
+                <p className="package-description text-black text-center mb-2">
                   {p.description}
                 </p>
 
@@ -161,10 +164,10 @@ export default function HomePage() {
 
         <section className="who-we-are my-28 px-4">
           <div className="text-wrap text-center max-w-2xl mx-auto">
-            <div className="section-title text-3xl text-center mb-2 font-black">
+            <div className="section-title text-4xl text-center mb-2 font-black">
               Who We Are
             </div>
-            <div className="secondary-text text-sm text-gray-400">
+            <div className="secondary-text text-gray-400">
               ROSHESTUDIOS is a global virtual studio. We are a team of nearly
               12 experienced international artists across the world with
               creatives specialized in different aspects of CG production.
@@ -177,7 +180,7 @@ export default function HomePage() {
             effect={"coverflow"}
             ref={swiperRef}
             coverflowEffect={{
-              rotate: 50,
+              rotate: 30,
               stretch: 0,
               depth: 100,
               modifier: 1,
@@ -199,6 +202,7 @@ export default function HomePage() {
             }}
             modules={[EffectCoverflow, Pagination]}
             // loop
+            centeredSlides
             pagination={{ clickable: true }}
             // onSwiper={(swiper) => console.log(swiper)}
             // onSlideChange={() => console.log("slide change")}

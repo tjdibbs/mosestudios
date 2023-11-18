@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "antd";
-import { Instagram, Youtube } from "iconsax-react";
+import { Instagram, Whatsapp, Youtube } from "iconsax-react";
 import React from "react";
 import { Icon } from "@iconify/react";
 
@@ -24,7 +24,7 @@ function Footer() {
             <div className="text text-primary mb-4">LET’S STAY CONNECTED</div>
             <div className="icons flex gap-x-3 items-center">
               {socialIcons.map((icon, index) => (
-                <a key={index} href={icon.link}>
+                <a key={index} href={icon.link} target="_blank">
                   {icon.icon}
                 </a>
               ))}
@@ -41,6 +41,12 @@ function Footer() {
                 className="no-underline text-white block"
               >
                 +234-802-768-5574
+              </a>
+              <a
+                href="tel:+447917904869"
+                className="no-underline text-white block"
+              >
+                +447917904869
               </a>
             </div>
             <div className="email mb-2">
@@ -67,6 +73,11 @@ function Footer() {
 }
 
 const socialIcons = [
+  {
+    title: "whatsapp",
+    link: "https://wa.me/+447917904869",
+    icon: <Whatsapp size="32" color="white" />,
+  },
   {
     title: "instagram",
     link: "https://instagram.com/roshe_studios?igshid=NTc4MTIwNjQ2YQ==",

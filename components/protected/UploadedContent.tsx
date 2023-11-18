@@ -4,7 +4,7 @@ import { Message, Messages } from "iconsax-react";
 
 function UploadedContent() {
   return (
-    <div className="w-full p-5 bg-neutral-800 flex items-center shadow-lg shadow-white/5 gap-4 rounded-xl">
+    <div className="w-full p-5 bg-neutral-800 flex flex-wrap items-center shadow-lg shadow-white/5 gap-4 rounded-xl">
       <div className="w-[218px] h-[139px] relative">
         <div className="w-[218px] h-[139px] bg-stone-500 rounded-[20px]"></div>
         <div className="w-[39px] h-[39px] left-[90px] top-[50px] absolute">

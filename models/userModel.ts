@@ -1,4 +1,3 @@
-import generateRandom5DigitNumber from "@lib/getRandomDigits";
 import { modelOptions, prop } from "@typegoose/typegoose";
 import { Schema } from "mongoose";
 

@@ -1,13 +1,32 @@
-"use client";
-
 import useFormControl from "hooks/useFormControl";
 import React from "react";
 import Image from "next/image";
-import { Button } from "antd";
+import { Button, message as Alert } from "antd";
 import InfoLayout from "@comp/info/InfoLayout";
+import useFetch from "@hooks/useFetch";
+import { appealingMessage, config } from "@lib/constants";
 
 function AffiliateMarketing() {
-  const { FormControl } = useFormControl({});
+  const { FormControl, handleSubmit, reset } = useFormControl({});
+  const { fetcher, fetching } = useFetch();
+
+  const submit = React.useCallback(
+    async (fields: any) => {
+      const res = await fetcher({
+        method: "post",
+        url: config.urls.affiliate,
+        data: fields,
+      });
+
+      if (!res.success || res.error) {
+        return Alert.error(res.message || res.error || appealingMessage, 3);
+      }
+
+      Alert.success(res.message, 5);
+      reset();
+    },
+    [fetcher, reset]
+  );
   return (
     <InfoLayout>
       <div className="internship-container px-4">
@@ -43,21 +62,31 @@ function AffiliateMarketing() {
         </div>
 
         <div className="wrap flex justify-center gap-16 gap-x-[200px] my-20 items-center flex-wrap-reverse">
-          <form action="#" className="bg-white px-6 w-[500px] py-8">
+          <form
+            action="#"
+            onSubmit={handleSubmit(submit)}
+            className="bg-white px-6 w-[500px] py-8"
+          >
             {FormControl({ name: "fullName", label: "Full Name" })}
             {FormControl({ name: "phone" })}
             {FormControl({ name: "email" })}
             {FormControl({ name: "address", label: "Address" })}
             {FormControl({ name: "bankName", label: "Bank Name" })}
-            {FormControl({ name: "accountName", label: "Bank Account Name" })}
             {FormControl({
-              name: "accountNumber",
+              name: "bankAccountName",
+              label: "Bank Account Name",
+            })}
+            {FormControl({
+              name: "bankAccountNumber",
               label: "Bank Account Number",
             })}
 
             <div className="actions w-max mx-auto">
               <Button
                 size="large"
+                loading={fetching}
+                disabled={fetching}
+                htmlType="submit"
                 className="bg-bgDark text-white rounded-none px-8"
               >
                 APPLY

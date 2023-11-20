@@ -12,12 +12,14 @@ const footerTemplate = readFileSync("./templates/footer.hbs", "utf8");
 Handlebars.registerPartial("footer", footerTemplate);
 
 export enum Email {
-  REGISTER = "register",
-  DELETE = "delete",
-  CHANGE = "change",
-  VERIFY = "verify",
-  SUPPORT = "support",
-  SEND_CODE = "send_code",
+  REGISTER,
+  DELETE,
+  CHANGE,
+  VERIFY,
+  SUPPORT,
+  SEND_CODE,
+  CONTACT,
+  AFFILIATE,
 }
 
 export default async function Emailer(
@@ -26,7 +28,7 @@ export default async function Emailer(
   data?: any
 ) {
   const mailOptions: Partial<MailOptions> = {
-    from: "Roshestudios <tech@nubisng.com>",
+    from: "Roshestudios <info@roshestudios.com>",
     to: email,
     sender: "Roshestudios",
   };
@@ -52,6 +54,14 @@ export default async function Emailer(
     case Email.VERIFY:
       mailOptions.subject = `Email Verification`;
       mailOptions.html = await addHtml("email_verification");
+      break;
+    case Email.CONTACT:
+      mailOptions.subject = "New Request from RosheStudios.com";
+      mailOptions.text = `There is a message request from ${data.fullName}, \n\n Email: ${data.email}, \n\n Message: ${data.message} \n\n Brand Name: ${data.brandName}`;
+      break;
+    case Email.AFFILIATE:
+      mailOptions.subject = "New Affiliate Form Submitted";
+      mailOptions.text = `There is a new Affiliate Form Submitted by ${data.fullName}, \n\n Email: ${data.email}, \n\n Phone: ${data.phone}, \n\n Address: ${data.address}, \n\n Bank name: ${data.bankName} \n\n Bank Account Name: ${data.bankAccountName} \n\n Bank Account Number: ${data.bankAccountNumber},`;
       break;
     default:
       break;

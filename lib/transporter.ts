@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
-import keys from "key.json";
 
 const user = process.env.MAIL_USER;
+const pass = process.env.MAIL_PASS;
 const host = process.env.MAIL_HOST;
 
 // Setting Up For Mailing
@@ -10,9 +10,11 @@ export default nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    type: "OAuth2",
+    // type: "OAuth2",
+    // user,
+    // serviceClient: keys.client_id,
+    // privateKey: keys.private_key,
     user,
-    serviceClient: keys.client_id,
-    privateKey: keys.private_key,
+    pass,
   },
 });

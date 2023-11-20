@@ -1,13 +1,33 @@
-"use client";
-
 import React from "react";
-import { Button } from "antd";
+import { Button, message as Alert } from "antd";
 import useFormControl from "hooks/useFormControl";
 import Image from "next/image";
 import InfoLayout from "@comp/info/InfoLayout";
+import useFetch from "@hooks/useFetch";
+import { appealingMessage, config } from "@lib/constants";
 
 function ContactUs() {
-  const { FormControl } = useFormControl({});
+  const { FormControl, handleSubmit, reset } = useFormControl({});
+  const { fetcher, fetching } = useFetch();
+
+  const submit = React.useCallback(
+    async (fields: any) => {
+      const res = await fetcher({
+        method: "post",
+        url: config.urls.contact,
+        data: fields,
+      });
+
+      if (!res.success || res.error) {
+        return Alert.error(res.message || res.error || appealingMessage, 3);
+      }
+
+      Alert.success(res.message, 5);
+      reset();
+    },
+    [fetcher, reset]
+  );
+
   return (
     <InfoLayout>
       <div className="contact-us-container px-4">
@@ -22,7 +42,11 @@ function ContactUs() {
               </div>
             </div>
 
-            <form action="#" className="bg-white px-6  py-8">
+            <form
+              action="#"
+              onSubmit={handleSubmit(submit)}
+              className="bg-white px-6  py-8"
+            >
               {FormControl({ name: "fullName", label: "Full Name" })}
               {FormControl({ name: "brandName", label: "Brand name" })}
               {FormControl({ name: "email" })}
@@ -35,6 +59,9 @@ function ContactUs() {
               <div className="actions w-max mx-auto mt-10">
                 <Button
                   size="large"
+                  loading={fetching}
+                  disabled={fetching}
+                  htmlType="submit"
                   className="bg-bgDark text-white rounded-none px-8"
                 >
                   SEND

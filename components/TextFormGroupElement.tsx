@@ -9,9 +9,9 @@ export const TextFormGroupElement = React.memo(
       <div className="form-group flex-grow mb-4" ref={props.htmlRef}>
         <label
           htmlFor="business-name"
-          className="block mb-2 text-sm text-black"
+          className="block mb-2 text-sm text-black capitalize"
         >
-          {props.label || "Business " + props.name?.replaceAll(/[0-9]/g, "")}{" "}
+          {props.label || props.name?.replaceAll(/[0-9]/g, "")}{" "}
           {required && <span className="text-red-600 font-bold">*</span>}
         </label>
         <Comp

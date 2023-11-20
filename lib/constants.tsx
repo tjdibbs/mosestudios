@@ -108,6 +108,9 @@ export enum Urls {
   addReview = "/add-review",
   aggregate = "/aggregate",
   getUser = "/users",
+
+  contact = "/contact",
+  affiliate = "/affiliate",
 }
 
 export const config = {

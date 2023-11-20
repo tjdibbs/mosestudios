@@ -4,9 +4,15 @@ import Handlebars, { compile } from "handlebars";
 import { readFileSync } from "node:fs";
 import transporter from "@lib/transporter";
 import HttpError from "./httpError";
+import path from "node:path";
+
+console.log({ resolved: path.resolve("templates/footer.hbs") });
 
 // let register template footer, we are able to include it in all template footer
-const footerTemplate = readFileSync("templates/footer.hbs", "utf8");
+const footerTemplate = readFileSync(
+  path.resolve("templates/footer.hbs"),
+  "utf8"
+);
 
 // Register the footer and banner template
 Handlebars.registerPartial("footer", footerTemplate);
@@ -35,7 +41,9 @@ export default async function Emailer(
 
   const addHtml = async (template: string) =>
     compile(
-      readFileSync("templates/" + template + ".hbs", { encoding: "utf-8" })
+      readFileSync(path.resolve("templates/" + template + ".hbs"), {
+        encoding: "utf-8",
+      })
     )(data);
 
   switch (type) {

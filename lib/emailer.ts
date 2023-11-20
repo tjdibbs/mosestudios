@@ -6,7 +6,7 @@ import transporter from "@lib/transporter";
 import HttpError from "./httpError";
 
 // let register template footer, we are able to include it in all template footer
-const footerTemplate = readFileSync("./templates/footer.hbs", "utf8");
+const footerTemplate = readFileSync("templates/footer.hbs", "utf8");
 
 // Register the footer and banner template
 Handlebars.registerPartial("footer", footerTemplate);
@@ -35,7 +35,7 @@ export default async function Emailer(
 
   const addHtml = async (template: string) =>
     compile(
-      readFileSync("./templates/" + template + ".hbs", { encoding: "utf-8" })
+      readFileSync("templates/" + template + ".hbs", { encoding: "utf-8" })
     )(data);
 
   switch (type) {

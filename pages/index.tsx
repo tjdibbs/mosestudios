@@ -40,12 +40,12 @@ export default function HomePage() {
             autoPlay
             loop
             muted
-            src="./homepage-video.mp4"
+            src="./Page.mp4"
           ></video>
 
-          <div className="content absolute w-full h-full top-56 left-0 grid place-items-center place-content-center">
+          <div className="content absolute w-full h-full top-0 md:top-56 left-0 grid place-items-center place-content-center">
             <div className="welcome bg-bgDark w-max px-4 py-2 rounded-lg mb-2 mx-auto text-white flex gap-x-4 items-center">
-              <span className="font-extrabold text-xl uppercase">
+              <span className="font-extrabold text-base sm:text-xl uppercase">
                 Welcome to{" "}
               </span>
               <Image
@@ -53,6 +53,7 @@ export default function HomePage() {
                 width={224}
                 height={42}
                 priority
+                className="w-48 h-auto sm:w-auto"
                 alt="roshestudio logo"
               />
             </div>
@@ -63,7 +64,7 @@ export default function HomePage() {
               <Button
                 type="primary"
                 size="large"
-                className="text-black w-auto px-2 uppercase text-center font-bold text-2xl"
+                className="text-black w-auto px-2 uppercase text-center font-bold text-xl sm:text-2xl"
               >
                 Get Started
               </Button>
@@ -72,11 +73,11 @@ export default function HomePage() {
           <BannerSvg />
         </section>
         <section className="partners-sections my-16">
-          <div className="text-wrap text-center mx-auto">
-            <h1 className="text-2xl sm:text-5xl mb-2 font-bold">
+          <div className="text-wrap px-4 text-center mx-auto">
+            <h1 className="text-2xl sm:text-5xl mb-2 font-black">
               A VIRTUAL GLOBAL DIGITAL STUDIO
             </h1>
-            <p className="text-secondary text-2xl text-center text-gray-500">
+            <p className="text-secondary text-base sm:text-2xl text-center text-gray-400">
               Sometimes size doesn't matter. We work for big & small
               non-stoppable visionaries. There's love for them all
             </p>
@@ -95,13 +96,13 @@ export default function HomePage() {
                 src={item.image}
                 key={i}
                 alt={"roshestudios partner"}
-                className="w-[40%] sm:w-auto"
+                className="h-auto sm:w-auto"
                 height={item.height}
               />
             ))}
           </div>
 
-          <div className="max-w-6xl text-2xl mt-4 mx-auto text-gray-400 text-center">
+          <div className="max-w-6xl sm:text-2xl mt-4 mx-auto text-gray-400 text-center">
             We offer innovative digital content solution like 3D animation, 2D
             animation, Product Visualization, Motion graphics, Visual effects
             and and Still Graphics to tell compelling brand stories.
@@ -116,7 +117,7 @@ export default function HomePage() {
             <div className="section-title text-2xl sm:text-5xl text-center mb-2 font-black">
               SOCIAL MEDIA PACKAGE SUBSCRIPTIONS
             </div>
-            <div className="secondary-text text-xl text-center mx-auto max-w-6xl text-gray-400">
+            <div className="secondary-text sm:text-xl text-center mx-auto max-w-6xl text-gray-400">
               With our Social media content packages, brands can focus on other
               part of their business while we create stunning and amazing
               contents for their social handles .
@@ -132,10 +133,10 @@ export default function HomePage() {
                 key={index}
                 className="package bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
               >
-                <div className="package-title text-black text-center uppercase font-extrabold text-4xl mb-2">
+                <div className="package-title text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
                   {p.title}
                 </div>
-                <p className="package-description text-black text-xl text-center mb-2">
+                <p className="package-description text-black sm:text-xl text-center mb-2">
                   {p.description}
                 </p>
 
@@ -172,10 +173,10 @@ export default function HomePage() {
 
         <section className="who-we-are my-28 px-4">
           <div className="text-wrap text-center max-w-5xl mx-auto">
-            <div className="section-title uppercase text-5xl text-center mb-2 font-black">
+            <div className="section-title uppercase text-3xl sm:text-5xl text-center mb-2 font-black">
               Who We Are
             </div>
-            <div className="secondary-text text-xl text-gray-400">
+            <div className="secondary-text sm:text-xl text-gray-400">
               ROSHE<span className="text-primary">STUDIOS</span> is a global
               virtual studio. We are a team of nearly 12 experienced
               international artists across the world with creatives specialized

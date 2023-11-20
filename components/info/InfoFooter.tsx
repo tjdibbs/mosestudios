@@ -4,19 +4,22 @@ import { Button } from "antd";
 import { Instagram, Whatsapp, Youtube } from "iconsax-react";
 import React from "react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 
 function Footer() {
   return (
     <footer className="mt-8">
       <div className="wrap-text text-center text-2xl sm:text-5xl font-extrabold my-6">
         ANY PROJECT IN MIND ?
-        <Button
-          type="text"
-          size="large"
-          className="text-primary font-bold text-2xl sm:text-5xl"
-        >
-          GET IN TOUCH
-        </Button>
+        <Link href={"/contact"}>
+          <Button
+            type="text"
+            size="large"
+            className="text-primary font-bold text-2xl sm:text-5xl"
+          >
+            GET IN TOUCH
+          </Button>
+        </Link>
       </div>
       <div className="wrap bg-black/50">
         <div className="flex flex-wrap px-24 mx-auto items-start justify-end  py-10 gap-6">
@@ -38,18 +41,18 @@ function Footer() {
             </div>
 
             <div className="phone mb-2">
-              <a
+              {/* <a
                 href="tel:+2348103115400"
                 className="no-underline text-white block text-xl"
               >
                 +234-802-768-5574
-              </a>
-              {/* <a
+              </a> */}
+              <a
                 href="tel:+447917904869"
                 className="no-underline text-white block"
               >
                 +447917904869
-              </a> */}
+              </a>
             </div>
             <div className="email mb-2 ">
               <a
@@ -77,7 +80,7 @@ function Footer() {
 const socialIcons = [
   {
     title: "whatsapp",
-    link: "https://wa.me/+2348027685574",
+    link: "https://wa.me/+447917904869",
     icon: <Whatsapp size="40" color="white" />,
   },
   {

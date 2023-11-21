@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import { Message, Messages } from "iconsax-react";
+import { Messages } from "iconsax-react";
 
 function UploadedContent() {
   return (

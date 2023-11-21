@@ -102,7 +102,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="max-w-6xl sm:text-2xl mt-4 mx-auto text-gray-400 text-center">
+          <div className="max-w-6xl px-4 sm:text-2xl mt-4 mx-auto text-gray-400 text-center">
             We offer innovative digital content solution like 3D animation, 2D
             animation, Product Visualization, Motion graphics, Visual effects
             and and Still Graphics to tell compelling brand stories.
@@ -140,12 +140,12 @@ export default function HomePage() {
                   {p.description}
                 </p>
 
-                <div className="price flex justify-between mt-6">
-                  <div className="dollar bg-bgDark text-white text-3xl font-bold px-6 py-2 rounded-lg">
+                <div className="price flex items-center justify-between mt-6">
+                  <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
                     {p.price.dollar}
                   </div>
                   <ArrowSwapHorizontal size="32" />
-                  <div className="naira bg-bgDark text-white text-3xl  font-bold px-6 py-2 rounded-lg">
+                  <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
                     {p.price.naira}
                   </div>
                 </div>

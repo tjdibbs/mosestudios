@@ -16,7 +16,7 @@ const tailwindConfig: Config = {
         white: "#D9D9D9",
       },
       screens: {
-        xs: "450px",
+        xs: "430px",
       },
     },
   },

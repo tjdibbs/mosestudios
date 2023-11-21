@@ -22,7 +22,7 @@ function Footer() {
         </Link>
       </div>
       <div className="wrap bg-black/50">
-        <div className="flex flex-wrap px-24 mx-auto items-start justify-end  py-10 gap-6">
+        <div className="flex flex-wrap px-4 sm:px-24 mx-auto items-start justify-end  py-10 gap-6">
           <div className="wrap social-icons flex-grow">
             <div className="text-2xl font-bold text-primary mb-4">
               Let's stay connected

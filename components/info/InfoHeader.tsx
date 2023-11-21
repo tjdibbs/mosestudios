@@ -133,13 +133,14 @@ function InfoHeader() {
               className="h-10 w-10 md:hidden grid place-items-center rounded-xl"
               icon={<HambergerMenu size="32" />}
             />
-            <div className="logo-wrap flex mr-10">
+            <div className="logo-wrap mr-10 flex-1 lg:flex-none">
               <Link href={"/"}>
                 <Image
                   alt="mosestudios logo"
                   src={Logo}
                   width={188}
                   height={32}
+                  className="w-[150px] h-auto xs:188 xs:h-[320px]"
                   priority
                 />
               </Link>
@@ -148,7 +149,7 @@ function InfoHeader() {
               {navigators}
             </div>
 
-            <div className="actions flex gap-x-4 items-center">
+            <div className="actions">
               {/* <Button
               className="h-10 w-10 grid place-items-center"
               icon={<ShoppingCart size="24" color="white" />}

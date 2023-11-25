@@ -12,41 +12,75 @@ export default class MyDocument extends Document {
           <meta property="og:title" content="RosheStudios" />
           <meta
             property="og:description"
-            content="Your graphics and animation studio"
+            content="Imagine you plan on launching a cutting-edge product but then, you are faced with a major issue.
+
+How exactly do I present the uniqueness of your product or service to my target audience?
+
+Fortunately, you don't have to worry anymore because your digital oasis of creativity is here to serve you!
+
+We are a animation studio committed to transforming your visions into captivating digital experiences.
+
+Our range of services include
+
+➡ 3D Animation,
+➡ 2D Animation,
+➡ Motion Graphics,
+➡ Explainer Videos,
+➡ Product Visualization,
+➡ Branding
+➡ Visual Effect and Editing, and
+➡ Architectural Visualization.
+
+Let Roshe Studios be the magic storyteller of your next digital story"
           />
           <meta property="og:url" content="https://roshestudios.com/" />
           <meta property="og:site_name" content="RosheStudios" />
           <meta property="og:locale" content="en_US" />
           <meta
             property="og:image:url"
-            content="https://roshestudios.com/images/mose.gif"
+            content="https://roshestudios.com/images/logo-big.png"
           />
-          <meta property="og:image:width" content="500" />
-          <meta property="og:image:height" content="500" />
+          <meta property="og:image:width" content="350" />
+          <meta property="og:image:height" content="300" />
           <meta
             property="og:image:url"
-            content="https://roshestudios.com/images/mose.gif"
+            content="https://roshestudios.com/images/logo-big.png"
           />
-          <meta property="og:image:width" content="500" />
-          <meta property="og:image:height" content="500" />
           <meta property="og:image:alt" content="RosheStudios" />
           <meta property="og:type" content="website" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:site:id" content="1467726470533754880" />
-          <meta name="twitter:creator" content="@tjdibbs" />
-          <meta name="twitter:creator:id" content="1467726470533754880" />
           <meta name="twitter:title" content="RosheStudios" />
           <meta
             name="twitter:description"
-            content="Your graphics and animation studio"
+            content="Imagine you plan on launching a cutting-edge product but then, you are faced with a major issue.
+
+How exactly do I present the uniqueness of your product or service to my target audience?
+
+Fortunately, you don't have to worry anymore because your digital oasis of creativity is here to serve you!
+
+We are a animation studio committed to transforming your visions into captivating digital experiences.
+
+Our range of services include
+
+➡ 3D Animation,
+➡ 2D Animation,
+➡ Motion Graphics,
+➡ Explainer Videos,
+➡ Product Visualization,
+➡ Branding
+➡ Visual Effect and Editing, and
+➡ Architectural Visualization.
+
+Let Roshe Studios be the magic storyteller of your next digital story"
           />
           <meta
             name="twitter:image"
-            content="https://roshestudios.com/images/mose.gif"
+            content="https://roshestudios.com/images/logo-big.png"
           />
           <meta
             name="keywords"
-            content="graphic,graphics,motion,animation,studio,roshestudios,roshe,studios,interface,design,animations,motion-graphics,illustration"
+            content="graphic,graphics,motion,animation,studio,roshestudios,roshe,studios,interface,design,animations,motion-graphics,illustration,Animation studio in Lagos,
+Animation studio in Nigeria,Animation studio in west Africa,Animation studio in Africa,Digital content studio,Social media plans,Roshe studio,Animation Studio,2D Animation,3D Animation,Animated Short Films,Motion Graphics,Character Animation,Storyboarding,Visual Effects (VFX),Cartoon Animation,Animated Explainer Videos,Digital Animation,Animation Production,Animation Design,CGI Animation,Stop Motion Animation,Animated Series,Animation for Marketing,Illustration and Animation,Animated Commercials,Animated Content Creation,Explainer video,Branding"
           />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -66,7 +100,26 @@ export default class MyDocument extends Document {
           <title>Roshestudios</title>
           <meta
             name="description"
-            content="Your graphics and animation studio"
+            content="Imagine you plan on launching a cutting-edge product but then, you are faced with a major issue.
+
+How exactly do I present the uniqueness of your product or service to my target audience?
+
+Fortunately, you don't have to worry anymore because your digital oasis of creativity is here to serve you!
+
+We are a animation studio committed to transforming your visions into captivating digital experiences.
+
+Our range of services include
+
+➡ 3D Animation,
+➡ 2D Animation,
+➡ Motion Graphics,
+➡ Explainer Videos,
+➡ Product Visualization,
+➡ Branding
+➡ Visual Effect and Editing, and
+➡ Architectural Visualization.
+
+Let Roshe Studios be the magic storyteller of your next digital story"
           />
         </Head>
         <body className="bg-bgDark text-white">

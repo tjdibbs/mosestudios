@@ -3,6 +3,7 @@ import CEO from "@assets/ceo.jpg";
 import Ayoodola from "@assets/ayodola.jpg";
 import ProductDesigner from "@assets/product-designer.jpg";
 import Okeke from "@assets/okeke.jpg";
+import Mercy from "@assets/mercy.jpg";
 
 export const teamMembers = [
   {
@@ -69,6 +70,20 @@ export const teamMembers = [
       </p>
     ),
     image: Dolapo,
+  },
+  {
+    name: "MERCY IMMANUEL",
+    role: "Marketing Copywriter",
+    description: (
+      <p>
+        Mercy Immanuel is a skilled Marketing Copywriter with an expertise in
+        content creation and social media management. Through compelling
+        narratives and strategic storytelling, I drive audience engagement and
+        boost sales, delivering tangible results to elevate your digital
+        presence.
+      </p>
+    ),
+    image: Mercy,
   },
 ];
 

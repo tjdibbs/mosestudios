@@ -48,11 +48,11 @@ const Sidebar: React.FC<{}> = (props) => {
   // }, [dispatch, props.sessionUser, props.token]);
 
   React.useEffect(() => {
-    setCollapse(window.innerWidth < 1024);
+    setCollapse(window.innerWidth < 1100);
     window.onresize = () => {
-      if (window.innerWidth < 1024 && !collapse) {
+      if (window.innerWidth < 1100 && !collapse) {
         setCollapse(true);
-      } else if (window.innerWidth > 1024 && collapse) {
+      } else if (window.innerWidth > 1100 && collapse) {
         setCollapse(false);
       }
     };
@@ -62,13 +62,15 @@ const Sidebar: React.FC<{}> = (props) => {
     };
   }, [collapse]);
 
+  console.log({ user });
+
   if (!user) return <></>;
 
   return (
     <Affix offsetTop={0}>
       <div
         className={
-          "sidebar-container relative h-screen bg-bgDarkSecondary p-4 hidden sm:block " +
+          "sidebar-container relative h-screen bg-bgDarkSecondary p-4 hidden md:block " +
           (collapse
             ? "w-[60px] overflow-hidden"
             : "w-[250px] overflow-auto pl-4 ")

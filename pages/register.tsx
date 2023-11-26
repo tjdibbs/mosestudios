@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@redux/store";
 import { LOGIN } from "@redux/slices/sessionSlice";
 import AuthLayout from "@comp/auth/AuthLayout";
+import User from "@models/userModel";
 
 type FormDataType = {
   email: string;
@@ -29,13 +30,11 @@ function RegisterPage() {
 
   const submit = React.useCallback(
     async (formData: FormDataType) => {
-      const res = await fetcher<{ token: string; user: Roshestudios.User }>({
+      const res = await fetcher<{ token: string; user: User }>({
         url: config.urls.register,
         data: formData,
         method: "POST",
       });
-
-      console.log({ res });
 
       if (!res.success || res.error)
         return Alert.error(
@@ -49,7 +48,7 @@ function RegisterPage() {
         router.push(`/dashboard`);
       }, 1000);
     },
-    [fetcher, router]
+    [dispatch, fetcher, router]
   );
 
   const Logo = (
@@ -110,6 +109,17 @@ function RegisterPage() {
                 label: "Email Address",
                 placeholder: "ebube@powerlabstech.com",
               })}
+              {FormControl({
+                name: "phone",
+                label: "Phone number",
+                placeholder:
+                  "+44 - - - - - - - - - - -  OR  +234 - - - - - - - - - - -",
+              })}
+              {FormControl({
+                name: "company",
+                label: "Company",
+                placeholder: "Enter company name",
+              })}
 
               <div className="form-group mt-4">
                 {FormControl({
@@ -145,7 +155,7 @@ function RegisterPage() {
           <div className="registered text-center  border border-solid border-primary/50 rounded-2xl shadow-2xl shadow-[#fff]/50 w-[500px] p-6 pb-8 text-black">
             {Logo}
 
-            <div className="mb-4 text-center">
+            <div className="mb-4 text-center text-gray-100">
               <div className="form-title text-2xl font-bold mb-2">
                 Account Created
               </div>

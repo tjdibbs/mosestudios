@@ -32,6 +32,15 @@ declare global {
       onChange?(value: React.ChangeEvent | string): void;
       onBlur?(e: React.FormEvent): void;
       setFormState?: BusinessRouteProps["setFormState"];
+      theme?: "light" | "dark";
     };
+
+    export interface Notification {
+      _id: string;
+      title: string;
+      description: string;
+      createdAt: string;
+      viewed: boolea;
+    }
   }
 }

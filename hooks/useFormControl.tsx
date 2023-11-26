@@ -127,7 +127,10 @@ export default function useFormControl<T>(props: Props<T>) {
                 <div className="form-group description-wrap flex-grow ">
                   <label
                     htmlFor="business-email"
-                    className="block mb-2 text-sm text-black"
+                    className={
+                      "block mb-2 text-sm" +
+                      (props.theme == "dark" ? " text-white" : " text-black")
+                    }
                   >
                     {props.label}{" "}
                     {required && (

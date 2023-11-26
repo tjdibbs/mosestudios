@@ -1,14 +1,8 @@
-import { STATUS } from "@lib/constants";
-import { verifyPassword } from "@lib/crypto";
 import HttpError from "@lib/httpError";
-import { Users } from "@models/index";
 import _ from "lodash";
-import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
-import { serialize } from "cookie";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter, expressWrapper } from "next-connect";
-import cors from "cors";
+import { createRouter } from "next-connect";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
@@ -19,12 +13,9 @@ router.post(async (req, res) => {
   const responseObject = {
     success: true,
   };
+
   return res.json(responseObject);
 });
-
-// export const config = {
-//   runtime: "edge",
-// };
 
 export default router.handler({
   onError: (err: any, req, res) => {

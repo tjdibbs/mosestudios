@@ -15,7 +15,13 @@ router.post(async (req, res) => {
   await dbConnect();
   const body = req.body;
 
-  if (!body.email || !body.password)
+  if (
+    !body.email ||
+    !body.password ||
+    !body.firstName ||
+    !body.lastName ||
+    !body.phone
+  )
     throw new HttpError("Incomplete body fields", STATUS.BAD_REQUEST);
 
   const dbUser = await Users.findOne({ email: body.email });
@@ -80,9 +86,12 @@ router.post(async (req, res) => {
 
 export default router.handler({
   onError: (err: any, req, res) => {
-    console.error(err.stack);
+    console.error({ err });
     return res.json(
-      new HttpError("Internal Server Error", err.statusCode || 500)
+      new HttpError(
+        err.message || "Internal Server Error",
+        err.statusCode || 500
+      )
     );
   },
 });

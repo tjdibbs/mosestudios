@@ -4,6 +4,7 @@ import Ayoodola from "@assets/ayodola.jpg";
 import ProductDesigner from "@assets/product-designer.jpg";
 import Okeke from "@assets/okeke.jpg";
 import Mercy from "@assets/mercy.jpg";
+import Omowumi from "@assets/omowumi.jpg";
 
 export const teamMembers = [
   {
@@ -85,6 +86,17 @@ export const teamMembers = [
     ),
     image: Mercy,
   },
+  {
+    name: "OMOWUMi ANIFOWOSE",
+    role: "HR/Secretary",
+    description: (
+      <p>
+        I am motivated, adaptive, responsible and ambitious professional in
+        administrative duties with exceptional interpersonal skills.
+      </p>
+    ),
+    image: Omowumi,
+  },
 ];
 
 export enum STATUS {
@@ -119,8 +131,7 @@ export enum Urls {
   sendCode = "/auth/one-time-password",
   getSessionUser = "/auth/get-session-user",
 
-  uploadContent = "/upload-content",
-  addReview = "/add-review",
+  content = "/content",
   aggregate = "/aggregate",
   getUser = "/users",
 

@@ -5,11 +5,19 @@ import { Schema } from "mongoose";
   schemaOptions: { collection: "Users", timestamps: true, versionKey: false },
 })
 export default class User {
+  _id: string;
+
   @prop()
   firstName: string;
 
   @prop()
   lastName: string;
+
+  @prop()
+  phone: string;
+
+  @prop()
+  company: string;
 
   @prop({ unique: true, lowercase: true, required: true })
   email: string;
@@ -20,8 +28,8 @@ export default class User {
   @prop({ required: true })
   password: string;
 
-  @prop({ enum: ["gold", "silver", "bronze"] })
-  package: string;
+  @prop({ enum: ["gold", "silver", "bronze", "diamond"] })
+  plan: "gold" | "silver" | "bronze" | "diamond";
 
   // @prop({ default: generateRandom5DigitNumber })
   // verificationCode: number;
@@ -32,8 +40,17 @@ export default class User {
   @prop({ type: Schema.Types.Mixed, default: {} })
   settings: object;
 
+  @prop({ type: String, default: "inactive" })
+  status: "active" | "inactive";
+
   @prop({ enum: ["admin", "client"], default: "client" })
   userType: string;
+
+  @prop({ type: Number })
+  contentLeft: number;
+
+  @prop({ type: Date })
+  contentLeftUpdatedDate: string;
 
   createdAt: string;
   updated: string;

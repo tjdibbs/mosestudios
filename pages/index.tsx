@@ -23,6 +23,11 @@ import Link from "next/link";
 
 export default function HomePage() {
   const swiperRef = React.createRef<SwiperRef>();
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    videoRef.current?.play();
+  }, []);
 
   return (
     <InfoLayout>
@@ -38,13 +43,14 @@ export default function HomePage() {
             controls={false}
             className="w-full min-h-[350px] sm:h-[800px] object-cover brightness-[90%]"
             autoPlay
+            ref={videoRef}
             loop
             muted
             src="./Page.mp4"
           ></video>
 
           <div className="content absolute w-full h-full top-0 md:top-56 left-0 grid place-items-center place-content-center">
-            <div className="welcome bg-bgDark w-max px-4 py-2 rounded-lg mb-2 mx-auto text-white flex gap-x-4 items-center">
+            <div className="welcome bg-bgDark w-max max-w-full px-4 py-2 rounded-lg mb-2 mx-auto text-white flex flex-wrap gap-x-4 items-center">
               <span className="font-extrabold text-base sm:text-xl uppercase">
                 Welcome to{" "}
               </span>
@@ -110,15 +116,15 @@ export default function HomePage() {
         </section>
 
         <section
-          id="sme-social-content-packages"
-          className="social-media-packages my-20 px-4"
+          id="sme-social-content-plans"
+          className="social-media-plans my-20 px-4"
         >
           <div className="text-wrap text-center  mx-auto">
             <div className="section-title text-2xl sm:text-5xl text-center mb-2 font-black">
               SOCIAL MEDIA PACKAGE SUBSCRIPTIONS
             </div>
             <div className="secondary-text sm:text-xl text-center mx-auto max-w-6xl text-gray-400">
-              With our Social media content packages, brands can focus on other
+              With our Social media content plans, brands can focus on other
               part of their business while we create stunning and amazing
               contents for their social handles .
             </div>
@@ -127,8 +133,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="packages flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
-            {packages.map((p, index) => (
+          <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
+            {plans.map((p, index) => (
               <div
                 key={index}
                 className="package bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
@@ -142,11 +148,11 @@ export default function HomePage() {
 
                 <div className="price flex items-center justify-between mt-6">
                   <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
-                    {p.price.dollar}
+                    ${p.price.dollar}
                   </div>
                   <ArrowSwapHorizontal size="32" />
                   <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                    {p.price.naira}
+                    ₦{p.price.naira.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -273,41 +279,45 @@ export default function HomePage() {
   );
 }
 
-const packages = [
+export const plans = [
   {
     title: "BRONZE PLAN",
+    plan: "bronze",
     description:
       "Get 3 E-flier design per week, 12 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: "$80",
-      naira: "₦80,000",
+      dollar: 80,
+      naira: 80000,
     },
   },
   {
     title: "Silver PLAN",
+    plan: "silver",
     description:
       "Get 8 E-flier and 2 Motion graphic design per month to cover your monthly social media contents",
     price: {
-      dollar: "$200",
-      naira: "₦200,000",
+      dollar: 200,
+      naira: 200000,
     },
   },
   {
     title: "GOLD PLAN",
+    plan: "gold",
     description:
       "Get 4 Motion graphics and 8 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: "$300",
-      naira: "₦300,000",
+      dollar: 300,
+      naira: 300000,
     },
   },
   {
+    plan: "diamond",
     title: "DIAMOND PLAN",
     description:
       "Get 8 Motion graphic design and 8 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: "$500",
-      naira: "₦500,000",
+      dollar: 500,
+      naira: 500000,
     },
   },
 ];

@@ -1,9 +1,10 @@
 "use client";
 
+import User from "@models/userModel";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SessionInitialState = {
-  user: Roshestudios.User | null;
+  user: User | null;
   token: string | null;
   loggedIn: boolean;
 };

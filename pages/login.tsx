@@ -11,6 +11,7 @@ import { LOGIN } from "@redux/slices/sessionSlice";
 import { useAppDispatch } from "@redux/store";
 import AuthLayout from "@comp/auth/AuthLayout";
 import dynamic from "next/dynamic";
+import User from "@models/userModel";
 
 type FormDataType = {
   email: string;
@@ -23,14 +24,14 @@ function LoginPage() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  console.log({ router });
+
   const submit = async (formData: FormDataType) => {
-    const res = await fetcher<{ token: string; user: Roshestudios.User }>({
+    const res = await fetcher<{ token: string; user: User }>({
       url: config.urls.login,
       data: formData,
       method: "POST",
     });
-
-    console.log({ res });
 
     if (!res.success || res.error)
       return Alert.error(res.message ?? res.error ?? "Unknown error occurred");
@@ -38,7 +39,9 @@ function LoginPage() {
     Alert.success(res.message);
     dispatch(LOGIN({ user: res.user, token: res.token }));
 
-    router.push(res.user.userType == "admin" ? "/admin" : "/dashboard");
+    const _r = router.query._r as string;
+
+    router.push(_r || (res.user.userType == "admin" ? "/admin" : "/dashboard"));
   };
 
   return (

@@ -118,6 +118,19 @@ function InfoHeader() {
           button
         );
       })}
+      <div className="actions lg:hidden">
+        {/* <Button
+              className="h-10 w-10 grid place-items-center"
+              icon={<ShoppingCart size="24" color="white" />}
+              shape="circle"
+              type="text"
+            /> */}
+        <Link href={"/login"}>
+          <Button type="primary" className="text-black font-bold">
+            Sign in
+          </Button>
+        </Link>
+      </div>
     </nav>
   );
 
@@ -130,17 +143,17 @@ function InfoHeader() {
               shape="circle"
               type="text"
               onClick={() => setOpenDrawer(!openDrawer)}
-              className="h-10 w-10 md:hidden grid place-items-center rounded-xl"
+              className="h-10 w-10 lg:hidden grid place-items-center rounded-xl"
               icon={<HambergerMenu size="32" />}
             />
-            <div className="logo-wrap mr-10">
+            <div className="logo-wrap lg:mr-10 flex-1 lg:flex-none">
               <Link href={"/"}>
                 <Image
                   alt="mosestudios logo"
                   src={Logo}
                   width={188}
                   height={32}
-                  className="w-[150px] h-auto xs:188 xs:h-[32px]"
+                  className="w-[150px] h-auto xs:w-[188px] xs:h-[32px]"
                   priority
                 />
               </Link>

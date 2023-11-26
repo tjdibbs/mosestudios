@@ -8,7 +8,10 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.get(async (req, res) => {
   await dbConnect();
-  const users = await Users.find({}, { password: 0, updatedAt: 0 });
+  const users = await Users.find(
+    { userType: { $ne: "admin" } },
+    { password: 0, updatedAt: 0 }
+  );
 
   return res.json({ success: true, users });
 });

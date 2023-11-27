@@ -20,8 +20,10 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { teamMembers } from "@lib/constants";
 import InfoLayout from "@comp/info/InfoLayout";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function HomePage() {
+  const router = useRouter();
   const swiperRef = React.createRef<SwiperRef>();
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
@@ -132,7 +134,7 @@ export default function HomePage() {
               SUBSCRIBE TO A <span className="text-primary">PLAN</span>
             </div>
           </div>
-
+          {/* 
           <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
             {plans.map((p, index) => (
               <div
@@ -156,6 +158,35 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+            ))} */}
+          <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
+            {plans.map((p, index) => (
+              <Button
+                onClickCapture={() =>
+                  router.push("/register?_r=/plans?selected=" + p.plan)
+                }
+                key={index}
+                className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
+              >
+                <div className="wrap max-w-full">
+                  <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
+                    {p.title}
+                  </div>
+                  <div className="text-black sm:text-xl mb-2 w-full whitespace-break-spaces">
+                    {p.description}
+                  </div>
+                </div>
+
+                <div className="price flex items-center justify-between mt-6">
+                  <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
+                    ${p.price.dollar}
+                  </div>
+                  <ArrowSwapHorizontal size="32" />
+                  <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                    ₦{p.price.naira?.toLocaleString()}
+                  </div>
+                </div>
+              </Button>
             ))}
           </div>
         </section>

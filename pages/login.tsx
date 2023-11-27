@@ -41,7 +41,7 @@ function LoginPage() {
 
     const _r = router.query._r as string;
 
-    router.push(_r || (res.user.userType == "admin" ? "/admin" : "/dashboard"));
+    router.push(res.user.userType == "admin" ? "/admin" : _r ?? "/dashboard");
   };
 
   return (

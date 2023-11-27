@@ -8,7 +8,7 @@ import Link from "next/link";
 import useFormControl from "@hooks/useFormControl";
 import useFetch from "@hooks/useFetch";
 import { config } from "@lib/constants";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useAppDispatch } from "@redux/store";
 import { LOGIN } from "@redux/slices/sessionSlice";
 import AuthLayout from "@comp/auth/AuthLayout";
@@ -44,9 +44,9 @@ function RegisterPage() {
       // Alert.success(res.message);
       setRegistered(true);
       dispatch(LOGIN({ user: res.user, token: res.token }));
-      setTimeout(() => {
-        router.push(`/dashboard`);
-      }, 1000);
+
+      const _r = router.query._r as string;
+      router.push(_r || `/plans`);
     },
     [dispatch, fetcher, router]
   );

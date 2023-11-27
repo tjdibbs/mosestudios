@@ -3,7 +3,7 @@ import Content from "./Content";
 import ContentType from "@models/contentModel";
 import useFetch from "@hooks/useFetch";
 import { config } from "@lib/constants";
-import { message as Alert, Skeleton } from "antd";
+import { message as Alert, Empty, Skeleton } from "antd";
 
 function ContentContainer() {
   const { fetcher, fetching } = useFetch(true);
@@ -18,6 +18,7 @@ function ContentContainer() {
       return Alert.error("we are to fetch contents, please reload page", 5);
     }
 
+    console.log({ res });
     setContents(res.contents);
   };
 
@@ -41,6 +42,10 @@ function ContentContainer() {
           contents.map((content, key) => {
             return <Content content={content} key={key} />;
           })}
+
+        {!fetching && !contents?.length && (
+          <Empty description="There is no Content" />
+        )}
       </div>
     </div>
   );

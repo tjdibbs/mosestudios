@@ -10,51 +10,29 @@ import User from "@models/userModel";
 import { useAppDispatch, useAppSelector } from "@redux/store";
 import useFetch from "@hooks/useFetch";
 import { useRouter } from "next/router";
-import { usePaystackPayment, PaystackButton } from "react-paystack";
+import { usePaystackPayment } from "react-paystack";
 import { PaystackProps } from "react-paystack/dist/types";
-import { setConfig } from "next/config";
 
 function Plans() {
   const user = useAppSelector((s) => s.session.user);
   const { fetcher, fetching } = useFetch();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [selected, setSelected] = React.useState<User["plan"]>();
-  const [paymentConfig, setPaymentConfig] = React.useState<
-    Partial<PaystackProps>
-  >({
+  const [selected, setSelected] = React.useState<User["plan"] | undefined>();
+
+  const defaultPaymentConfig: Partial<PaystackProps> = {
     email: user?.email,
     firstname: user?.firstName,
     lastname: user?.lastName,
     currency: "NGN",
-
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY as string,
-  });
+  };
+
+  const [paymentConfig, setPaymentConfig] =
+    React.useState<Partial<PaystackProps>>(defaultPaymentConfig);
 
   // @ts-ignore
   const initializePayment = usePaystackPayment(paymentConfig);
-
-  React.useEffect(() => {
-    if (!user) {
-      (async () => {
-        const tk = Cookies.get("tk");
-
-        if (!tk) return;
-
-        const res = await fetcher<{ token: string; user: User }>({
-          url: config.urls.getSessionUser,
-          method: "post",
-          data: { token: tk },
-        });
-
-        if (res.success) {
-          dispatch(LOGIN({ user: res.user, token: tk }));
-        }
-      })();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
 
   const handleSuccessPayment = (...args: any[]) => {
     console.log({ args });
@@ -79,29 +57,64 @@ function Plans() {
     initializePayment(handleSuccessPayment, console.log);
   };
 
-  const handleClick = (plan: User["plan"]) => {
-    return () => {
-      router.push("?selected=" + plan, "/plans?selected=" + plan, {
-        shallow: true,
-      });
+  const handleClick = React.useCallback(
+    (plan: User["plan"]) => {
+      return () => {
+        router.push("?selected=" + plan, "/plans?selected=" + plan, {
+          shallow: true,
+        });
 
-      if (!user) return router.replace("/login?_r=/plans?selected=" + plan);
+        console.log({ handlingClick: true });
+        if (!user) return router.replace("/login?_r=/plans?selected=" + plan);
 
-      const planData = plans.find((p) => p.plan == plan);
+        const planData = plans.find((p) => p.plan == plan);
 
-      setPaymentConfig((c) => ({
-        ...c,
-        email: user.email,
-        reference: new Date().getTime().toString(),
-        // amount: 5000,
-        amount: planData!.price.naira! * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-      }));
+        setPaymentConfig((c) => ({
+          ...c,
+          email: user.email,
+          reference: new Date().getTime().toString(),
+          // amount: 5000,
+          amount: planData!.price.naira! * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        }));
 
-      setSelected(plan);
-    };
-  };
+        setSelected(plan);
+      };
+    },
+    [router, user]
+  );
+
+  React.useEffect(() => {
+    if (!user) {
+      (async () => {
+        const tk = Cookies.get("tk");
+
+        if (!tk) return;
+
+        const res = await fetcher<{ token: string; user: User }>({
+          url: config.urls.getSessionUser,
+          method: "post",
+          data: { token: tk },
+        });
+
+        if (res.success) {
+          dispatch(LOGIN({ user: res.user, token: tk }));
+        }
+      })();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  React.useEffect(() => {
+    console.log({ router });
+    if (router.query.selected) {
+      handleClick(router.query.selected as User["plan"])();
+    }
+  }, [router.query.selected]);
 
   const selectedData = plans.find((p) => p.plan == selected);
+
+  console.log({ selected, selectedData });
 
   return (
     <ProtectedLayout>

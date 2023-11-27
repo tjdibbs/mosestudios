@@ -69,7 +69,7 @@ export default function Customers() {
         <Table
           dataSource={customers}
           loading={fetching}
-          scroll={{ x: 800 }}
+          // scroll={{ x: 800 }}
           // className="[&_.ant-table-thead]:hidden"
           className="border border-solid border-gray-300 w-max rounded-xl shadow-xl overflow-hidden"
           columns={customersTableColumns}

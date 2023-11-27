@@ -171,7 +171,7 @@ function Admin() {
             </div>
             <Customers />
           </div>
-          <aside className="py-4 mt-10 xl:mt-0 xl:w-[400px] xl:h-screen overflow-hidden">
+          <aside className="py-4 mt-10 xl:mt-0 flex-1 xl:w-[400px] xl:h-screen overflow-hidden">
             <div className="title font-extrabold mb-4 text-2xl">
               Upcoming Contents
             </div>

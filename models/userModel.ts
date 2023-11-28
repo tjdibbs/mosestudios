@@ -28,6 +28,9 @@ export default class User {
   @prop({ required: true })
   password: string;
 
+  @prop({ type: String, ref: "Affiliate", refPath: "referralCode" })
+  referral: string;
+
   @prop({ enum: ["gold", "silver", "bronze", "diamond"] })
   plan: "gold" | "silver" | "bronze" | "diamond";
 

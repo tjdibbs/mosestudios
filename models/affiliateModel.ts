@@ -1,4 +1,5 @@
 import { modelOptions, prop } from "@typegoose/typegoose";
+import { Schema } from "mongoose";
 
 @modelOptions({
   schemaOptions: {
@@ -15,11 +16,21 @@ export default class Affiliate {
   @prop()
   phone: string;
 
-  @prop({ lowercase: true, required: true })
+  @prop({ lowercase: true, required: true, unique: true })
   email: string;
 
   @prop()
   address: string;
+
+  @prop({ unique: true, required: true })
+  referralCode: string;
+
+  @prop({ type: Schema.Types.Mixed })
+  refers: {
+    total: number;
+    registered: number;
+    subscribed: number;
+  };
 
   @prop({ required: true })
   bankName: string;

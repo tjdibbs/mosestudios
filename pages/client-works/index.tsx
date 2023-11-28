@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import InfoLayout from "@comp/info/InfoLayout";
+import Link from "next/link";
 
 function ClientWorks() {
   return (
@@ -29,9 +30,11 @@ function ClientWorks() {
         </div>
 
         <div className="actions w-max mx-auto mt-10">
-          <Button className="h-12 mt-6 px-6 rounded-none border-primary">
-            Let's Work Together
-          </Button>
+          <Link href={"/contact"}>
+            <Button className="h-12 mt-6 px-6 rounded-none border-primary">
+              Let's Work Together
+            </Button>
+          </Link>
         </div>
       </div>
     </InfoLayout>
@@ -47,6 +50,10 @@ const works = [
   "qcstJGPVvMc",
   "_X940L2Jum4",
   "X_Tjyy5-mlo",
+  "bdbv-lx9ByY",
+  "YdT77cj93RU",
+  "cf2zrG__tuU",
+  "k3uLqhCmTnE",
 ];
 
 export default ClientWorks;

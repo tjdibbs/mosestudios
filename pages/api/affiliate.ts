@@ -21,6 +21,7 @@ router.post(async (req, res) => {
     bankName: body.bankName,
     bankAccountName: body.bankAccountName,
     bankAccountNumber: body.bankAccountNumber,
+    // referralCode: body.split(" ")[0] +
   };
 
   await Affiliates.create(newAffiliate);

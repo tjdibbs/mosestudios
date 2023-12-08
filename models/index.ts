@@ -31,5 +31,3 @@ export const Affiliates =
 export const Contacts =
   (mongoose.models["Contact"] as M<typeof Contact>) ||
   getModelForClass(Contact);
-
-// add other models here

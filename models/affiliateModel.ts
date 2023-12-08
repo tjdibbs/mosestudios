@@ -1,4 +1,5 @@
-import { modelOptions, prop } from "@typegoose/typegoose";
+import generateRandom6DigitNumber from "@lib/getRandomDigits";
+import { modelOptions, prop, Pre } from "@typegoose/typegoose";
 import { Schema } from "mongoose";
 
 @modelOptions({
@@ -9,7 +10,16 @@ import { Schema } from "mongoose";
     versionKey: false,
   },
 })
+@Pre<Affiliate>("save", async function (next) {
+  const count = await this.collection.countDocuments();
+  this.referrerCode =
+    this.fullName.split(" ")[0] + generateRandom6DigitNumber() + count;
+
+  next();
+})
 export default class Affiliate {
+  _id: string;
+
   @prop({ required: true })
   fullName: string;
 
@@ -22,14 +32,38 @@ export default class Affiliate {
   @prop()
   address: string;
 
-  @prop({ unique: true, required: true })
-  referralCode: string;
+  @prop({ unique: true, lowercase: true })
+  referrerCode: string;
 
-  @prop({ type: Schema.Types.Mixed })
-  refers: {
+  @prop({ default: 0, type: Number })
+  totalRefers: number;
+
+  @prop({
+    type: Schema.Types.Mixed,
+    default: {
+      unpaid: 0,
+      paid: 0,
+      total: 0,
+    },
+  })
+  registeredRefers: {
+    unpaid: number;
+    paid: number;
     total: number;
-    registered: number;
-    subscribed: number;
+  };
+
+  @prop({
+    type: Schema.Types.Mixed,
+    default: {
+      unpaid: 0,
+      paid: 0,
+      total: 0,
+    },
+  })
+  subscribedRefers: {
+    unpaid: number;
+    paid: number;
+    total: number;
   };
 
   @prop({ required: true })
@@ -40,4 +74,7 @@ export default class Affiliate {
 
   @prop({ required: true })
   bankAccountNumber: string;
+
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }

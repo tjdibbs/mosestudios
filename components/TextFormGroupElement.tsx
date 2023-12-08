@@ -34,7 +34,7 @@ export const TextFormGroupElement = React.memo(
             if (props.onChange) props.onChange(e);
           }}
           // ref={props.ref}
-          autoComplete={!props.autoComplete ? "new-password" : ""}
+          autoComplete={!autoComplete ? "new-password" : ""}
           maxLength={props.maxLength}
           status={props.error ? "error" : undefined}
           placeholder={

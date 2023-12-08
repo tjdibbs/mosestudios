@@ -134,6 +134,7 @@ export enum Urls {
   content = "/content",
   aggregate = "/aggregate",
   getUser = "/users",
+  getAffiliates = "/affiliates",
 
   contact = "/contact",
   affiliate = "/affiliate",

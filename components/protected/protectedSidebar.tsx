@@ -1,17 +1,14 @@
-"use client";
-
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@redux/store";
+import { useAppSelector } from "@redux/store";
 import type { MenuProps } from "antd";
 import { Affix, Button, Menu } from "antd";
 import { ElementPlus, Logout } from "iconsax-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 import LargeLogo from "@assets/logo.png";
 import SmallLogo from "@assets/logo-small.png";
 import Image from "next/image";
-import { LOGIN } from "@redux/slices/sessionSlice";
 import Cookie from "js-cookie";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -23,22 +20,19 @@ export interface MenuInfo {
 const Sidebar: React.FC<{}> = (props) => {
   const user = useAppSelector((s) => s.session.user);
   const [collapse, setCollapse] = React.useState<boolean>(false);
-  const location = usePathname();
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const [toggle, setToggle] = React.useState({
     selected: ["/dashboard"],
-    opened: [""],
   });
 
   const onClick = (data: MenuInfo) => {
-    // navigate(data.key);
     console.log({ data });
-    setToggle({
-      selected: [data.key],
-      opened: [data.key],
-    });
+    if (data.key == "/") {
+      router.push(user?.userType == "client" ? "/dashboard" : "/admin");
+    } else router.push(data.key);
+
+    setToggle({ selected: [data.key] });
   };
 
   // React.useLayoutEffect(() => {
@@ -62,9 +56,19 @@ const Sidebar: React.FC<{}> = (props) => {
     };
   }, [collapse]);
 
-  console.log({ user });
+  React.useEffect(() => {
+    if (user) {
+      const key = "/" + (user.userType == "client" ? "dashboard" : "admin");
+      setToggle({
+        selected: [key],
+      });
+    }
+  }, [user]);
 
   if (!user) return <></>;
+
+  const menuItems = items(false, user.userType);
+  console.log({ toggle, menuItems });
 
   return (
     <Affix offsetTop={0}>
@@ -96,18 +100,17 @@ const Sidebar: React.FC<{}> = (props) => {
             className="w-full bg-inherit text-inherit border-none"
             mode="inline"
             defaultActiveFirst={true}
-            openKeys={toggle.opened}
+            defaultSelectedKeys={toggle.selected}
             selectedKeys={toggle.selected}
-            items={items(false)}
+            openKeys={toggle.selected}
+            items={menuItems}
             inlineCollapsed={collapse}
           />
         </div>
-        <div className="sidebar-footer absolute bottom-0 left-0 p-3 right-0">
+        <div className="sidebar-footer absolute bottom-0 left-0 p-3 right-0 items-center h-14 cursor-pointer flex mb-4 max-[900px]:justify-center max-[900px]:[&_.ant-menu-title-content]:hidden [&.ant-menu-item-selected]:bg-primary [&.ant-menu-item-selected]:text-black">
           <Button
             onClick={() => {
-              Cookie.remove("tk", {
-                path: "/",
-              });
+              Cookie.remove("tk", { path: "/" });
               router.replace("/login");
             }}
             className="bg-dark text-white flex items-center h-auto gap-x-2 py-2 rounded-xl"
@@ -120,39 +123,44 @@ const Sidebar: React.FC<{}> = (props) => {
   );
 };
 
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key | null,
-  icon?: React.ReactNode,
-  disabled?: boolean,
-  children?: MenuItem[],
-  type?: "group"
-): MenuItem {
+function getItem(params: {
+  label: React.ReactNode;
+  key: string;
+  icon?: React.ReactNode;
+  disabled?: boolean;
+  children?: MenuItem[];
+  type?: string;
+}): MenuItem {
+  const { key, icon, disabled, children = [], label, type = "group" } = params;
   return {
     key,
     icon,
     children,
     className:
-      "items-center h-14 flex mb-4 max-[900px]:justify-center max-[900px]:[&_.ant-menu-title-content]:hidden [&.ant-menu-item-selected]:bg-primary [&.ant-menu-item-selected]:text-black",
-    label: !disabled ? (
-      <Link href={key as string}>
+      "items-center h-14 cursor-pointer flex mb-4 max-[900px]:justify-center max-[900px]:[&_.ant-menu-title-content]:hidden [&.ant-menu-item-selected]:bg-primary [&.ant-menu-item-selected]:text-black",
+    label: (
+      <Link href={key}>
         <span className="font-bold">{label}</span>
       </Link>
-    ) : (
-      <span className="font-medium">{label}</span>
     ),
     type,
-    disabled,
+    // disabled,
   } as MenuItem;
 }
 
-const items: (disable: boolean) => MenuItem[] = (disable) => [
-  getItem(
-    "Dashboard",
-    "/dashboard",
-    <ElementPlus size="24" className="min-w-[24px]" />,
-    disable
-  ),
+const items = (disabled: boolean, userType: "client" | "admin"): MenuItem[] => [
+  getItem({
+    label: "Dashboard",
+    key: "/" + (userType == "client" ? "dashboard" : "admin"),
+    icon: <ElementPlus size="24" className="min-w-[24px]" />,
+    disabled,
+  }),
+  getItem({
+    label: userType == "admin" ? "Affiliates" : "Invites",
+    key: userType == "admin" ? `/admin/affiliates` : "/dashboard/invites",
+    icon: <ElementPlus size="24" className="min-w-[24px]" />,
+    disabled,
+  }),
 ];
 
 export default Sidebar;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Button, Divider, Input, message as Alert } from "antd";
+import { Button, Divider, Input, message as Alert, Modal } from "antd";
 import { GoogleSvg } from "@comp/svgs";
 import Link from "next/link";
 import useFormControl from "@hooks/useFormControl";
@@ -13,23 +13,33 @@ import { useAppDispatch } from "@redux/store";
 import { LOGIN } from "@redux/slices/sessionSlice";
 import AuthLayout from "@comp/auth/AuthLayout";
 import User from "@models/userModel";
+import { GetServerSideProps } from "next";
+import { Affiliates } from "@models/index";
+import copyToClipboard from "@lib/copyToClipboard";
+import { serialize } from "cookie";
 
 type FormDataType = {
   email: string;
   password: string;
   firstName: string;
   lastName: string;
+  referrerCode: string;
 };
 
 function RegisterPage() {
   const [registered, setRegistered] = React.useState<boolean>(false);
-  const { FormControl, handleSubmit } = useFormControl<FormDataType>({});
-  const { fetcher, fetching } = useFetch();
   const router = useRouter();
+  const { FormControl, handleSubmit } = useFormControl<Partial<FormDataType>>({
+    defaultValues: {
+      referrerCode: router.query.referrerCode as string,
+    },
+  });
+  const { fetcher, fetching } = useFetch();
+
   const dispatch = useAppDispatch();
 
   const submit = React.useCallback(
-    async (formData: FormDataType) => {
+    async (formData: Partial<FormDataType>) => {
       const res = await fetcher<{ token: string; user: User }>({
         url: config.urls.register,
         data: formData,
@@ -120,6 +130,12 @@ function RegisterPage() {
                 label: "Company",
                 placeholder: "Enter company name",
               })}
+              {FormControl({
+                name: "referrerCode",
+                required: false,
+                label: "Referrer's Code (optional)",
+                placeholder: "Enter your referrer's code",
+              })}
 
               <div className="form-group mt-4">
                 {FormControl({
@@ -152,7 +168,7 @@ function RegisterPage() {
             </form>
           </div>
         ) : (
-          <div className="registered text-center  border border-solid border-primary/50 rounded-2xl shadow-2xl shadow-[#fff]/50 w-[500px] p-6 pb-8 text-black">
+          <div className="registered text-center  border border-solid border-primary/50 rounded-2xl shadow-2xl shadow-white/10 w-[500px] p-6 pb-8 text-black">
             {Logo}
 
             <div className="mb-4 text-center text-gray-100">
@@ -170,5 +186,34 @@ function RegisterPage() {
     </AuthLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  res,
+  req,
+}) => {
+  const referrerCode = query.referrerCode as string;
+  const clicked = req.cookies.clicked;
+
+  if (!clicked && referrerCode) {
+    await Affiliates.findOneAndUpdate(
+      { referrerCode },
+      { $inc: { totalRefers: 1 } }
+    );
+
+    // set cookie for device, it tells if the device has been used to visit the site before
+    const serialized = serialize("clicked", "true", {
+      secure: process.env.NODE_ENV == "production",
+      maxAge: 60 * 60 * 24 * 7 * 365,
+      path: "/",
+    });
+
+    res.setHeader("Set-Cookie", serialized);
+  }
+
+  return {
+    props: {},
+  };
+};
 
 export default RegisterPage;

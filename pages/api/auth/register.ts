@@ -1,7 +1,7 @@
 import { STATUS } from "@lib/constants";
 import { hashPassword } from "@lib/crypto";
 import HttpError from "@lib/httpError";
-import { Users, Notifications } from "@models/index";
+import { Users, Notifications, Affiliates } from "@models/index";
 import * as token from "@lib/token";
 import dbConnect from "@lib/dbConnect";
 import { serialize } from "cookie";
@@ -28,6 +28,13 @@ router.post(async (req, res) => {
 
   if (dbUser) {
     throw new HttpError("User Already Exist", STATUS.FORBIDDEN);
+  }
+
+  if (body.referrerCode) {
+    await Affiliates.findOneAndUpdate(
+      { referrerCode: body.referrerCode },
+      { $inc: { totalRefers: 1, "registeredRefers.total": 1 } }
+    );
   }
 
   const hashedPassword = await hashPassword(body.password);

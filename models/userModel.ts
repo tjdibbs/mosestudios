@@ -1,8 +1,11 @@
-import { modelOptions, prop } from "@typegoose/typegoose";
+import { Severity, modelOptions, prop } from "@typegoose/typegoose";
 import { Schema } from "mongoose";
 
 @modelOptions({
   schemaOptions: { collection: "Users", timestamps: true, versionKey: false },
+  options: {
+    allowMixed: Severity.ALLOW,
+  },
 })
 export default class User {
   _id: string;
@@ -28,8 +31,8 @@ export default class User {
   @prop({ required: true })
   password: string;
 
-  @prop({ type: String, ref: "Affiliate", refPath: "referralCode" })
-  referral: string;
+  @prop({ type: String, ref: "Affiliate", refPath: "referrerCode" })
+  referrerCode: string;
 
   @prop({ enum: ["gold", "silver", "bronze", "diamond"] })
   plan: "gold" | "silver" | "bronze" | "diamond";
@@ -47,7 +50,7 @@ export default class User {
   status: "active" | "inactive";
 
   @prop({ enum: ["admin", "client"], default: "client" })
-  userType: string;
+  userType: "admin" | "client";
 
   @prop({ type: Number })
   contentLeft: number;

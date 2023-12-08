@@ -1,13 +1,6 @@
 import ContentContainer from "@comp/protected/ContentContainer";
 import Customers from "@comp/protected/Customers";
-import {
-  Affix,
-  message as Alert,
-  Select,
-  Skeleton,
-  Dropdown,
-  MenuProps,
-} from "antd";
+import { message as Alert, Select, Skeleton, Dropdown, MenuProps } from "antd";
 import dynamic from "next/dynamic";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@redux/store";
@@ -21,7 +14,6 @@ import ProtectedLayout from "@comp/protected/ProtectedLayout";
 import User from "@models/userModel";
 import Image from "next/image";
 import ProfileImage from "@assets/profile.png";
-import { format } from "date-fns";
 import Link from "next/link";
 
 const Performance = dynamic(
@@ -168,6 +160,7 @@ function Admin() {
               <div className="wrap text-black">
                 <Performance />
               </div>
+              2
             </div>
             <Customers />
           </div>

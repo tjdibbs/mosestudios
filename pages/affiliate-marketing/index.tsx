@@ -1,18 +1,82 @@
 import useFormControl from "hooks/useFormControl";
 import React from "react";
 import Image from "next/image";
-import { Button, message as Alert } from "antd";
+import { Button, message as Alert, Modal } from "antd";
 import InfoLayout from "@comp/info/InfoLayout";
 import useFetch from "@hooks/useFetch";
 import { appealingMessage, config } from "@lib/constants";
+import copyToClipboard from "@lib/copyToClipboard";
+import Affiliate from "@models/affiliateModel";
+import { CloseCircle } from "iconsax-react";
+import Link from "next/link";
+import { useAppSelector } from "@redux/store";
 
 function AffiliateMarketing() {
-  const { FormControl, handleSubmit, reset } = useFormControl({});
+  const user = useAppSelector((state) => state.session.user);
+  const { FormControl, handleSubmit, reset } = useFormControl<
+    Partial<Affiliate>
+  >({});
   const { fetcher, fetching } = useFetch();
+  const formState = {};
+  console.log({ formState });
+
+  const showModal = React.useCallback((referrerCode: string) => {
+    const { destroy } = Modal.success({
+      title: <p className="font-bold text-lg">Account Created Successfully</p>,
+      footer: false,
+      onCancel: () => {
+        reset();
+        destroy();
+      },
+      closable: true,
+      closeIcon: <CloseCircle />,
+      content: (
+        <div className="wrap">
+          <div className="title font-semibold mb-4">
+            Your referral Code is -{" "}
+            <span className="text-primary">{referrerCode}</span>
+          </div>
+          <div className="flex flex-col gap-3 cursor-pointer mt-4">
+            <Link
+              href={"/affiliate-marketing/" + referrerCode}
+              className="block w-full"
+            >
+              <Button
+                size="large"
+                type="primary"
+                className="text-black w-full bg-orange-400"
+              >
+                Go to Dashboard
+              </Button>
+            </Link>
+            <Button
+              size="large"
+              className="border-primary/80 text-primary/80"
+              onClick={() => copyToClipboard(referrerCode)}
+            >
+              Copy your referral Code
+            </Button>
+            <Button
+              size="large"
+              className="border-primary/80 text-primary/80"
+              onClick={() =>
+                copyToClipboard(
+                  "https://roshestudios.com/register?referrerCode=" +
+                    referrerCode
+                )
+              }
+            >
+              Copy your referral Link
+            </Button>
+          </div>
+        </div>
+      ),
+    });
+  }, []);
 
   const submit = React.useCallback(
     async (fields: any) => {
-      const res = await fetcher({
+      const res = await fetcher<{ referrerCode: string }>({
         method: "post",
         url: config.urls.affiliate,
         data: fields,
@@ -23,10 +87,11 @@ function AffiliateMarketing() {
       }
 
       Alert.success(res.message, 5);
-      reset();
+      showModal(res.referrerCode);
     },
-    [fetcher, reset]
+    [fetcher, showModal]
   );
+
   return (
     <InfoLayout>
       <div className="internship-container px-4">

@@ -14,6 +14,7 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import stringToColor from "../../lib/stringToColor";
 import copyToClipboard from "@lib/copyToClipboard";
+import dbConnect from "@lib/dbConnect";
 
 interface ReferrerDashboardProps {
   referrer: Affiliate;
@@ -169,6 +170,7 @@ function ReferrerDashboard(props: ReferrerDashboardProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  await dbConnect();
   const referrerCode = params?.referrer;
   const referrer = await Affiliates.findOne(
     {

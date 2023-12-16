@@ -48,7 +48,7 @@ export default function HomePage() {
             ref={videoRef}
             loop
             muted
-            src="./Page.mp4"
+            src="https://res.cloudinary.com/dm7xl4bea/video/upload/v1702690032/dkfxptgwc2rhghfcsqki.mp4"
           ></video>
 
           <div className="content absolute w-full h-full top-0 md:top-56 left-0 grid place-items-center place-content-center">

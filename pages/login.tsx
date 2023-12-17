@@ -12,6 +12,7 @@ import { useAppDispatch } from "@redux/store";
 import AuthLayout from "@comp/auth/AuthLayout";
 import dynamic from "next/dynamic";
 import User from "@models/userModel";
+import Affiliate from "@models/affiliateModel";
 
 type FormDataType = {
   email: string;
@@ -27,7 +28,7 @@ function LoginPage() {
   console.log({ router });
 
   const submit = async (formData: FormDataType) => {
-    const res = await fetcher<{ token: string; user: User }>({
+    const res = await fetcher<{ token: string; user: User<Affiliate> }>({
       url: config.urls.login,
       data: formData,
       method: "POST",

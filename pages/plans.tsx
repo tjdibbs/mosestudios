@@ -90,7 +90,7 @@ function Plans() {
 
         if (!tk) return;
 
-        const res = await fetcher<{ token: string; user: User }>({
+        const res = await fetcher<{ token: string; user: typeof user }>({
           url: config.urls.getSessionUser,
           method: "post",
           data: { token: tk },
@@ -106,16 +106,12 @@ function Plans() {
   }, [user]);
 
   React.useEffect(() => {
-    console.log({ router });
     if (router.query.selected) {
       handleClick(router.query.selected as User["plan"])();
     }
-  }, [router.query.selected]);
+  }, [handleClick, router.query.selected]);
 
   const selectedData = plans.find((p) => p.plan == selected);
-
-  console.log({ selected, selectedData });
-
   return (
     <ProtectedLayout>
       <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">

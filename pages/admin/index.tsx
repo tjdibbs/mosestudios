@@ -15,6 +15,7 @@ import User from "@models/userModel";
 import Image from "next/image";
 import ProfileImage from "@assets/profile.png";
 import Link from "next/link";
+import Affiliate from "@models/affiliateModel";
 
 const Performance = dynamic(
   async () => await import("@comp/protected/PerformanceChart"),
@@ -55,7 +56,7 @@ function Admin() {
         const tk = Cookies.get("tk");
 
         if (!tk) return router.replace("/login?_r=/admin");
-        const res = await fetcher<{ token: string; user: User }>({
+        const res = await fetcher<{ token: string; user: typeof user }>({
           url: config.urls.getSessionUser,
           method: "post",
           data: { token: tk },
@@ -83,7 +84,7 @@ function Admin() {
           <div className="profile">
             <Dropdown
               menu={{
-                items: menuItems(user! ?? {}),
+                items: menuItems(user),
 
                 className:
                   "shadow-2xl rounded-xl overflow-hidden px-2 pb-6 border border-solid border-gray-300",
@@ -176,7 +177,7 @@ function Admin() {
   );
 }
 
-const menuItems = (user: User): MenuProps["items"] => [
+const menuItems = (user: User<Affiliate>): MenuProps["items"] => [
   {
     label: (
       <div className="profile-wrapper">

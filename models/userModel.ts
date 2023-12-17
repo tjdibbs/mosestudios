@@ -1,4 +1,4 @@
-import { Severity, modelOptions, prop } from "@typegoose/typegoose";
+import { Severity, modelOptions, prop, Pre } from "@typegoose/typegoose";
 import { Schema } from "mongoose";
 
 @modelOptions({
@@ -7,7 +7,12 @@ import { Schema } from "mongoose";
     allowMixed: Severity.ALLOW,
   },
 })
-export default class User {
+@Pre<User>("save", async function (next) {
+  this.affiliate = this._id;
+
+  next();
+})
+export default class User<T = string> {
   _id: string;
 
   @prop()
@@ -15,6 +20,8 @@ export default class User {
 
   @prop()
   lastName: string;
+
+  fullName: () => string;
 
   @prop()
   phone: string;
@@ -33,6 +40,9 @@ export default class User {
 
   @prop({ type: String, ref: "Affiliate", refPath: "referrerCode" })
   referrerCode: string;
+
+  @prop({ type: Schema.Types.ObjectId, ref: "Affiliate" })
+  affiliate: T;
 
   @prop({ enum: ["gold", "silver", "bronze", "diamond"] })
   plan: "gold" | "silver" | "bronze" | "diamond";

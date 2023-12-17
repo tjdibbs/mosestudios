@@ -5,6 +5,9 @@ export const TextFormGroupElement = React.memo(
   (props: Partial<Roshestudios.FormGroupProps>) => {
     const { required = true, autoComplete = true } = props;
     const Comp = props.inputType !== "password" ? Input : Input.Password;
+    const label = (props.name ??= "")
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replaceAll(/[0-9]/g, "");
     return (
       <div className="form-group flex-grow mb-4" ref={props.htmlRef}>
         <label
@@ -14,7 +17,7 @@ export const TextFormGroupElement = React.memo(
             (props.theme == "dark" ? " text-white" : " text-black")
           }
         >
-          {props.label || props.name?.replaceAll(/[0-9]/g, "")}{" "}
+          {props.label || label}{" "}
           {required && <span className="text-red-600 font-bold">*</span>}
         </label>
         <Comp
@@ -37,9 +40,7 @@ export const TextFormGroupElement = React.memo(
           autoComplete={!autoComplete ? "new-password" : ""}
           maxLength={props.maxLength}
           status={props.error ? "error" : undefined}
-          placeholder={
-            props.placeholder ?? "Enter " + props.name?.replaceAll(/[0-9]/g, "")
-          }
+          placeholder={props.placeholder ?? "Enter " + label}
           size="large"
         />
       </div>

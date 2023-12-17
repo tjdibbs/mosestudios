@@ -1,27 +1,21 @@
 import Affiliate from "@models/affiliateModel";
 import { Affiliates } from "@models/index";
-import {
-  Avatar,
-  Button,
-  Divider,
-  Popover,
-  Tag,
-  Tooltip,
-  message as Alert,
-} from "antd";
+import { Avatar, Button, Divider, Popover, Tag, Tooltip } from "antd";
 import { Copy } from "iconsax-react";
 import { GetServerSideProps } from "next";
 import React from "react";
 import stringToColor from "../../lib/stringToColor";
 import copyToClipboard from "@lib/copyToClipboard";
 import dbConnect from "@lib/dbConnect";
+import User from "@models/userModel";
 
 interface ReferrerDashboardProps {
-  referrer: Affiliate;
+  referrer: Affiliate<User>;
 }
 
 function ReferrerDashboard(props: ReferrerDashboardProps) {
   const referrer = props.referrer;
+  const fullName = referrer.user.firstName + " " + referrer.user.lastName;
 
   return (
     <div className="referrer-dashboard h-screen w-screen sm:grid place-items-center">
@@ -29,15 +23,12 @@ function ReferrerDashboard(props: ReferrerDashboardProps) {
         <div className="title font-bold text-2xl">Analytics</div>
         <Divider className="border-gray-500" />
         <div className="flex gap-3">
-          <Avatar
-            style={{ background: stringToColor(referrer.fullName) }}
-            size={60}
-          >
-            {referrer.fullName.at(0)}
+          <Avatar style={{ background: stringToColor(fullName) }} size={60}>
+            {fullName.at(0)}
           </Avatar>
           <div className="detail-wrap flex-1">
             <div className="full-name font-bold text-xl mb-4 flex items-center gap-3">
-              <span>{referrer.fullName}</span>
+              <span>{fullName}</span>
               <Tooltip title="Total Refers">
                 <div className="total-refers border border-solid border-primary text-primary font-bold px-1 rounded-xl">
                   {referrer.totalRefers}
@@ -79,10 +70,10 @@ function ReferrerDashboard(props: ReferrerDashboardProps) {
                 </Tag>
               </Popover>
               <Tag className="text-gray-200 border-gray-300 p-1 gap-2 rounded-xl px-2 text-base">
-                {referrer.email}
+                {referrer.user.email}
               </Tag>
               <Tag className="text-gray-200 text-base border-gray-300 p-1 gap-2 rounded-xl px-2">
-                {referrer.phone}
+                {referrer.user.phone}
               </Tag>
             </div>
           </div>
@@ -177,7 +168,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       referrerCode,
     },
     { updatedAt: 0 }
-  ).lean();
+  )
+    .populate("user")
+    .lean();
 
   if (referrer) {
     referrer.createdAt = new Date(referrer.createdAt).toISOString();

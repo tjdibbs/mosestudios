@@ -13,24 +13,16 @@ import { Schema } from "mongoose";
 @Pre<Affiliate>("save", async function (next) {
   const count = await this.collection.countDocuments();
   this.referrerCode =
-    this.fullName.split(" ")[0] + generateRandom6DigitNumber() + count;
+    this.referrerCode.split(" ")[0] + generateRandom6DigitNumber() + count;
 
   next();
 })
-export default class Affiliate {
+export default class Affiliate<T = string> {
+  @prop({ type: Schema.Types.ObjectId, required: true })
   _id: string;
 
-  @prop({ required: true })
-  fullName: string;
-
-  @prop()
-  phone: string;
-
-  @prop({ lowercase: true, required: true, unique: true })
-  email: string;
-
-  @prop()
-  address: string;
+  @prop({ type: Schema.Types.ObjectId, ref: "User" })
+  user: T;
 
   @prop({ unique: true, lowercase: true })
   referrerCode: string;
@@ -66,14 +58,12 @@ export default class Affiliate {
     total: number;
   };
 
-  @prop({ required: true })
-  bankName: string;
-
-  @prop({ required: true })
-  bankAccountName: string;
-
-  @prop({ required: true })
-  bankAccountNumber: string;
+  @prop({ type: Array, default: [] })
+  banks: {
+    bankName: string;
+    accountName: string;
+    accountNumber: number;
+  }[];
 
   createdAt: Date | string;
   updatedAt: Date | string;

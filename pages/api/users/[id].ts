@@ -13,7 +13,9 @@ router.get(async (req, res) => {
 
   if (!id) throw new HttpError("Incomplete Fields", STATUS.BAD_REQUEST);
 
-  const user = await Users.findById(id, { password: 0, updatedAt: 0 }).lean();
+  const user = await Users.findById(id, { password: 0, updatedAt: 0 })
+    .populate("affiliate")
+    .populate("referrerCode");
 
   return res.json({ success: true, user });
 });
@@ -27,6 +29,7 @@ router.patch(async (req, res) => {
   if (!id) throw new HttpError("Incomplete Fields", STATUS.BAD_REQUEST);
 
   const user = await Users.findByIdAndUpdate(id, { plan });
+
   return res.json({ success: true, user });
 });
 

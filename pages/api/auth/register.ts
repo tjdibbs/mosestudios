@@ -56,6 +56,12 @@ router.post(async (req, res) => {
     ],
   });
 
+  const newAffiliate = await Affiliates.create({
+    _id: user._id,
+    user: user._id,
+    referrerCode: body.firstName + " " + body.lastName,
+  });
+
   // const code = generateRandom5DigitNumber();
   const _token = token.create(
     {
@@ -83,7 +89,10 @@ router.post(async (req, res) => {
   return res.json({
     success: true,
     message: "User Registered Successfully",
-    user: omit(user, ["password", "updatedAt"]),
+    user: omit(user, ["password", "updatedAt"])?.set!(
+      "affiliate",
+      newAffiliate
+    ),
     token: _token,
     // verifyToken: encrypt(
     //   JSON.stringify({ code, expireTime: moment().add(5, "m") })

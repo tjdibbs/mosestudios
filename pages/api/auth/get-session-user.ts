@@ -28,7 +28,9 @@ router.post(async (req, res) => {
   const user = await Users.findById(payload?.user._id, {
     password: 0,
     updatedAt: 0,
-  });
+  })
+    .populate("affiliate")
+    .populate("referrerCode");
 
   return res.json({
     user,

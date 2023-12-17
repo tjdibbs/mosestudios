@@ -2,8 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Button, Divider, Input, message as Alert, Modal } from "antd";
-import { GoogleSvg } from "@comp/svgs";
+import { Button, message as Alert } from "antd";
 import Link from "next/link";
 import useFormControl from "@hooks/useFormControl";
 import useFetch from "@hooks/useFetch";
@@ -15,8 +14,8 @@ import AuthLayout from "@comp/auth/AuthLayout";
 import User from "@models/userModel";
 import { GetServerSideProps } from "next";
 import { Affiliates } from "@models/index";
-import copyToClipboard from "@lib/copyToClipboard";
 import { serialize } from "cookie";
+import Affiliate from "@models/affiliateModel";
 
 type FormDataType = {
   email: string;
@@ -40,7 +39,7 @@ function RegisterPage() {
 
   const submit = React.useCallback(
     async (formData: Partial<FormDataType>) => {
-      const res = await fetcher<{ token: string; user: User }>({
+      const res = await fetcher<{ token: string; user: User<Affiliate> }>({
         url: config.urls.register,
         data: formData,
         method: "POST",

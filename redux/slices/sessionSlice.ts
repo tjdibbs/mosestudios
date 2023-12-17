@@ -1,10 +1,11 @@
 "use client";
 
+import Affiliate from "@models/affiliateModel";
 import User from "@models/userModel";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SessionInitialState = {
-  user: User | null;
+  user: User<Affiliate> | null;
   token: string | null;
   loggedIn: boolean;
 };
@@ -23,8 +24,12 @@ export const sessionSlice = createSlice({
       state,
       { payload }: PayloadAction<Partial<SessionInitialState>>
     ) => {
-      console.log({ payload });
-      state.user = payload.user ?? null;
+      state.user = {
+        ...payload.user!,
+        fullName: function (this: User) {
+          return this.firstName + " " + this.lastName;
+        },
+      };
       state.token = payload.token ?? null;
     },
     Set2FAPass: (state) => {
@@ -36,7 +41,16 @@ export const sessionSlice = createSlice({
       state.loggedIn = false;
       state.token = null;
     },
+    AddBank: (state, actions: PayloadAction<Affiliate["banks"][0]>) => {
+      state.user = {
+        ...state.user!,
+        affiliate: {
+          ...state.user!.affiliate,
+          banks: [actions.payload, ...state.user!.affiliate.banks],
+        },
+      };
+    },
   },
 });
 
-export const { LOGIN, Set2FAPass, LogOut } = sessionSlice.actions;
+export const { LOGIN, Set2FAPass, LogOut, AddBank } = sessionSlice.actions;

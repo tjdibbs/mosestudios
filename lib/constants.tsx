@@ -60,32 +60,32 @@ export const teamMembers = [
     image: ProductDesigner,
   },
 
-  {
-    name: "OLAOPA DOLAPO",
-    role: "COMMUNICATIONS MANAGER",
-    description: (
-      <p>
-        Olaopa Dolapo is an experienced Communications Manager with a background
-        in content strategy, collaborations, and email marketing. She is a
-        digital success catalyst, driving engagement and results.
-      </p>
-    ),
-    image: Dolapo,
-  },
-  {
-    name: "MERCY IMMANUEL",
-    role: "Marketing Copywriter",
-    description: (
-      <p>
-        Mercy Immanuel is a skilled Marketing Copywriter with an expertise in
-        content creation and social media management. Through compelling
-        narratives and strategic storytelling, I drive audience engagement and
-        boost sales, delivering tangible results to elevate your digital
-        presence.
-      </p>
-    ),
-    image: Mercy,
-  },
+  // {
+  //   name: "OLAOPA DOLAPO",
+  //   role: "COMMUNICATIONS MANAGER",
+  //   description: (
+  //     <p>
+  //       Olaopa Dolapo is an experienced Communications Manager with a background
+  //       in content strategy, collaborations, and email marketing. She is a
+  //       digital success catalyst, driving engagement and results.
+  //     </p>
+  //   ),
+  //   image: Dolapo,
+  // },
+  // {
+  //   name: "MERCY IMMANUEL",
+  //   role: "Marketing Copywriter",
+  //   description: (
+  //     <p>
+  //       Mercy Immanuel is a skilled Marketing Copywriter with an expertise in
+  //       content creation and social media management. Through compelling
+  //       narratives and strategic storytelling, I drive audience engagement and
+  //       boost sales, delivering tangible results to elevate your digital
+  //       presence.
+  //     </p>
+  //   ),
+  //   image: Mercy,
+  // },
   {
     name: "OMOWUMi ANIFOWOSE",
     role: "HR/Secretary",

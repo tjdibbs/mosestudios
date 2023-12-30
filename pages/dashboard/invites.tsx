@@ -90,7 +90,7 @@ function ReferrerDashboard() {
     // });
 
     Alert.error("You must have up to ₦1000 available to withdraw");
-  }, [selectedBank, user.affiliate.banks]);
+  }, [selectedBank, user?.affiliate?.banks]);
 
   if (!user) return <Loading />;
 

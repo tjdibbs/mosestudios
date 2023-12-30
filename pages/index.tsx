@@ -10,14 +10,14 @@ import FindrColorCode from "@assets/FindrColorCode.png";
 // Team members
 
 import React from "react";
-import { Button } from "antd";
+import { Badge, Button } from "antd";
 import Image from "next/image";
 import Logo from "@assets/logo.png";
 import { BannerSvg } from "@comp/svgs";
 import { ArrowSwapHorizontal } from "iconsax-react";
 import { Pagination, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import { teamMembers } from "@lib/constants";
+import { plans, teamMembers } from "@lib/constants";
 import InfoLayout from "@comp/info/InfoLayout";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -161,32 +161,39 @@ export default function HomePage() {
             ))} */}
           <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
             {plans.map((p, index) => (
-              <Button
-                onClickCapture={() =>
-                  router.push("/register?_r=/plans?selected=" + p.plan)
-                }
-                key={index}
-                className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
-              >
-                <div className="wrap max-w-full">
-                  <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
-                    {p.title}
+              <Badge.Ribbon key={index} text={"50% off"}>
+                <Button
+                  onClickCapture={() =>
+                    router.push("/register?_r=/plans?selected=" + p.plan)
+                  }
+                  className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
+                >
+                  <div className="wrap max-w-full">
+                    <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
+                      {p.title}
+                    </div>
+                    <div className="text-black sm:text-xl mb-2 w-full whitespace-break-spaces">
+                      {p.description}
+                    </div>
                   </div>
-                  <div className="text-black sm:text-xl mb-2 w-full whitespace-break-spaces">
-                    {p.description}
-                  </div>
-                </div>
 
-                <div className="price flex items-center justify-between mt-6">
-                  <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
-                    ${p.price.dollar}
+                  <div className="price flex items-center justify-between mt-6">
+                    <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
+                      ${p.price.dollar / 2}
+                    </div>
+                    <ArrowSwapHorizontal size="32" />
+                    <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                      ₦{(p.price.naira / 2).toLocaleString()}
+                    </div>
                   </div>
-                  <ArrowSwapHorizontal size="32" />
-                  <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                    ₦{p.price.naira?.toLocaleString()}
+                  <div className="price flex items-center justify-between px-5">
+                    <div className="line-through">${p.price.dollar}</div>
+                    <div className="naira line-through">
+                      ₦{p.price.naira.toLocaleString()}
+                    </div>
                   </div>
-                </div>
-              </Button>
+                </Button>
+              </Badge.Ribbon>
             ))}
           </div>
         </section>
@@ -309,46 +316,3 @@ export default function HomePage() {
     </InfoLayout>
   );
 }
-
-export const plans = [
-  {
-    title: "BRONZE PLAN",
-    plan: "bronze",
-    description:
-      "Get 3 E-flier design per week, 12 E-flier per month to cover your monthly social media contents",
-    price: {
-      dollar: 80,
-      naira: 80000,
-    },
-  },
-  {
-    title: "Silver PLAN",
-    plan: "silver",
-    description:
-      "Get 8 E-flier and 2 Motion graphic design per month to cover your monthly social media contents",
-    price: {
-      dollar: 200,
-      naira: 200000,
-    },
-  },
-  {
-    title: "GOLD PLAN",
-    plan: "gold",
-    description:
-      "Get 4 Motion graphics and 8 E-flier per month to cover your monthly social media contents",
-    price: {
-      dollar: 300,
-      naira: 300000,
-    },
-  },
-  {
-    plan: "diamond",
-    title: "DIAMOND PLAN",
-    description:
-      "Get 8 Motion graphic design and 8 E-flier per month to cover your monthly social media contents",
-    price: {
-      dollar: 500,
-      naira: 500000,
-    },
-  },
-];

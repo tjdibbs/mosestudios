@@ -99,6 +99,49 @@ export const teamMembers = [
   },
 ];
 
+export const plans = [
+  {
+    title: "BRONZE PLAN",
+    plan: "bronze",
+    description:
+      "Get 3 E-flier design per week, 12 E-flier per month to cover your monthly social media contents",
+    price: {
+      dollar: 80,
+      naira: 80000,
+    },
+  },
+  {
+    title: "Silver PLAN",
+    plan: "silver",
+    description:
+      "Get 8 E-flier and 2 Motion graphic design per month to cover your monthly social media contents",
+    price: {
+      dollar: 200,
+      naira: 200000,
+    },
+  },
+  {
+    title: "GOLD PLAN",
+    plan: "gold",
+    description:
+      "Get 4 Motion graphics and 8 E-flier per month to cover your monthly social media contents",
+    price: {
+      dollar: 300,
+      naira: 300000,
+    },
+  },
+  {
+    plan: "diamond",
+    title: "DIAMOND PLAN",
+    description:
+      "Get 8 Motion graphic design and 8 E-flier per month to cover your monthly social media contents",
+    price: {
+      dollar: 500,
+      naira: 500000,
+    },
+  },
+];
+
 export enum STATUS {
   OK = 200,
   CREATED = 201,

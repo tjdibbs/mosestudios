@@ -1,10 +1,9 @@
 import ProtectedLayout from "@comp/protected/ProtectedLayout";
 import React from "react";
 import { ArrowSwapHorizontal } from "iconsax-react";
-import { plans } from "pages";
-import { Button, Modal, message as Alert } from "antd";
+import { Button, Modal, message as Alert, Badge } from "antd";
 import Cookies from "js-cookie";
-import { appealingMessage, config } from "@lib/constants";
+import { appealingMessage, config, plans } from "@lib/constants";
 import { LOGIN } from "@redux/slices/sessionSlice";
 import User from "@models/userModel";
 import { useAppDispatch, useAppSelector } from "@redux/store";
@@ -64,7 +63,6 @@ function Plans() {
           shallow: true,
         });
 
-        console.log({ handlingClick: true });
         if (!user) return router.replace("/login?_r=/plans?selected=" + plan);
 
         const planData = plans.find((p) => p.plan == plan);
@@ -74,7 +72,7 @@ function Plans() {
           email: user.email,
           reference: new Date().getTime().toString(),
           // amount: 5000,
-          amount: planData!.price.naira! * 100, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+          amount: (planData!.price.naira! * 100) / 2, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
         }));
 
         setSelected(plan);
@@ -116,30 +114,39 @@ function Plans() {
     <ProtectedLayout>
       <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
         {plans.map((p, index) => (
-          <Button
-            onClickCapture={handleClick(p.plan as User["plan"])}
-            key={index}
-            className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
-          >
-            <div className="wrap max-w-full">
-              <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
-                {p.title}
+          <Badge.Ribbon key={index} text={"50% off"}>
+            <Button
+              onClickCapture={() =>
+                router.push("/register?_r=/plans?selected=" + p.plan)
+              }
+              className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
+            >
+              <div className="wrap max-w-full">
+                <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">
+                  {p.title}
+                </div>
+                <div className="text-black sm:text-xl mb-2 w-full whitespace-break-spaces">
+                  {p.description}
+                </div>
               </div>
-              <div className="text-black sm:text-xl mb-2 w-full whitespace-break-spaces">
-                {p.description}
-              </div>
-            </div>
 
-            <div className="price flex items-center justify-between mt-6">
-              <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
-                ${p.price.dollar}
+              <div className="price flex items-center justify-between mt-6">
+                <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
+                  ${p.price.dollar / 2}
+                </div>
+                <ArrowSwapHorizontal size="32" />
+                <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                  ₦{(p.price.naira / 2).toLocaleString()}
+                </div>
               </div>
-              <ArrowSwapHorizontal size="32" />
-              <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                ₦{p.price.naira?.toLocaleString()}
+              <div className="price flex items-center justify-between px-5">
+                <div className="line-through">${p.price.dollar}</div>
+                <div className="naira line-through">
+                  ₦{p.price.naira.toLocaleString()}
+                </div>
               </div>
-            </div>
-          </Button>
+            </Button>
+          </Badge.Ribbon>
         ))}
       </div>
       <Modal

@@ -112,14 +112,21 @@ function Plans() {
   const selectedData = plans.find((p) => p.plan == selected);
   return (
     <ProtectedLayout>
-      <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
+      <div className="page-title text-4xl text-center mt-20 mb-4 font-black">
+        Select You Preferred Package
+      </div>
+      <div className="plans flex flex-wrap justify-center gap-6 my-10 max-w-6xl mx-auto">
         {plans.map((p, index) => (
-          <Badge.Ribbon key={index} text={"50% off"}>
+          <Badge.Ribbon
+            key={index}
+            rootClassName="flex-grow sm:min-w-[320px] w-[450px] max-w-full"
+            text={"50% off"}
+          >
             <Button
               onClickCapture={() =>
                 router.push("/register?_r=/plans?selected=" + p.plan)
               }
-              className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
+              className="h-auto bg-[#D9D9D9] text-black py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
             >
               <div className="wrap max-w-full">
                 <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">

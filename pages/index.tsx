@@ -159,14 +159,18 @@ export default function HomePage() {
                 </div>
               </div>
             ))} */}
-          <div className="plans flex flex-wrap gap-6 my-10 max-w-6xl mx-auto">
+          <div className="plans flex flex-wrap justify-center gap-6 my-10 max-w-6xl mx-auto">
             {plans.map((p, index) => (
-              <Badge.Ribbon key={index} text={"50% off"}>
+              <Badge.Ribbon
+                rootClassName="flex-grow sm:min-w-[320px] w-[450px] max-w-full"
+                key={index}
+                text={"50% off"}
+              >
                 <Button
                   onClickCapture={() =>
                     router.push("/register?_r=/plans?selected=" + p.plan)
                   }
-                  className="h-auto bg-[#D9D9D9] w-[450px] text-black flex-grow min-w-[320px] max-w-full py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
+                  className="h-auto bg-[#D9D9D9] w-full  text-black py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
                 >
                   <div className="wrap max-w-full">
                     <div className=" text-black text-center uppercase font-extrabold text-2xl sm:text-4xl mb-2">

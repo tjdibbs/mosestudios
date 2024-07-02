@@ -35,7 +35,7 @@ export default class Content {
   @prop({ type: () => [Review], default: [] })
   reviews: Review[];
 
-  @prop({ type: Number, required: true })
+  @prop({ type: Number, default: 0 })
   corrections: number;
 
   @prop({ type: Schema.Types.Mixed })

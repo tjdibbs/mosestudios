@@ -12,15 +12,17 @@ import { useRouter } from "next/router";
 import { usePaystackPayment } from "react-paystack";
 import { PaystackProps } from "react-paystack/dist/types";
 
+type Plan = Roshestudios.Plan;
+
 function Plans() {
   const user = useAppSelector((s) => s.session.user);
   const { fetcher, fetching } = useFetch();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [selected, setSelected] = React.useState<User["plan"] | undefined>();
+  const [selected, setSelected] = React.useState<Plan>();
+  const [open, setOpen] = React.useState(false);
 
   const defaultPaymentConfig: Partial<PaystackProps> = {
-    email: user?.email,
     firstname: user?.firstName,
     lastname: user?.lastName,
     currency: "NGN",
@@ -38,22 +40,30 @@ function Plans() {
     fetcher({
       url: config.urls.getUser + "/" + user?._id,
       method: "patch",
-      data: { plan: selected },
+      data: { plan: selected?.plan },
     }).then((res) => {
       if (!res.success || res.error) {
         return Alert.error(res.message || res.error || appealingMessage);
       }
 
-      dispatch(LOGIN({ user: { ...user!, plan: selected! } }));
+      dispatch(LOGIN({ user: { ...user!, plan: selected!.plan! } }));
 
       Alert.success("You have successfully subscribe to " + selected + " plan");
       router.replace("/dashboard");
     });
   };
 
-  const handlePayment = (plan: User["plan"]) => {
-    if (!user) return router.replace("/login?_r=/plans?selected=" + plan);
-    initializePayment(handleSuccessPayment, console.log);
+  const handlePayment = (plan: (typeof plans)[0]) => {
+    if (!user) return router.replace("/login?_r=/plans?selected=" + plan.plan);
+    initializePayment({
+      onSuccess: handleSuccessPayment,
+      onClose: () => {},
+      config: {
+        amount: (plan!.price.naira! * 100) / 2,
+        email: user?.email,
+        reference: new Date().getTime().toString(),
+      },
+    });
   };
 
   const handleClick = React.useCallback(
@@ -67,15 +77,15 @@ function Plans() {
 
         const planData = plans.find((p) => p.plan == plan);
 
-        setPaymentConfig((c) => ({
-          ...c,
-          email: user.email,
-          reference: new Date().getTime().toString(),
-          // amount: 5000,
-          amount: (planData!.price.naira! * 100) / 2, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-        }));
+        // setPaymentConfig((c) => ({
+        //   ...c,
+        //   email: user.email,
+        //   reference: new Date().getTime().toString(),
+        //   // amount: 5000,
+        //   amount: (planData!.price.naira! * 100) / 2, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        // }));
 
-        setSelected(plan);
+        setSelected(planData);
       };
     },
     [router, user]
@@ -107,9 +117,8 @@ function Plans() {
     if (router.query.selected) {
       handleClick(router.query.selected as User["plan"])();
     }
-  }, [handleClick, router.query.selected]);
+  }, [router.query.selected]);
 
-  const selectedData = plans.find((p) => p.plan == selected);
   return (
     <ProtectedLayout>
       <div className="page-title text-4xl text-center mt-20 mb-4 font-black">
@@ -123,9 +132,7 @@ function Plans() {
             text={"50% off"}
           >
             <Button
-              onClickCapture={() =>
-                router.push("/register?_r=/plans?selected=" + p.plan)
-              }
+              onClickCapture={handleClick(p.plan)}
               className="h-auto bg-[#D9D9D9] text-black py-6 border border-solid border-primary shadow-primary/20 shadow-lg p-4 px-6 rounded-xl"
             >
               <div className="wrap max-w-full">
@@ -156,23 +163,26 @@ function Plans() {
           </Badge.Ribbon>
         ))}
       </div>
-      <Modal
-        onOk={() => handlePayment(selected!)}
-        onCancel={() => setSelected(undefined)}
-        confirmLoading={fetching}
-        okText={
-          <p className="text-black">
-            Make Payment - ₦{selectedData?.price.naira.toLocaleString()}
-          </p>
-        }
-        title={<p>Make payment for {selected} plan</p>}
-        open={Boolean(selected)}
-      >
-        <div className="title font-bold text-2xl my-4">
-          Buy {selectedData?.title}
-        </div>
-        <div className="description leading-6">{selectedData?.description}</div>
-      </Modal>
+      {selected && (
+        <Modal
+          onOk={() => handlePayment(selected!)}
+          onCancel={() => setSelected(undefined)}
+          centered
+          confirmLoading={fetching}
+          okText={
+            <p className="text-black">
+              Make Payment - ₦{(selected?.price?.naira / 2).toLocaleString()}
+            </p>
+          }
+          title={<p>Make payment for {selected?.plan} plan</p>}
+          open={Boolean(selected)}
+        >
+          <div className="title font-bold text-2xl my-4">
+            Buy {selected?.title}
+          </div>
+          <div className="description leading-6">{selected?.description}</div>
+        </Modal>
+      )}
     </ProtectedLayout>
   );
 }

@@ -21,6 +21,7 @@ import useFetch from "@hooks/useFetch";
 import { useRouter } from "next/router";
 import useFormControl from "@hooks/useFormControl";
 import Header from "@comp/protected/EHeader";
+import { formatCurrencyNGN } from "helpers";
 
 function ReferrerDashboard() {
   const user = useAppSelector((s) => s.session.user!);
@@ -94,6 +95,9 @@ function ReferrerDashboard() {
 
   if (!user) return <Loading />;
 
+  const clicksEarnings = referrer?.registeredRefers.total * 20;
+  const subscribeEarnings = referrer?.subscribedRefers?.total;
+
   return (
     <ProtectedLayout>
       <div className="invites-container flex-1">
@@ -121,22 +125,41 @@ function ReferrerDashboard() {
                   <div className="wrap">
                     <div className="label text-primary mb-2">Total</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.registeredRefers.total}
+                      {referrer?.registeredRefers.total}
                     </div>
                   </div>
                   <Divider type="vertical" className="border-gray-500" />
                   <div className="wrap">
                     <div className="label text-primary mb-2">Paid</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.registeredRefers.paid}
+                      {referrer?.registeredRefers.paid}
                     </div>
                   </div>
                   <Divider type="vertical" className="border-gray-500" />
                   <div className="wrap">
                     <div className="label text-primary mb-2">Unpaid</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.registeredRefers.unpaid}
+                      {referrer?.registeredRefers.unpaid}
                     </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-6 mt-10">
+                  <div className="total">
+                    <div className="title text-green-100">Total Earnings</div>
+                    <span className="count">
+                      {formatCurrencyNGN(subscribeEarnings)}
+                    </span>
+                  </div>
+                  <div className="total">
+                    <div className="title text-red-100">Withdraw</div>
+                    <span className="count">{formatCurrencyNGN(0)}</span>
+                  </div>
+                  <div className="available-to-withdraw">
+                    <div className="title text-primary">
+                      Available To Withdraw
+                    </div>
+                    <span className="count">{formatCurrencyNGN(0)}</span>
                   </div>
                 </div>
               </div>
@@ -155,44 +178,46 @@ function ReferrerDashboard() {
                   <div className="wrap">
                     <div className="label text-primary mb-2">Total</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.subscribedRefers.total}
+                      {referrer?.subscribedRefers.total}
                     </div>
                   </div>
                   <Divider type="vertical" className="border-gray-500" />
                   <div className="wrap">
                     <div className="label text-primary mb-2">Paid</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.subscribedRefers.paid}
+                      {referrer?.subscribedRefers.paid}
                     </div>
                   </div>
                   <Divider type="vertical" className="border-gray-500" />
                   <div className="wrap">
                     <div className="label text-primary mb-2">Unpaid</div>
                     <div className="count font-bold text-2xl text-center">
-                      {referrer.subscribedRefers.unpaid}
+                      {referrer?.subscribedRefers.unpaid}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-wrap gap-6 mt-10">
-                <div className="total">
-                  <div className="title text-green-100">Total Earnings</div>
-                  <span className="count">(₦) 0.00</span>
-                </div>
-                <div className="total">
-                  <div className="title text-red-100">Withdraw</div>
-                  <span className="count">(₦) 0.00</span>
-                </div>
-                <div className="available-to-withdraw">
-                  <div className="title text-primary">
-                    Available To Withdraw
+                <div className="flex flex-wrap gap-6 mt-10">
+                  <div className="total">
+                    <div className="title text-green-100">Total Earnings</div>
+                    <span className="count">
+                      {formatCurrencyNGN(subscribeEarnings)}
+                    </span>
                   </div>
-                  <span className="count">(₦) 0.00</span>
+                  <div className="total">
+                    <div className="title text-red-100">Withdraw</div>
+                    <span className="count">{formatCurrencyNGN(0)}</span>
+                  </div>
+                  <div className="available-to-withdraw">
+                    <div className="title text-primary">
+                      Available To Withdraw
+                    </div>
+                    <span className="count">{formatCurrencyNGN(0)}</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-end mt-6">
+              {/* <div className="flex justify-end mt-6">
                 <Button
                   size="large"
                   type="primary"
@@ -201,7 +226,7 @@ function ReferrerDashboard() {
                 >
                   Withdraw
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="wrap col-span-2 bg-bgDarkSecondary rounded-xl p-4">

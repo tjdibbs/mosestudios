@@ -7,11 +7,54 @@ declare global {
       firstName: string;
       lastName: string;
       image: string;
+      company: string;
+      phone: string;
+      status: string;
       email: string;
-      package: "gold" | "silver" | "bronze";
+      package: "gold" | "silver" | "bronze" | "diamond";
       upgraded: boolean;
       createdAt: string;
       userType: "admin" | "client";
+      affiliate: Affiliate;
+    }
+
+    export interface Affiliate {
+      _id: string;
+      referrerCode: string;
+      totalRefers: number;
+      registeredRefers: RegisteredRefers;
+      subscribedRefers: SubscribedRefers;
+      banks: Bank[];
+      createdAt: string;
+      updatedAt: string;
+    }
+
+    export interface RegisteredRefers {
+      unpaid: number;
+      paid: number;
+      total: number;
+    }
+
+    export interface SubscribedRefers {
+      unpaid: number;
+      paid: number;
+      total: number;
+    }
+
+    export interface Bank {
+      accountName: string;
+      accountNumber: string;
+      bankName: string;
+    }
+
+    interface Plan {
+      title: string;
+      plan: "gold" | "silver" | "bronze" | "diamond";
+      description: string;
+      price: {
+        dollar: number;
+        naira: number;
+      };
     }
 
     export type FormGroupProps = {

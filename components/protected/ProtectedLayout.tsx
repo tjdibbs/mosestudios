@@ -8,9 +8,7 @@ export default function ProtectedLayout(props: { children: React.ReactNode }) {
     <ConfigProvider theme={theme}>
       <div className="flex w-full">
         <Sidebar />
-        <main className="p-4 flex-grow max-w-7xl mx-auto">
-          {props.children}
-        </main>
+        <main className="p-4 flex-grow  mx-auto">{props.children}</main>
       </div>
     </ConfigProvider>
   );

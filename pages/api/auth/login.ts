@@ -23,7 +23,10 @@ router.post(async (req, res) => {
     {
       email: body.email,
     },
-    { __v: 0, updatedAt: 0 }
+    { __v: 0, updatedAt: 0 },
+    {
+      populate: ["affiliate"],
+    }
   );
 
   if (!user)
@@ -32,7 +35,9 @@ router.post(async (req, res) => {
   const matched = await verifyPassword(body.password, user!.password);
 
   if (_.isEmpty(user) || !matched) {
-    throw new HttpError("Email or password is incorrect", STATUS.BAD_REQUEST);
+    return res.json(
+      new HttpError("Email or password is incorrect", STATUS.BAD_REQUEST)
+    );
   }
 
   const _token = token.create(
@@ -70,9 +75,12 @@ router.post(async (req, res) => {
 
 export default router.handler({
   onError: (err: any, req, res) => {
-    console.error(err.stack);
+    console.error(err);
     return res.json(
-      new HttpError("Internal Server Error", err.statusCode || 500)
+      new HttpError(
+        err.message || "Internal Server Error",
+        err.statusCode || 500
+      )
     );
   },
 });

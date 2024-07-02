@@ -99,7 +99,7 @@ export const teamMembers = [
   },
 ];
 
-export const plans = [
+export const plans: Roshestudios.Plan[] = [
   {
     title: "BRONZE PLAN",
     plan: "bronze",

@@ -30,7 +30,7 @@ const Sidebar: React.FC<{}> = (props) => {
   });
 
   const onClick = (data: MenuInfo) => {
-    router.push(data.key);
+    router.push("/" + data.key);
     setToggle({ selected: [data.key] });
   };
 

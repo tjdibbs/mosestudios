@@ -38,7 +38,7 @@ router.put(async (req, res) => {
     description: fields.description?.length ? fields.description[0] : "",
     document: result.secure_url,
     userId: fields.userId,
-    reviewsLeft: 3,
+    corrections: 3,
   });
 
   return res.json({ success: true, message: "Content created successfully" });

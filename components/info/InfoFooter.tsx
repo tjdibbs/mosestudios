@@ -70,7 +70,7 @@ function Footer() {
             </div>
             <div className="email mb-2 ">
               <a
-                href="mailto:info@roshestudios.com"
+                href="mailto:roshestudios.com@gmail.com"
                 className="no-underline text-white block text-xl"
               >
                 roshe<span className="text-primary">studios</span>.com@gmail.com

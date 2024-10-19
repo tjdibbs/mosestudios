@@ -131,7 +131,7 @@ export default function HomePage() {
               contents for their social handles .
             </div>
             <div className="subtitle mt-6 text-2xl sm:text-5xl font-bold">
-              SUBSCRIBE TO A <span className="text-primary">PLAN</span>
+              SUBSCRIBE TO A <span className="text-primary">MONTHLY PLAN</span>
             </div>
           </div>
           {/* 
@@ -153,8 +153,8 @@ export default function HomePage() {
                     ${p.price.dollar}
                   </div>
                   <ArrowSwapHorizontal size="32" />
-                  <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                    ₦{p.price.naira.toLocaleString()}
+                  <div className="pounds bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                    £{p.price.pounds.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function HomePage() {
               <Badge.Ribbon
                 rootClassName="flex-grow sm:min-w-[320px] w-[450px] max-w-full"
                 key={index}
-                text={"50% off"}
+                
               >
                 <Button
                   onClickCapture={() =>
@@ -183,19 +183,19 @@ export default function HomePage() {
 
                   <div className="price flex items-center justify-between mt-6">
                     <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
-                      ${p.price.dollar / 2}
+                    £{(p.price.pounds).toLocaleString()}
                     </div>
                     <ArrowSwapHorizontal size="32" />
-                    <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                      ₦{(p.price.naira / 2).toLocaleString()}
+                    <div className="pounds bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                      ${p.price.dollar}
                     </div>
                   </div>
-                  <div className="price flex items-center justify-between px-5">
+                  {/* <div className="price flex items-center justify-between px-5">
                     <div className="line-through">${p.price.dollar}</div>
-                    <div className="naira line-through">
-                      ₦{p.price.naira.toLocaleString()}
+                    <div className="pounds line-through">
+                      £{p.price.pounds.toLocaleString()}
                     </div>
-                  </div>
+                  </div> */}
                 </Button>
               </Badge.Ribbon>
             ))}
@@ -295,7 +295,7 @@ export default function HomePage() {
           </Swiper>
         </section>
 
-        <section className="rosheprint">
+        {/* <section className="rosheprint">
           <div
             id="NewRootRoot"
             className="bottom-banner flex flex-col w-full bg-[url('../public/images/bottom-banner-image.jpg')]"
@@ -315,7 +315,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </InfoLayout>
   );

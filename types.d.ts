@@ -53,7 +53,7 @@ declare global {
       description: string;
       price: {
         dollar: number;
-        naira: number;
+        pounds: number;
       };
     }
 

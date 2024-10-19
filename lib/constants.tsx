@@ -43,7 +43,7 @@ export const teamMembers = [
     ),
   },
   {
-    name: "OKEKE CHIMEZE",
+    name: "OKEKE CHIMEZIE",
     role: "Character animator",
     description: (
       <p>
@@ -87,7 +87,7 @@ export const teamMembers = [
   //   image: Mercy,
   // },
   {
-    name: "OMOWUMi ANIFOWOSE",
+    name: "HELEN MOSES",
     role: "HR/Secretary",
     description: (
       <p>
@@ -106,8 +106,8 @@ export const plans: Roshestudios.Plan[] = [
     description:
       "Get 3 E-flier design per week, 12 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: 80,
-      naira: 80000,
+      dollar: 200,
+      pounds: 150,
     },
   },
   {
@@ -116,8 +116,8 @@ export const plans: Roshestudios.Plan[] = [
     description:
       "Get 8 E-flier and 2 Motion graphic design per month to cover your monthly social media contents",
     price: {
-      dollar: 200,
-      naira: 200000,
+      dollar: 260,
+      pounds: 200
     },
   },
   {
@@ -126,8 +126,8 @@ export const plans: Roshestudios.Plan[] = [
     description:
       "Get 4 Motion graphics and 8 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: 300,
-      naira: 300000,
+      dollar: 330,
+      pounds: 250,
     },
   },
   {
@@ -136,8 +136,8 @@ export const plans: Roshestudios.Plan[] = [
     description:
       "Get 8 Motion graphic design and 8 E-flier per month to cover your monthly social media contents",
     price: {
-      dollar: 500,
-      naira: 500000,
+      dollar: 400,
+      pounds: 300,
     },
   },
 ];

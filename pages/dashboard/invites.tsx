@@ -21,7 +21,7 @@ import useFetch from "@hooks/useFetch";
 import { useRouter } from "next/router";
 import useFormControl from "@hooks/useFormControl";
 import Header from "@comp/protected/EHeader";
-import { formatCurrencyNGN } from "helpers";
+import { formatCurrencyUK } from "helpers";
 
 function ReferrerDashboard() {
   const user = useAppSelector((s) => s.session.user!);
@@ -116,7 +116,7 @@ function ReferrerDashboard() {
                     title={<p className="text-black">Percentage</p>}
                   >
                     <div className="total-refers border border-solid border-primary text-primary text-sm px-1 py-px rounded-xl">
-                      ₦2,000 per 500 Clicks
+                    £1 per 500 Clicks
                     </div>
                   </Tooltip>
                 </div>
@@ -148,18 +148,18 @@ function ReferrerDashboard() {
                   <div className="total">
                     <div className="title text-green-100">Total Earnings</div>
                     <span className="count">
-                      {formatCurrencyNGN(subscribeEarnings)}
+                      {formatCurrencyUK(subscribeEarnings)}
                     </span>
                   </div>
                   <div className="total">
                     <div className="title text-red-100">Withdraw</div>
-                    <span className="count">{formatCurrencyNGN(0)}</span>
+                    <span className="count">{formatCurrencyUK(0)}</span>
                   </div>
                   <div className="available-to-withdraw">
                     <div className="title text-primary">
                       Available To Withdraw
                     </div>
-                    <span className="count">{formatCurrencyNGN(0)}</span>
+                    <span className="count">{formatCurrencyUK(0)}</span>
                   </div>
                 </div>
               </div>
@@ -201,18 +201,18 @@ function ReferrerDashboard() {
                   <div className="total">
                     <div className="title text-green-100">Total Earnings</div>
                     <span className="count">
-                      {formatCurrencyNGN(subscribeEarnings)}
+                      {formatCurrencyUK(subscribeEarnings)}
                     </span>
                   </div>
                   <div className="total">
                     <div className="title text-red-100">Withdraw</div>
-                    <span className="count">{formatCurrencyNGN(0)}</span>
+                    <span className="count">{formatCurrencyUK(0)}</span>
                   </div>
                   <div className="available-to-withdraw">
                     <div className="title text-primary">
                       Available To Withdraw
                     </div>
-                    <span className="count">{formatCurrencyNGN(0)}</span>
+                    <span className="count">{formatCurrencyUK(0)}</span>
                   </div>
                 </div>
               </div>

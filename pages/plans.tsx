@@ -54,12 +54,13 @@ function Plans() {
   };
 
   const handlePayment = (plan: (typeof plans)[0]) => {
+    console.log('the user is', user)
     if (!user) return router.replace("/login?_r=/plans?selected=" + plan.plan);
     initializePayment({
       onSuccess: handleSuccessPayment,
       onClose: () => {},
       config: {
-        amount: (plan!.price.naira! * 100) / 2,
+        amount: (plan!.price.pounds! * 100),
         email: user?.email,
         reference: new Date().getTime().toString(),
       },
@@ -82,7 +83,7 @@ function Plans() {
         //   email: user.email,
         //   reference: new Date().getTime().toString(),
         //   // amount: 5000,
-        //   amount: (planData!.price.naira! * 100) / 2, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+        //   amount: (planData!.price.pounds! * 100) / 2, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
         // }));
 
         setSelected(planData);
@@ -129,7 +130,6 @@ function Plans() {
           <Badge.Ribbon
             key={index}
             rootClassName="flex-grow sm:min-w-[320px] w-[450px] max-w-full"
-            text={"50% off"}
           >
             <Button
               onClickCapture={handleClick(p.plan)}
@@ -145,20 +145,20 @@ function Plans() {
               </div>
 
               <div className="price flex items-center justify-between mt-6">
-                <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
-                  ${p.price.dollar / 2}
+              <div className="pounds bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
+                  £{(p.price.pounds).toLocaleString()}
                 </div>
                 <ArrowSwapHorizontal size="32" />
-                <div className="naira bg-bgDark text-white text-xl xs:text-3xl  font-bold px-6 py-2 rounded-lg">
-                  ₦{(p.price.naira / 2).toLocaleString()}
+                <div className="dollar bg-bgDark text-white text-xl xs:text-3xl font-bold px-6 py-2 rounded-lg">
+                  ${p.price.dollar}
                 </div>
               </div>
-              <div className="price flex items-center justify-between px-5">
+              {/* <div className="price flex items-center justify-between px-5">
                 <div className="line-through">${p.price.dollar}</div>
-                <div className="naira line-through">
-                  ₦{p.price.naira.toLocaleString()}
+                <div className="pounds line-through">
+                  £{p.price.pounds.toLocaleString()}
                 </div>
-              </div>
+              </div> */}
             </Button>
           </Badge.Ribbon>
         ))}
@@ -171,7 +171,7 @@ function Plans() {
           confirmLoading={fetching}
           okText={
             <p className="text-black">
-              Make Payment - ₦{(selected?.price?.naira / 2).toLocaleString()}
+              Make Payment - £{(selected?.price?.pounds).toLocaleString()}
             </p>
           }
           title={<p>Make payment for {selected?.plan} plan</p>}

@@ -42,7 +42,21 @@ function Footer() {
 
             <div className="phone mb-2">
               {/* <a
-                href="tel:+2348103115400"
+                href="tel:+447917904869"
+                className="no-underline text-white block text-xl"
+              >
+                +234-802-768-5574
+              </a> */}
+              <a
+                href="tel:+447917904869"
+                className="no-underline text-white block"
+              >
+                +447584834000
+              </a>
+            </div>
+            <div className="phone mb-2">
+              {/* <a
+                href="tel:+447917904869"
                 className="no-underline text-white block text-xl"
               >
                 +234-802-768-5574
@@ -52,20 +66,6 @@ function Footer() {
                 className="no-underline text-white block"
               >
                 +447917904869
-              </a>
-            </div>
-            <div className="phone mb-2">
-              {/* <a
-                href="tel:+2348103115400"
-                className="no-underline text-white block text-xl"
-              >
-                +234-802-768-5574
-              </a> */}
-              <a
-                href="tel:+2348103115400"
-                className="no-underline text-white block"
-              >
-                +2348103115400
               </a>
             </div>
             <div className="email mb-2 ">
@@ -94,7 +94,7 @@ function Footer() {
 const socialIcons = [
   {
     title: "whatsapp",
-    link: "https://wa.me/+447917904869",
+    link: "https://wa.me/+447584834000",
     icon: <Whatsapp size="40" color="white" />,
   },
   {

@@ -19,7 +19,7 @@ export interface MenuInfo {
   keyPath: string[];
 }
 
-const Sidebar: React.FC<{}> = (props) => {
+const Sidebar: React.FC<{}> = () => {
   const user = useAppSelector((s) => s.session.user);
   const [collapse, setCollapse] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);

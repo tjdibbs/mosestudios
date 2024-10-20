@@ -2,21 +2,20 @@
 
 import React from "react";
 import { Table, Select, Input, message as Alert, Tag } from "antd";
-import { format } from "date-fns";
 import { ColumnsType } from "antd/es/table";
 import User from "@models/userModel";
 import useFetch from "@hooks/useFetch";
 import { config } from "@lib/constants";
 
-type CustomerType = {
-  _id: string | number;
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  country: string;
-  status: "inactive" | "active";
-};
+// type CustomerType = {
+//   _id: string | number;
+//   name: string;
+//   company: string;
+//   email: string;
+//   phone: string;
+//   country: string;
+//   status: "inactive" | "active";
+// };
 
 export default function Customers() {
   const { fetcher, fetching } = useFetch(true);

@@ -171,7 +171,7 @@ function Plans() {
           confirmLoading={fetching}
           okText={
             <p className="text-black">
-              Make Payment - £{(selected?.price?.pounds).toLocaleString()}
+              Make Payment - £{(selected.price.pounds).toLocaleString()}
             </p>
           }
           title={<p>Make payment for {selected?.plan} plan</p>}

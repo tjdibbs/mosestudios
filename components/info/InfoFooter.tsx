@@ -55,12 +55,6 @@ function Footer() {
               </a>
             </div>
             <div className="phone mb-2">
-              {/* <a
-                href="tel:+447917904869"
-                className="no-underline text-white block text-xl"
-              >
-                +234-802-768-5574
-              </a> */}
               <a
                 href="tel:+447917904869"
                 className="no-underline text-white block"

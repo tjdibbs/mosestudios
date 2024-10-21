@@ -6,7 +6,7 @@ import Image from "next/image";
 import Content, { Review } from "@models/contentModel";
 import useFetch from "@hooks/useFetch";
 import { appealingMessage, config } from "@lib/constants";
-import { useAppSelector } from "@redux/store";
+// import { useAppSelector } from "@redux/store";
 
 function UploadedContent(props: { content: Content }) {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -16,21 +16,21 @@ function UploadedContent(props: { content: Content }) {
 
   console.log({ content: props.content });
 
-  const addReview = async () => {
-    if (!review) return Alert.error("Please add review");
+  // const addReview = async () => {
+  //   if (!review) return Alert.error("Please add review");
 
-    const res = await fetcher({
-      url: config.urls.content + `/${props.content._id}/add-review`,
-      data: { message: review },
-      method: "put",
-    });
+  //   const res = await fetcher({
+  //     url: config.urls.content + `/${props.content._id}/add-review`,
+  //     data: { message: review },
+  //     method: "put",
+  //   });
 
-    if (!res.success || res.error) {
-      return Alert.error(res.message || res.error || appealingMessage);
-    }
+  //   if (!res.success || res.error) {
+  //     return Alert.error(res.message || res.error || appealingMessage);
+  //   }
 
-    Alert.success("Review sent successfully");
-  };
+  //   Alert.success("Review sent successfully");
+  // };
 
   return (
     <div className="w-full p-5 bg-neutral-800 shadow-lg shadow-white/5 gap-4 rounded-xl">
